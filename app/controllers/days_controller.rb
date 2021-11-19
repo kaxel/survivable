@@ -21,6 +21,7 @@ class DaysController < ApplicationController
 
   # POST /days or /days.json
   def create
+    
     @day = Day.new(day_params)
 
     respond_to do |format|
@@ -64,6 +65,6 @@ class DaysController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def day_params
-      params.require(:day).permit(:hour, :event_id)
+      params.require(:day).permit(:hour, :event_id, :current_game_id)
     end
 end
