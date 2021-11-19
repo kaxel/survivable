@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Current Games</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sig</th>
+      <th>Ip</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @current_games.each do |current_game| %>
+      <tr>
+        <td><%= current_game.sig %></td>
+        <td><%= current_game.ip %></td>
+        <td><%= link_to 'Show', current_game %></td>
+        <td><%= link_to 'Edit', edit_current_game_path(current_game) %></td>
+        <td><%= link_to 'Destroy', current_game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Current Game', new_current_game_path %>
