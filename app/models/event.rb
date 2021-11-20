@@ -22,4 +22,8 @@ class Event < ApplicationRecord
     
   end
   
+  def self.delete_related(game_id)
+     Event.where(["current_game_id = ?", game_id]).delete_all
+  end
+  
 end

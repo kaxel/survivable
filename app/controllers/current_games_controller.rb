@@ -52,7 +52,9 @@ class CurrentGamesController < ApplicationController
 
   # DELETE /current_games/1 or /current_games/1.json
   def destroy
+    Event.delete_related(@current_game.id)
     @current_game.destroy
+    
     respond_to do |format|
       format.html { redirect_to current_games_url, notice: "Current game was successfully destroyed." }
       format.json { head :no_content }
