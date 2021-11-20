@@ -1,0 +1,34 @@
+rails g scaffold Event name:string length:integer
+
+rails g scaffold Day hour:integer{1} event:references
+
+rails g scaffold CurrentGame sig:string ip:string
+
+/event requirements
+/event results
+/event source
+
+/player
+
+
+
+
+rails g migration AddUserToSubscriptions user:references
+
+
+rails g scaffold CurrentGame sig:string ip:string
+
+
+
+rails g migration AddCurrentGameToDay current_game:references
+
+rails g migration AddCurrentGameToEvents current_game:references
+
+rails g migration AddHiddenToEvents hidden:boolean
+
+
+rails g scaffold Survivalist strength:integer{2} creativity:integer{2} determination:integer{2} optimism:integer{2} skill:integer{2}
+
+rails g migration AddSurvivalistToCurrentGame survivalist:references
+
+rails g migration AddNameToSurvivalists name:string

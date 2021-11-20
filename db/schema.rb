@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_150044) do
+ActiveRecord::Schema.define(version: 2021_11_20_152640) do
 
   create_table "current_games", force: :cascade do |t|
     t.string "sig"
     t.string "ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "survivalist_id", null: false
+    t.index ["survivalist_id"], name: "index_current_games_on_survivalist_id"
   end
 
   create_table "days", force: :cascade do |t|
@@ -47,8 +49,10 @@ ActiveRecord::Schema.define(version: 2021_11_20_150044) do
     t.integer "skill", limit: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
   end
 
+  add_foreign_key "current_games", "survivalists"
   add_foreign_key "days", "current_games"
   add_foreign_key "days", "events"
   add_foreign_key "events", "current_games"

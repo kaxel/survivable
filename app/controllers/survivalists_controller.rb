@@ -1,5 +1,10 @@
 class SurvivalistsController < ApplicationController
   before_action :set_survivalist, only: %i[ show edit update destroy ]
+  
+  def get_default
+    Survivalist.add_default
+    redirect_to new_current_game_path
+  end
 
   # GET /survivalists or /survivalists.json
   def index
