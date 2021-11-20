@@ -25,6 +25,9 @@ gem 'bcrypt', '~> 3.1.7'
 #admin users
 gem 'rails_admin', '~> 2.0'
 
+#postmark
+gem 'postmark-rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
