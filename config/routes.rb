@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :survivalists
   resources :days
   resources :current_games
   resources :events

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_073031) do
+ActiveRecord::Schema.define(version: 2021_11_20_150044) do
 
   create_table "current_games", force: :cascade do |t|
     t.string "sig"
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 2021_11_20_073031) do
     t.integer "current_game_id", null: false
     t.boolean "hidden", default: false
     t.index ["current_game_id"], name: "index_events_on_current_game_id"
+  end
+
+  create_table "survivalists", force: :cascade do |t|
+    t.integer "strength", limit: 2
+    t.integer "creativity", limit: 2
+    t.integer "determination", limit: 2
+    t.integer "optimism", limit: 2
+    t.integer "skill", limit: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "days", "current_games"

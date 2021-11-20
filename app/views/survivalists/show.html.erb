@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Strength:</strong>
+  <%= @survivalist.strength %>
+</p>
+
+<p>
+  <strong>Creativity:</strong>
+  <%= @survivalist.creativity %>
+</p>
+
+<p>
+  <strong>Determination:</strong>
+  <%= @survivalist.determination %>
+</p>
+
+<p>
+  <strong>Optimism:</strong>
+  <%= @survivalist.optimism %>
+</p>
+
+<p>
+  <strong>Skill:</strong>
+  <%= @survivalist.skill %>
+</p>
+
+<%= link_to 'Edit', edit_survivalist_path(@survivalist) %> |
+<%= link_to 'Back', survivalists_path %>

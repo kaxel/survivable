@@ -1,0 +1,42 @@
+<%= form_with(model: survivalist) do |form| %>
+  <% if survivalist.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(survivalist.errors.count, "error") %> prohibited this survivalist from being saved:</h2>
+
+      <ul>
+        <% survivalist.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :strength %>
+    <%= form.number_field :strength %>
+  </div>
+
+  <div class="field">
+    <%= form.label :creativity %>
+    <%= form.number_field :creativity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :determination %>
+    <%= form.number_field :determination %>
+  </div>
+
+  <div class="field">
+    <%= form.label :optimism %>
+    <%= form.number_field :optimism %>
+  </div>
+
+  <div class="field">
+    <%= form.label :skill %>
+    <%= form.number_field :skill %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
