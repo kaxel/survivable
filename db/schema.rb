@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_19_170832) do
+ActiveRecord::Schema.define(version: 2021_11_20_060726) do
 
   create_table "current_games", force: :cascade do |t|
     t.string "sig"
@@ -34,8 +34,11 @@ ActiveRecord::Schema.define(version: 2021_11_19_170832) do
     t.integer "length"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "current_game_id", null: false
+    t.index ["current_game_id"], name: "index_events_on_current_game_id"
   end
 
   add_foreign_key "days", "current_games"
   add_foreign_key "days", "events"
+  add_foreign_key "events", "current_games"
 end
