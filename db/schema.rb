@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_152640) do
+ActiveRecord::Schema.define(version: 2021_11_20_162625) do
 
   create_table "current_games", force: :cascade do |t|
     t.string "sig"
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 2021_11_20_152640) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "current_games", "survivalists"
