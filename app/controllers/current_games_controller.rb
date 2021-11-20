@@ -25,6 +25,9 @@ class CurrentGamesController < ApplicationController
 
     respond_to do |format|
       if @current_game.save
+        #add new events
+        Event.insert_starting_events(@current_game)
+        
         format.html { redirect_to @current_game, notice: "Current game was successfully created." }
         format.json { render :show, status: :created, location: @current_game }
       else
