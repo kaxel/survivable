@@ -14,12 +14,8 @@ class Event < ApplicationRecord
       {:name => "Eat Food", :duration => 1}
     ]
     events.each do |ev|
-      
       Event.new(:name => ev[:name], :length => ev[:duration], :current_game_id => game.id).save
-      
     end
-    
-    
   end
   
   def self.delete_related(game_id)
