@@ -12,21 +12,24 @@
 
 ActiveRecord::Schema.define(version: 2021_11_20_162625) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "current_games", force: :cascade do |t|
     t.string "sig"
     t.string "ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "survivalist_id", null: false
+    t.bigint "survivalist_id", null: false
     t.index ["survivalist_id"], name: "index_current_games_on_survivalist_id"
   end
 
   create_table "days", force: :cascade do |t|
-    t.integer "hour", limit: 1
-    t.integer "event_id", null: false
+    t.integer "hour", limit: 2
+    t.bigint "event_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "current_game_id", null: false
+    t.bigint "current_game_id", null: false
     t.index ["current_game_id"], name: "index_days_on_current_game_id"
     t.index ["event_id"], name: "index_days_on_event_id"
   end
@@ -36,7 +39,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_162625) do
     t.integer "length"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "current_game_id", null: false
+    t.bigint "current_game_id", null: false
     t.boolean "hidden", default: false
     t.index ["current_game_id"], name: "index_events_on_current_game_id"
   end
