@@ -1,5 +1,5 @@
 databases:
-  - name: survivable PROD
+  - name: survivable_production
     databaseName: survivable_production
     user: survivable
 
