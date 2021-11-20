@@ -11,7 +11,7 @@ rails g scaffold CurrentGame sig:string ip:string
 /player
 
 
-
+brew services restart php@7.4
 
 rails g migration AddUserToSubscriptions user:references
 
