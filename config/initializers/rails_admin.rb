@@ -1,4 +1,8 @@
 RailsAdmin.config do |config|
+  
+  config.main_app_name = ["Survivable", "BackOffice"]
+  # or something more dynamic
+  config.main_app_name = Proc.new { |controller| [ "Survivable", "BackOffice - #{controller.params[:action].try(:titleize)}" ] }
 
   ### Popular gems integration
 
@@ -18,10 +22,17 @@ RailsAdmin.config do |config|
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
+  
+    config.authenticate_with do
+      authenticate_or_request_with_http_basic('Login required') do |username, password|
+        user = User.where(name: username).first
+        user.authenticate(password) if user
+      end
+    end
 
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
-  # config.show_gravatar = true
+  config.show_gravatar = true
 
   config.actions do
     dashboard                     # mandatory

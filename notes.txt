@@ -32,3 +32,17 @@ rails g scaffold Survivalist strength:integer{2} creativity:integer{2} determina
 rails g migration AddSurvivalistToCurrentGame survivalist:references
 
 rails g migration AddNameToSurvivalists name:string
+
+rails g migration AddNameToUsers name:string
+
+
+
+
+webmaster
+55zmeE5VD*BpAbS
+
+
+
+localuser
+czZakz2Zk67gXhH
+blacklake@onmail
