@@ -42,7 +42,7 @@ development:
   #min_messages: notice
 test:
   <<: *default
-  database: db/survivable_test
+  database: survivable_test
 
 production:
   <<: *default
