@@ -2,7 +2,7 @@
 
 <p>
   <strong>Survivalist</strong>
-  <%= Survivalist.find(@current_game.survivalist_id).name %>
+  <%= @current_game.survivalist.name %>
 </p>
 
 <%= link_to 'Edit', edit_current_game_path(@current_game) %> |
