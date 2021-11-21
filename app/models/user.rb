@@ -16,5 +16,9 @@ class User < ApplicationRecord
   def latest_game
     CurrentGame.where(["user_id = ?", self.id]).last
   end
+  
+  def current_admin
+    current_user && current_user.is_admin
+  end
        
 end

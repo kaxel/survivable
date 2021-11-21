@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   #devise_for :admins
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => '/moar_info', as: 'rails_admin'
   resources :survivalists
   resources :days
   resources :current_games
