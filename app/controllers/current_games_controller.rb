@@ -1,4 +1,5 @@
 class CurrentGamesController < ApplicationController
+  before_action :authenticate_user!
 
   # GET /current_games or /current_games.json
   def index
