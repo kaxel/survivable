@@ -14,7 +14,7 @@
   <div class="field">
     <%= form.label :survivalist %>
 	<% if !Survivalist.first %>
-		<%= link_to 'use default', add_default_survivalist_path %>
+		<%= link_to 'use default', add_default_survivalist_path(:user_id => current_user.id) %>
 	<% else %>
 		<%= form.collection_select :survivalist_id, Survivalist.order(:name), :id, :name, include_blank: false %>
 	<% end %>

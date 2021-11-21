@@ -26,7 +26,7 @@ class Survivalist < ApplicationRecord
     
   
   
-  def self.add_default
+  def self.add_default(user_id)
     @defaults.each do |survivalist|
       
       Survivalist.new(:name => survivalist[:name],
@@ -34,7 +34,8 @@ class Survivalist < ApplicationRecord
                       :creativity => survivalist[:creativity],
                       :determination => survivalist[:determination],
                       :optimism => survivalist[:optimism],
-                      :skill => survivalist[:skill]).save
+                      :skill => survivalist[:skill],
+                      :user_id => user_id).save
       
     end
     

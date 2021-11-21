@@ -2,7 +2,8 @@ class SurvivalistsController < ApplicationController
   before_action :authenticate_user!
   
   def get_default
-    Survivalist.add_default
+    user_id = params[:user_id]
+    Survivalist.add_default(user_id)
     redirect_to new_current_game_path
   end
 
