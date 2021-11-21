@@ -2,29 +2,41 @@
 
 <h1>Days</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Hour</th>
-      <th>Event</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="container mt-4 mb-4 w-50">
+	
+    <div class="row">
+      <div class="col">
+            Hour
+          </div>
+          <div class="col">
+            Event
+          </div>
+          <div class="col">
+            Links
+          </div>
+      </div>
+    </div>
 
-  <tbody>
     <% @days.each do |day| %>
-      <tr>
-        <td><%= day.hour %></td>
-        <td><%= day.event.name %></td>
-		
-        <td><%= link_to 'Show', day %></td>
-        <td><%= link_to 'Edit', edit_day_path(day) %></td>
-        <td><%= link_to 'Destroy', day, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="row">
+		<div class="col">
+        <%= day.hour %>
+		</div>
+		<div class="col">
+        <%= day.event.name %>
+		</div>
+		<div class="col">
+        <%= link_to 'Show', day %>
+        <%= link_to 'Edit', edit_day_path(day) %>
+        <%= link_to 'Destroy', day, method: :delete, data: { confirm: 'Are you sure?' } %>
+		</div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+
+
+</div>
+
 
 <br>
 
-<%= link_to 'New Day', new_day_path %>
+<%if !Current.user.latest_game.nil? %><%= link_to 'New Day', new_day_path %><% end %>

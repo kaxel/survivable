@@ -13,14 +13,18 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="text-center">
 	<header class="container mt-4 mb-4">
 	  <a href="/">
 	    <%= image_tag 'SURVIVABLE-1200.png', class: 'mw-100' %>
 	  </a>
 	</header>
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
+	<div class="container mt-4 mb-4">
+		<p class="notice"><%= notice %></p>
+		<p class="alert"><%= alert %></p>
+	</div>
+	<div class="container mt-4 mb-4">
 	<%= yield %>
+	</div>
   </body>
 </html>

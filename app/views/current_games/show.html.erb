@@ -1,13 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Sig:</strong>
-  <%= @current_game.sig %>
-</p>
-
-<p>
-  <strong>Ip:</strong>
-  <%= @current_game.ip %>
+  <strong>Survivalist</strong>
+  <%= Survivalist.find(@current_game.survivalist_id).name %>
 </p>
 
 <%= link_to 'Edit', edit_current_game_path(@current_game) %> |

@@ -22,7 +22,7 @@ class CurrentGamesController < ApplicationController
 
   # POST /current_games or /current_games.json
   def create
-    @current_game = CurrentGame.new(current_game_params)
+    @current_game = CurrentGame.new(current_game_params.merge(user_id: Current.user.id))
 
     respond_to do |format|
       if @current_game.save
@@ -70,6 +70,6 @@ class CurrentGamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def current_game_params
-      params.require(:current_game).permit(:sig, :ip)
+      params.require(:current_game).permit(:sig, :ip, :survivalist_id, :user_id)
     end
 end

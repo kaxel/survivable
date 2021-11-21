@@ -35,6 +35,8 @@ rails g migration AddNameToSurvivalists name:string
 
 rails g migration AddNameToUsers name:string
 
+rails g migration AddUserToCurrentGame user:references
+
 
 
 
@@ -43,6 +45,10 @@ webmaster
 
 
 
-localuser
+localuser -- doom
 czZakz2Zk67gXhH
 blacklake@onmail
+
+
+survivable app
+VVxPjad86PvFxmX
