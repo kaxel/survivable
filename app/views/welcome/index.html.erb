@@ -1,2 +1,10 @@
 <h1>Survivable Authentication</h1>
+<% if current_user %>
 
+	<%= link_to "admin", rails_admin_path %> | <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+
+<% else %>
+
+	<%= link_to "log in", new_user_session_path %>
+
+<% end %>
