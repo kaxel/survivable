@@ -1,7 +1,4 @@
 class CurrentGamesController < ApplicationController
-  before_action :require_user_logged_in!
-  before_action :set_current_game, only: %i[ show edit update destroy ]
-  load_and_authorize_resource
 
   # GET /current_games or /current_games.json
   def index
