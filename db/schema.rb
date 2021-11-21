@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_21_181905) do
+ActiveRecord::Schema.define(version: 2021_11_21_192022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2021_11_21_181905) do
     t.index ["current_game_id"], name: "index_events_on_current_game_id"
   end
 
+  create_table "possessions", force: :cascade do |t|
+    t.string "name"
+    t.string "bonus"
+    t.bigint "current_game_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["current_game_id"], name: "index_possessions_on_current_game_id"
+  end
+
   create_table "survivalists", force: :cascade do |t|
     t.integer "strength", limit: 2
     t.integer "creativity", limit: 2
@@ -75,5 +84,6 @@ ActiveRecord::Schema.define(version: 2021_11_21_181905) do
   add_foreign_key "days", "current_games"
   add_foreign_key "days", "events"
   add_foreign_key "events", "current_games"
+  add_foreign_key "possessions", "current_games"
   add_foreign_key "survivalists", "users"
 end
