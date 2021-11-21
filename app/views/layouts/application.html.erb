@@ -40,7 +40,7 @@
 	         <!-- Grid column -->
 	         <div class="col-md-6 mt-md-0 mt-3">
 				 
-				 <% if current_user %>
+				 <% if current_user %> logged in as: <%= current_user.email %> |
 				 	Admin: <%= current_user.admin? %>
 				 <% end %>
 				 
