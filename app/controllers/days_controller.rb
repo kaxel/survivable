@@ -1,6 +1,7 @@
 class DaysController < ApplicationController
   before_action :require_user_logged_in!
   before_action :set_day, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /days or /days.json
   def index

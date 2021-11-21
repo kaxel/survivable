@@ -13,7 +13,9 @@ RailsAdmin.config do |config|
   # config.current_user_method(&:current_user)
 
   ## == CancanCan ==
-  # config.authorize_with :cancancan
+  RailsAdmin.config do |config|
+    config.authorize_with :cancancan
+  end
 
   ## == Pundit ==
   # config.authorize_with :pundit
@@ -23,13 +25,7 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
   
-      config.authorize_with do |controller|
-        if Current.user.nil?
-          redirect_to main_app.root_path, notice: 'Please Login to Continue...'
-        elsif !Current.user.admin?
-          redirect_to main_app.root_path, notice: 'You are not Admin bro!'
-        end
-      end
+
 
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false

@@ -5,8 +5,8 @@ class User < ApplicationRecord
   # validates email
   validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: 'Invalid email' }
   
-  def admin
-    (name == "doom") || (email == "krister.axel@gmail.com")
+  def admin?
+    name == "doom"
   end
   
   def latest_game
