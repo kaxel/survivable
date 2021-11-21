@@ -23,12 +23,13 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
   
-    config.authenticate_with do
-      authenticate_or_request_with_http_basic('Login required') do |username, password|
-        user = User.where(name: username).first
-        user.authenticate(password) if user
+      config.authorize_with do |controller|
+        if Current.user.nil?
+          redirect_to main_app.root_path, notice: 'Please Login to Continue...'
+        elsif !Current.user.admin?
+          redirect_to main_app.root_path, notice: 'You are not Admin bro!'
+        end
       end
-    end
 
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
