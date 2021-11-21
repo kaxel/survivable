@@ -9,9 +9,9 @@ RailsAdmin.config do |config|
   ## == Devise ==
   RailsAdmin.config do |config|
     config.authenticate_with do
-      warden.authenticate! scope: :user
+      warden.authenticate! scope: :admin
     end
-    config.current_user_method(&:current_user)
+    config.current_user_method(&:current_admin)
   end
 
   ## == CancanCan ==
