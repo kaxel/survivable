@@ -20,8 +20,12 @@
 	  </a>
 	</header>
 	<div class="container mt-4 mb-4">
-		<p class="notice"><%= notice %></p>
-		<p class="alert"><%= alert %></p>
+		<% if notice %>
+		  <p class="alert alert-success"><%= notice %></p>
+		<% end %>
+		<% if alert %>
+		  <p class="alert alert-danger"><%= alert %></p>
+		<% end %>
 	</div>
 	<div class="container mt-4 mb-4">
 	<%= yield %>

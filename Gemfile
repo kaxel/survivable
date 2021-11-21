@@ -28,6 +28,8 @@ gem 'rails_admin', '~> 2.0'
 #postmark
 gem 'postmark-rails'
 
+gem 'devise'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
