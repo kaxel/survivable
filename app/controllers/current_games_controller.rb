@@ -8,6 +8,7 @@ class CurrentGamesController < ApplicationController
 
   # GET /current_games/1 or /current_games/1.json
   def show
+    set_current_game
   end
 
   # GET /current_games/new
@@ -17,6 +18,7 @@ class CurrentGamesController < ApplicationController
 
   # GET /current_games/1/edit
   def edit
+    set_current_game
   end
 
   # POST /current_games or /current_games.json

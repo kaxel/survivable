@@ -8,6 +8,7 @@ class DaysController < ApplicationController
 
   # GET /days/1 or /days/1.json
   def show
+    set_day
   end
 
   # GET /days/new
@@ -17,6 +18,7 @@ class DaysController < ApplicationController
 
   # GET /days/1/edit
   def edit
+    set_day
   end
 
   # POST /days or /days.json

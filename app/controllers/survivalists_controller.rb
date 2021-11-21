@@ -13,6 +13,7 @@ class SurvivalistsController < ApplicationController
 
   # GET /survivalists/1 or /survivalists/1.json
   def show
+    set_survivalist
   end
 
   # GET /survivalists/new
@@ -22,6 +23,7 @@ class SurvivalistsController < ApplicationController
 
   # GET /survivalists/1/edit
   def edit
+    set_survivalist
   end
 
   # POST /survivalists or /survivalists.json
