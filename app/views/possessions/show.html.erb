@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @possession.name %>
+</p>
+
+<p>
+  <strong>Bonus:</strong>
+  <%= @possession.bonus %>
+</p>
+
+<p>
+  <strong>Current game:</strong>
+  <%= @possession.current_game_id %>
+</p>
+
+<%= link_to 'Edit', edit_possession_path(@possession) %> |
+<%= link_to 'Back', possessions_path %>

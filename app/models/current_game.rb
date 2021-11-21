@@ -1,6 +1,7 @@
 class CurrentGame < ApplicationRecord
   belongs_to :survivalist
   belongs_to :user
+  has_many :possessions
   
   def earliest
     puts "search for game #{id}"

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :possessions
   devise_for :users
   #devise_for :admins
   mount RailsAdmin::Engine => '/moar_info', as: 'rails_admin'
