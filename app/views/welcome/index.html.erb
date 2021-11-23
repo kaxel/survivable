@@ -1,7 +1,7 @@
 <h1>Survivable Authentication</h1>
 <% if current_user %>
 
-	<% if current_user.admin? %><%= link_to "admin", rails_admin_path %> |<% end %> <%= link_to "New Game", new_current_game_path %> | <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+	<% if current_user.admin? %><%= link_to "admin", rails_admin_path %> | <%= link_to "my_admin", my_admin_path %> |<% end %> <%= link_to "New Game", new_current_game_path %> | <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
 
 <% else %>
 

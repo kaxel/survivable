@@ -1,5 +1,13 @@
 class ResourcesController < ApplicationController
   before_action :set_resource, only: %i[ show edit update destroy ]
+  
+  def load_default
+    redirect_to my_admin_path, notice: "Resources were successfully loaded."
+  end
+  
+  def destroy_default
+    redirect_to my_admin_path, notice: "Resources were successfully destroyed."
+  end
 
   # GET /resources or /resources.json
   def index

@@ -1,5 +1,15 @@
 class AdjustmentsController < ApplicationController
   before_action :set_adjustment, only: %i[ show edit update destroy ]
+  
+  
+  def load_default
+    redirect_to my_admin_path, notice: "Adjustments were successfully loaded."
+  end
+  
+  def destroy_default
+    redirect_to my_admin_path, notice: "Adjustments were successfully destroyed."
+  end
+  
 
   # GET /adjustments or /adjustments.json
   def index

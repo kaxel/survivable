@@ -1,5 +1,13 @@
 class ProjectRequirementsController < ApplicationController
   before_action :set_project_requirement, only: %i[ show edit update destroy ]
+  
+  def load_default
+    redirect_to my_admin_path, notice: "Project Requirements were successfully loaded."
+  end
+  
+  def destroy_default
+    redirect_to my_admin_path, notice: "Project Requirements were successfully destroyed."
+  end
 
   # GET /project_requirements or /project_requirements.json
   def index

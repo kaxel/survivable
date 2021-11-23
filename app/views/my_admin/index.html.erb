@@ -1,0 +1,29 @@
+
+<h1>My Admin</h1>
+<div class="container w-50">
+	
+	<% my_modules = data_modules %>
+	
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th scope="col">Name</th>
+	      <th scope="col">Load</th>
+	      <th scope="col">Delete</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+		  <% my_modules.each do |m| %>
+	    <tr>
+	      <td><%= m[:name] %></td>
+	      <td><%= link_to 'load', m[:load_link] %></td>
+	      <td><%= link_to 'destroy', m[:destroy_link] %></td>
+	    </tr>
+	      <% end %>
+	  </tbody>
+	</table>
+	
+</div>
+
+
+<%= link_to 'admin', rails_admin_path %>
