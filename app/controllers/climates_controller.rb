@@ -1,6 +1,16 @@
 class ClimatesController < ApplicationController
   before_action :set_climate, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  
+  def load_default
+    message = Climate.load_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
+  end
+  
+  def destroy_default
+    message = Climate.destroy_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
+  end
 
   # GET /climates or /climates.json
   def index

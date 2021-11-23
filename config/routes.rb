@@ -41,4 +41,13 @@ Rails.application.routes.draw do
   get "/destroy_default_project_requirement", to: "project_requirements#destroy_default"
   
   get "/delete_game", to: "current_games#delete_game"
+  
+  get "/load_default_climate", to: "climates#load_default"
+  get "/destroy_default_climate", to: "climates#destroy_default"
+  
+  get "/load_default_collection", to: "collections#load_default"
+  get "/destroy_default_collection", to: "collections#destroy_default"
+  
+  get "/load_default_location", to: "locations#load_default"
+  get "/destroy_default_location", to: "locations#destroy_default"
 end
