@@ -2,16 +2,13 @@ class Project < ApplicationRecord
   
   def self.load_default
     defaults = [
-      "Explore",
-      "Set Camp",
-      "Cut Firewood",
-      "Build fire",
-      "Tend fire",
-      "Gather Mud",
-      "Gather Leaves",
-      "Build Smoker",
-      "Make Bed",
-      "Eat Food"
+      "Twine",
+      "Hook",
+      "Knife",
+      "Lean To",
+      "Log Cabin",
+      "Bed",
+      "Fireplace"
     ]
     
     defaults.each do |d|

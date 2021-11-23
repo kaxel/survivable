@@ -2,11 +2,13 @@ class ResourcesController < ApplicationController
   before_action :set_resource, only: %i[ show edit update destroy ]
   
   def load_default
-    redirect_to my_admin_path, notice: "Resources were successfully loaded."
+    message = Resource.load_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
   end
   
   def destroy_default
-    redirect_to my_admin_path, notice: "Resources were successfully destroyed."
+    message = Resource.destroy_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
   end
 
   # GET /resources or /resources.json
