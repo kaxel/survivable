@@ -31,7 +31,7 @@ class Requirement < ApplicationRecord
       res = Resource.where(name: d[1]).first
       Requirement.new(:name => "#{proj.name} - #{res.name}", :resource_id => res.id, :amount => d[2]).save
     end
-    "Resources loaded"
+    "Requirements loaded"
     
   end
   
