@@ -2,11 +2,13 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
   
   def load_default
-    redirect_to my_admin_path, notice: "Projects were successfully loaded."
+    message = Project.load_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
   end
   
   def destroy_default
-    redirect_to my_admin_path, notice: "Projects were successfully destroyed."
+    message = Project.destroy_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
   end
 
   # GET /projects or /projects.json
