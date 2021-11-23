@@ -35,10 +35,21 @@ rails g migration AddNameToSurvivalists name:string
 
 rails g migration AddNameToUsers name:string
 
-rails g migration AddUserToCurrentGame user:references
+rails g migration AddUserToSurvivalists user:references
+
+rails generate migration AddAdminToUsers admin:boolean
+
+rails g scaffold Possession name:string bonus:string current_game:references
+
+rails g migration AddQuantityToPossessions quantity:integer{2}
 
 
-
+rails g scaffold Project name:string
+rails g scaffold Resource name:string
+rails g scaffold Requirement amount:integer{2} resource:references
+rails g scaffold ProjectRequirement project:references requirement:references
+rails g scaffold Adjustment bonus:string amount:integer{2} project:references
+rails generate migration AddProjectToPossession project:references
 
 webmaster
 55zmeE5VD*BpAbS
@@ -52,3 +63,23 @@ krister.axel@gmail
 
 survivable app
 VVxPjad86PvFxmX
+
+
+
+
+
+
+
+
+dpg-c6ckrv10gd02d1icn7q0 missing
+
+
+new host: dpg-c6cudnvd17c7c6n8vkkg
+
+db: survivable_production_4a6x
+
+user: survivable_production_4a6x_user
+
+pass: ybCk6tb6SEy9uXehKvRVbiNW9J8DMHlP
+
+postgres://survivable_production_4a6x_user:ybCk6tb6SEy9uXehKvRVbiNW9J8DMHlP@dpg-c6cudnvd17c7c6n8vkkg/survivable_production_4a6x

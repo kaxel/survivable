@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Project Requirements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Requirement</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_requirements.each do |project_requirement| %>
+      <tr>
+        <td><%= project_requirement.project_id %></td>
+        <td><%= project_requirement.requirement_id %></td>
+        <td><%= link_to 'Show', project_requirement %></td>
+        <td><%= link_to 'Edit', edit_project_requirement_path(project_requirement) %></td>
+        <td><%= link_to 'Destroy', project_requirement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project Requirement', new_project_requirement_path %>

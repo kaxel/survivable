@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bonus: MyString
+  amount: 1
+  project: one
+
+two:
+  bonus: MyString
+  amount: 1
+  project: two

@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_21_212330) do
+ActiveRecord::Schema.define(version: 2021_11_23_030551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adjustments", force: :cascade do |t|
+    t.string "bonus"
+    t.integer "amount", limit: 2
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_adjustments_on_project_id"
+  end
 
   create_table "current_games", force: :cascade do |t|
     t.string "sig"
@@ -53,7 +62,38 @@ ActiveRecord::Schema.define(version: 2021_11_21_212330) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "quantity", limit: 2, default: 1
+    t.bigint "project_id", null: false
     t.index ["current_game_id"], name: "index_possessions_on_current_game_id"
+    t.index ["project_id"], name: "index_possessions_on_project_id"
+  end
+
+  create_table "project_requirements", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "requirement_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_project_requirements_on_project_id"
+    t.index ["requirement_id"], name: "index_project_requirements_on_requirement_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "requirements", force: :cascade do |t|
+    t.integer "amount", limit: 2
+    t.bigint "resource_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["resource_id"], name: "index_requirements_on_resource_id"
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "survivalists", force: :cascade do |t|
@@ -80,11 +120,16 @@ ActiveRecord::Schema.define(version: 2021_11_21_212330) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "adjustments", "projects"
   add_foreign_key "current_games", "survivalists"
   add_foreign_key "current_games", "users"
   add_foreign_key "days", "current_games"
   add_foreign_key "days", "events"
   add_foreign_key "events", "current_games"
   add_foreign_key "possessions", "current_games"
+  add_foreign_key "possessions", "projects"
+  add_foreign_key "project_requirements", "projects"
+  add_foreign_key "project_requirements", "requirements"
+  add_foreign_key "requirements", "resources"
   add_foreign_key "survivalists", "users"
 end

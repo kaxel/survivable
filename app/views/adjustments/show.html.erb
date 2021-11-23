@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Bonus:</strong>
+  <%= @adjustment.bonus %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @adjustment.amount %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @adjustment.project_id %>
+</p>
+
+<%= link_to 'Edit', edit_adjustment_path(@adjustment) %> |
+<%= link_to 'Back', adjustments_path %>

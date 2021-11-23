@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :adjustments
+  resources :project_requirements
+  resources :requirements
+  resources :resources
+  resources :projects
   resources :possessions
   devise_for :users
   #devise_for :admins
