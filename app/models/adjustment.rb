@@ -30,6 +30,14 @@ class Adjustment < ApplicationRecord
     proj = Project.where(name: "A Frame").first
     Adjustment.new( project_id: proj.id, bonus: "comfort", amount: 6).save
     
+    # fireplace
+    proj = Project.where(name: "Fireplace").first
+    Adjustment.new( project_id: proj.id, bonus: "comfort", amount: 2).save
+    
+    # bed
+    proj = Project.where(name: "Bed").first
+    Adjustment.new( project_id: proj.id, bonus: "comfort", amount: 2).save
+    
     "Adjustments loaded"
   end
   

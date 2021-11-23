@@ -12,6 +12,8 @@ class Project < ApplicationRecord
     "A Frame"
   ]
   
+  #add new to Adjustment, Requirement, and ProjectRequirement
+  
   def self.load_default
     @defaults.each do |d|
       Project.new(:name => d).save
