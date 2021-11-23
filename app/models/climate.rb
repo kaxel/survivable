@@ -1,7 +1,8 @@
 class Climate < ApplicationRecord
   
   @default_climates = [
-    {:name => "Rainy Hot Mild", :cold_warm => 40, :cold_floor => 45, :warm_ceiling => 110, :intensity => 50, :trend => 5}
+    {:name => "Rainy Hot Mild", :cold_warm => 40, :cold_floor => 45, :warm_ceiling => 110, :intensity => 50, :trend => 3},
+    {:name => "Rainy Cold Brisk", :cold_warm => 70, :cold_floor => 0, :warm_ceiling => 85, :intensity => 80, :trend => -5}
   ]
 
   def self.load_default
@@ -13,6 +14,7 @@ class Climate < ApplicationRecord
       x.warm_ceiling = d[:warm_ceiling]
       x.intensity = d[:intensity]
       x.trend = d[:trend]
+      x.save
     end
     "Climates loaded"
   end
