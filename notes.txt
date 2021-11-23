@@ -51,6 +51,18 @@ rails g scaffold ProjectRequirement project:references requirement:references
 rails g scaffold Adjustment bonus:string amount:integer{2} project:references
 rails generate migration AddProjectToPossession project:references
 
+rails g controller myadmin
+
+rails g migration AddNameToRequirements name:string
+
+rails g scaffold Climate name:string cold_warm:integer{1} cold_floor:integer{1} warm_ceiling:integer{1} intensity:integer{1} trend:integer{1}
+
+rails g scaffold Collection name:string
+
+rails g migration CreateJoinTableCollectionsProjects collections projects
+
+rails g scaffold Location climate:references collection:references
+
 webmaster
 55zmeE5VD*BpAbS
 

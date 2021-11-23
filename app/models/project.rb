@@ -11,7 +11,9 @@ class Project < ApplicationRecord
     "Pit House",
     "A Frame",
     "Firewood",
-    "Smoker"
+    "Smoker",
+    "Net",
+    "Firestarter"
   ]
   
 
