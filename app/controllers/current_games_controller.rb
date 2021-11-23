@@ -5,6 +5,12 @@ class CurrentGamesController < ApplicationController
   def index
     @current_games = CurrentGame.all
   end
+  
+  def delete_game
+    @current_game = CurrentGame.where(user_id: current_user.id).first
+    message = CurrentGame.delete_game(@current_game.id)
+    redirect_to my_admin_path, notice: message
+  end
 
   # GET /current_games/1 or /current_games/1.json
   def show

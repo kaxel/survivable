@@ -9,8 +9,12 @@ class Project < ApplicationRecord
     "Bed",
     "Fireplace",
     "Pit House",
-    "A Frame"
+    "A Frame",
+    "Firewood",
+    "Smoker"
   ]
+  
+
   
   #add new to Adjustment, Requirement, and ProjectRequirement
   

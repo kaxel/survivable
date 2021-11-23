@@ -12,4 +12,8 @@ class CurrentGame < ApplicationRecord
     end
   end
   
+  def self.delete_game(id)
+    "game #{id} deleted"
+  end
+  
 end

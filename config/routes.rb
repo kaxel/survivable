@@ -36,4 +36,6 @@ Rails.application.routes.draw do
   
   get "/load_default_project_requirement", to: "project_requirements#load_default"
   get "/destroy_default_project_requirement", to: "project_requirements#destroy_default"
+  
+  get "/delete_game", to: "current_games#delete_game"
 end
