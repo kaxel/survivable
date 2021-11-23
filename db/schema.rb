@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_23_175249) do
+ActiveRecord::Schema.define(version: 2021_11_23_175854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,16 @@ ActiveRecord::Schema.define(version: 2021_11_23_175249) do
     t.bigint "current_game_id", null: false
     t.boolean "hidden", default: false
     t.index ["current_game_id"], name: "index_events_on_current_game_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.bigint "climate_id", null: false
+    t.bigint "collection_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["climate_id"], name: "index_locations_on_climate_id"
+    t.index ["collection_id"], name: "index_locations_on_collection_id"
   end
 
   create_table "possessions", force: :cascade do |t|
@@ -149,6 +159,8 @@ ActiveRecord::Schema.define(version: 2021_11_23_175249) do
   add_foreign_key "days", "current_games"
   add_foreign_key "days", "events"
   add_foreign_key "events", "current_games"
+  add_foreign_key "locations", "climates"
+  add_foreign_key "locations", "collections"
   add_foreign_key "possessions", "current_games"
   add_foreign_key "possessions", "projects"
   add_foreign_key "project_requirements", "projects"

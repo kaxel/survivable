@@ -1,5 +1,6 @@
 class ClimatesController < ApplicationController
   before_action :set_climate, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /climates or /climates.json
   def index

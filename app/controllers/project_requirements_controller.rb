@@ -1,5 +1,6 @@
 class ProjectRequirementsController < ApplicationController
   before_action :set_project_requirement, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
   
   def load_default
     message = ProjectRequirement.load_default

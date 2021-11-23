@@ -1,5 +1,6 @@
 class ResourcesController < ApplicationController
   before_action :set_resource, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
   
   def load_default
     message = Resource.load_default

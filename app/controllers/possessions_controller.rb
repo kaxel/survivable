@@ -1,5 +1,6 @@
 class PossessionsController < ApplicationController
   before_action :set_possession, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /possessions or /possessions.json
   def index

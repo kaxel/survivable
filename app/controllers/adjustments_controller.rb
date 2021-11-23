@@ -1,6 +1,6 @@
 class AdjustmentsController < ApplicationController
   before_action :set_adjustment, only: %i[ show edit update destroy ]
-  
+  before_action :authenticate_user!
   
   def load_default
     message = Adjustment.load_default
