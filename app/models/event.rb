@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  
+    
   def self.insert_starting_events(game)
     events = [
       {:name => "Explore", :duration => 1},
