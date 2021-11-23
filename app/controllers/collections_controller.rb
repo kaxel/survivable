@@ -1,6 +1,16 @@
 class CollectionsController < ApplicationController
   before_action :set_collection, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  
+  def load_default
+    message = Collection.load_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
+  end
+  
+  def destroy_default
+    message = Collection.destroy_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
+  end
 
   # GET /collections or /collections.json
   def index
