@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Climates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Cold warm</th>
+      <th>Cold floor</th>
+      <th>Warm ceiling</th>
+      <th>Intensity</th>
+      <th>Trend</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @climates.each do |climate| %>
+      <tr>
+        <td><%= climate.name %></td>
+        <td><%= climate.cold_warm %></td>
+        <td><%= climate.cold_floor %></td>
+        <td><%= climate.warm_ceiling %></td>
+        <td><%= climate.intensity %></td>
+        <td><%= climate.trend %></td>
+        <td><%= link_to 'Show', climate %></td>
+        <td><%= link_to 'Edit', edit_climate_path(climate) %></td>
+        <td><%= link_to 'Destroy', climate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Climate', new_climate_path %>

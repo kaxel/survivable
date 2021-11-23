@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_23_050903) do
+ActiveRecord::Schema.define(version: 2021_11_23_175139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 2021_11_23_050903) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_adjustments_on_project_id"
+  end
+
+  create_table "climates", force: :cascade do |t|
+    t.string "name"
+    t.integer "cold_warm", limit: 2
+    t.integer "cold_floor", limit: 2
+    t.integer "warm_ceiling", limit: 2
+    t.integer "intensity", limit: 2
+    t.integer "trend", limit: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "current_games", force: :cascade do |t|

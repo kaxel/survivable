@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @climate.name %>
+</p>
+
+<p>
+  <strong>Cold warm:</strong>
+  <%= @climate.cold_warm %>
+</p>
+
+<p>
+  <strong>Cold floor:</strong>
+  <%= @climate.cold_floor %>
+</p>
+
+<p>
+  <strong>Warm ceiling:</strong>
+  <%= @climate.warm_ceiling %>
+</p>
+
+<p>
+  <strong>Intensity:</strong>
+  <%= @climate.intensity %>
+</p>
+
+<p>
+  <strong>Trend:</strong>
+  <%= @climate.trend %>
+</p>
+
+<%= link_to 'Edit', edit_climate_path(@climate) %> |
+<%= link_to 'Back', climates_path %>

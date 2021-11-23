@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :climates
   resources :adjustments
   resources :project_requirements
   resources :requirements

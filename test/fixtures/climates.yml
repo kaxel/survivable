@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  cold_warm: 1
+  cold_floor: 1
+  warm_ceiling: 1
+  intensity: 1
+  trend: 1
+
+two:
+  name: MyString
+  cold_warm: 1
+  cold_floor: 1
+  warm_ceiling: 1
+  intensity: 1
+  trend: 1
