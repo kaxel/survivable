@@ -3,11 +3,13 @@ class AdjustmentsController < ApplicationController
   
   
   def load_default
-    redirect_to my_admin_path, notice: "Adjustments were successfully loaded."
+    message = Adjustment.load_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
   end
   
   def destroy_default
-    redirect_to my_admin_path, notice: "Adjustments were successfully destroyed."
+    message = Adjustment.destroy_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
   end
   
 

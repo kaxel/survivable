@@ -1,17 +1,19 @@
 class Project < ApplicationRecord
   
+  @defaults = [
+    "Twine",
+    "Hook",
+    "Knife",
+    "Lean To",
+    "Log Cabin",
+    "Bed",
+    "Fireplace",
+    "Pit House",
+    "A Frame"
+  ]
+  
   def self.load_default
-    defaults = [
-      "Twine",
-      "Hook",
-      "Knife",
-      "Lean To",
-      "Log Cabin",
-      "Bed",
-      "Fireplace"
-    ]
-    
-    defaults.each do |d|
+    @defaults.each do |d|
       Project.new(:name => d).save
     end
     "Projects loaded"
@@ -20,6 +22,10 @@ class Project < ApplicationRecord
   def self.destroy_default
     Project.delete_all
     "Projects delete all"
+  end
+  
+  def self.list
+    @defaults
   end
   
 end

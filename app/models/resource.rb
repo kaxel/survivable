@@ -11,7 +11,8 @@ class Resource < ApplicationRecord
       "Stone",
       "Leaves",
       "Grass",
-      "Wire"
+      "Wire",
+      "Metal"
     ]
     
     defaults.each do |d|

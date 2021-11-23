@@ -3,12 +3,12 @@ class RequirementsController < ApplicationController
   
   def load_default
     message = Requirement.load_default
-    redirect_to my_admin_path, notice: "Requirements were successfully loaded."
+    redirect_to my_admin_path, notice: "Successful: #{message}"
   end
   
   def destroy_default
     message = Requirement.destroy_default
-    redirect_to my_admin_path, notice: "Requirements were successfully destroyed."
+    redirect_to my_admin_path, notice: "Successful: #{message}"
   end
 
   # GET /requirements or /requirements.json
