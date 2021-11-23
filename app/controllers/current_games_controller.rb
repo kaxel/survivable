@@ -8,7 +8,11 @@ class CurrentGamesController < ApplicationController
   
   def delete_game
     @current_game = CurrentGame.where(user_id: current_user.id).first
-    message = CurrentGame.delete_game(@current_game.id)
+    if @current_game
+      message = CurrentGame.delete_game(@current_game.id)
+    else
+      message = "No current game is present."
+    end
     redirect_to my_admin_path, notice: message
   end
 
