@@ -68,6 +68,8 @@ rails g scaffold Animal name:string type:string meat:integer{1} difficulty:integ
 
 rails g migration CreateJoinTableAnimalsLocations animals locations
 
+rails g migration rename_type_to_class
+
 webmaster
 55zmeE5VD*BpAbS
 
