@@ -1,5 +1,6 @@
 class Requirement < ApplicationRecord
   belongs_to :resource
+  has_and_belongs_to_many :projects
   
   @defaults = [
     ["Twine", "Leaves", 2],

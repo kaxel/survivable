@@ -9,7 +9,9 @@ RailsAdmin.config do |config|
   # == Devise ==
   RailsAdmin.config do |config|
     config.authorize_with do
-      redirect_to main_app.root_path unless current_user.admin?
+       if !current_user || !current_user.admin?
+         redirect_to main_app.root_path
+       end
     end
   end
 
