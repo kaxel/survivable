@@ -1,7 +1,7 @@
 class Location < ApplicationRecord
   belongs_to :climate
   belongs_to :collection
-  has_and_belongs_to_many :animals
+  has_many :animals
   
   @defaults = [
     {:name => "Black Lake", :climate => "Rainy Cold Brisk", :animals => "All", :collection => "Standard"},
@@ -19,6 +19,7 @@ class Location < ApplicationRecord
         when "All"
           Animal.list.each do |a|
             animal = Animal.where(name: a[:name]).first
+            #LocationAnimal.new(location_id: @location.id, animal_id: animal.id).save
             @location.animals << animal
           end
           @location.save

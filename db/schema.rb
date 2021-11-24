@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 2021_11_24_044441) do
   create_table "animals_locations", id: false, force: :cascade do |t|
     t.bigint "location_id", null: false
     t.bigint "animal_id", null: false
-    t.index ["location_id", "animal_id"], name: "index_animals_locations_on_location_id_and_animal_id"
   end
 
   create_table "climates", force: :cascade do |t|
