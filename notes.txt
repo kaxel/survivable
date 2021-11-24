@@ -66,6 +66,8 @@ rails g scaffold Location name:string climate:references collection:references
 
 rails g scaffold Animal name:string type:string meat:integer{1} difficulty:integer{1}
 
+rails g migration CreateJoinTableAnimalsLocations animals locations
+
 webmaster
 55zmeE5VD*BpAbS
 
