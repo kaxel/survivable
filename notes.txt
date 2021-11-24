@@ -61,7 +61,10 @@ rails g scaffold Collection name:string
 
 rails g migration CreateJoinTableCollectionsProjects collections projects
 
-rails g scaffold Location climate:references collection:references
+rails g scaffold Location name:string climate:references collection:references
+
+
+rails g scaffold Animal name:string type:string meat:integer{1} difficulty:integer{1}
 
 webmaster
 55zmeE5VD*BpAbS

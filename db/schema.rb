@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_024811) do
+ActiveRecord::Schema.define(version: 2021_11_24_032204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 2021_11_24_024811) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_adjustments_on_project_id"
+  end
+
+  create_table "animals", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.integer "meat", limit: 2
+    t.integer "difficulty", limit: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "climates", force: :cascade do |t|
@@ -99,15 +108,19 @@ ActiveRecord::Schema.define(version: 2021_11_24_024811) do
     t.index ["project_id"], name: "index_possessions_on_project_id"
   end
 
+  create_table "project_requirements", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "requirement_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_project_requirements_on_project_id"
+    t.index ["requirement_id"], name: "index_project_requirements_on_requirement_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "projects_requirements", id: false, force: :cascade do |t|
-    t.bigint "project_id", null: false
-    t.bigint "requirement_id", null: false
   end
 
   create_table "requirements", force: :cascade do |t|
@@ -159,6 +172,8 @@ ActiveRecord::Schema.define(version: 2021_11_24_024811) do
   add_foreign_key "locations", "collections"
   add_foreign_key "possessions", "current_games"
   add_foreign_key "possessions", "projects"
+  add_foreign_key "project_requirements", "projects"
+  add_foreign_key "project_requirements", "requirements"
   add_foreign_key "requirements", "resources"
   add_foreign_key "survivalists", "users"
 end
