@@ -51,4 +51,7 @@ Rails.application.routes.draw do
   
   get "/load_default_location", to: "locations#load_default"
   get "/destroy_default_location", to: "locations#destroy_default"
+  
+  get "/load_default_animal", to: "animals#load_default"
+  get "/destroy_default_animal", to: "animals#destroy_default"
 end

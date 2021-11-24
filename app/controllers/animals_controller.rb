@@ -1,5 +1,16 @@
 class AnimalsController < ApplicationController
   before_action :set_animal, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  
+  def load_default
+    message = Animal.load_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
+  end
+  
+  def destroy_default
+    message = Animal.destroy_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
+  end
 
   # GET /animals or /animals.json
   def index
