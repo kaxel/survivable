@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_11_24_035227) do
 
   create_table "animals", force: :cascade do |t|
     t.string "name"
-    t.string "class"
+    t.string "aclass"
     t.integer "meat", limit: 2
     t.integer "difficulty", limit: 2
     t.datetime "created_at", precision: 6, null: false
