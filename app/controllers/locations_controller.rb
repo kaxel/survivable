@@ -1,5 +1,16 @@
 class LocationsController < ApplicationController
   before_action :set_location, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  
+  def load_default
+    message = Location.load_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
+  end
+  
+  def destroy_default
+    message = Location.destroy_default
+    redirect_to my_admin_path, notice: "Successful: #{message}"
+  end
 
   # GET /locations or /locations.json
   def index

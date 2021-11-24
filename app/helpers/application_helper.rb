@@ -11,6 +11,7 @@ module ApplicationHelper
       {:name => "Climate", :load_link => "/load_default_climate", :destroy_link => "/destroy_default_climate"},
       {:name => "Collection", :load_link => "/load_default_collection", :destroy_link => "/destroy_default_collection"},
       {:name => "Animal", :load_link => "/load_default_animal", :destroy_link => "/destroy_default_animal"},
+      {:name => "Location", :load_link => "/load_default_location", :destroy_link => "/destroy_default_location"},
     ]
 
   end

@@ -3,7 +3,8 @@ class Collection < ApplicationRecord
   
   @default_collections = [
     {:name => "Hunting Kit"},
-    {:name => "Fisherman's Pride"}
+    {:name => "Fisherman's Pride"},
+    {:name => "Desert"}
   ]
 
   def self.load_default
@@ -21,6 +22,25 @@ class Collection < ApplicationRecord
           p = Project.where(name: "Hook").first
           x.projects << p
           p = Project.where(name: "Net").first
+          x.projects << p
+        when "Desert"
+          p = Project.where(name: "Knife").first
+          x.projects << p
+          p = Project.where(name: "Firestarter").first
+          x.projects << p
+          p = Project.where(name: "Twine").first
+          x.projects << p
+          p = Project.where(name: "Lean To").first
+          x.projects << p
+          p = Project.where(name: "Bed").first
+          x.projects << p
+          p = Project.where(name: "Smoker").first
+          x.projects << p
+          p = Project.where(name: "Net").first
+          x.projects << p
+          p = Project.where(name: "Well").first
+          x.projects << p
+          p = Project.where(name: "A Frame").first
           x.projects << p
       end
       x.save

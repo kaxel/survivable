@@ -70,6 +70,14 @@ rails g migration CreateJoinTableAnimalsLocations animals locations
 
 rails g migration rename_type_to_class
 
+
+animals_locations
+
+rails g migration DropTableAnimalsLocations
+
+
+rails g migration CreateJoinTableLocationsAnimals locations animals
+
 webmaster
 55zmeE5VD*BpAbS
 
