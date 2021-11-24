@@ -1,6 +1,7 @@
 class RequirementsController < ApplicationController
   before_action :set_requirement, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  has_and_belongs_to_many :projects
   
   def load_default
     message = Requirement.load_default
