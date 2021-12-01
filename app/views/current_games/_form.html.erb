@@ -11,21 +11,41 @@
     </div>
   <% end %>
   
-  <div class="field">
-    <%= form.label "Pick a Survivalist" %>
-	<% if !Survivalist.first %>
-		<%= link_to 'use default', add_default_survivalist_path(:user_id => current_user.id) %>
-	<% else %>
-		<%= form.collection_select :survivalist_id, Survivalist.order(:name), :id, :name, include_blank: false %>
-	<% end %>
+  <div class="row">
+    <div class="col-sm-4">
+	    <div class="field">
+	      <%= form.label "Pick a Survivalist" %>
+	  	<% if !Survivalist.first %>
+	  		<%= link_to 'use default', add_default_survivalist_path(:user_id => current_user.id) %>
+	  	<% else %>
+	  		<%= form.collection_select :survivalist_id, Survivalist.order(:name), :id, :name, 
+			{include_blank: false},  {:style => "width:220px"} %>
+	  	<% end %>
+	    </div>
+	</div>
+    <div class="col-sm-8">
+      <div class="survivalist_selected">
+	  </div>
+    </div>
   </div>
   
-  <div class="field">
-    <%= form.label "Pick a Location" %>
-	<%= form.collection_select :location_id, Location.order(:name), :id, :name, include_blank: false %>
+  <div class="row">
+    <div class="col-sm-4">
+	    <div class="field">
+	      <%= form.label "Pick a Location" %>
+	  	<%= form.collection_select :location_id, Location.order(:name), :id, :name, 
+			{include_blank: false},  {:style => "width:220px"} %>
+	    </div>
+	</div>
+    <div class="col-sm-8">
+      <div class="location_selected">
+	  </div>
+    </div>
   </div>
 
   <div class="actions">
     <%= form.submit "BEGIN" %>
   </div>
+  
+  
 <% end %>
