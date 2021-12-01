@@ -19,12 +19,14 @@
 	  		<%= link_to 'use default', add_default_survivalist_path(:user_id => current_user.id) %>
 	  	<% else %>
 	  		<%= form.collection_select :survivalist_id, Survivalist.order(:name), :id, :name, 
-			{include_blank: false},  {:style => "width:220px"} %>
+			{include_blank: false, :remote => true},  
+			{:id =>"survivalist_selection", :style => "width:220px", :onchange => "updateSurvivalist();", :remote => true} %>
+						
 	  	<% end %>
 	    </div>
 	</div>
     <div class="col-sm-8">
-      <div class="survivalist_selected">
+      <div id="survivalist_selected">
 	  </div>
     </div>
   </div>
@@ -34,11 +36,11 @@
 	    <div class="field">
 	      <%= form.label "Pick a Location" %>
 	  	<%= form.collection_select :location_id, Location.order(:name), :id, :name, 
-			{include_blank: false},  {:style => "width:220px"} %>
+			{include_blank: false},  {:id =>"location_selection", :style => "width:220px", :remote => true} %>
 	    </div>
 	</div>
     <div class="col-sm-8">
-      <div class="location_selected">
+      <div id="location_selected">
 	  </div>
     </div>
   </div>
@@ -49,3 +51,12 @@
   
   
 <% end %>
+
+<script type='text/javascript'>
+	function updateSurvivalist(id) {
+		var elem = document.getElementById('survivalist_selected');
+	    elem.replaceWith("<%= j render(:partial => 'survivalist') %>");
+	}
+</script>
+  
+  
