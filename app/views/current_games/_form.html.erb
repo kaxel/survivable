@@ -12,15 +12,20 @@
   <% end %>
   
   <div class="field">
-    <%= form.label :survivalist %>
+    <%= form.label "Pick a Survivalist" %>
 	<% if !Survivalist.first %>
 		<%= link_to 'use default', add_default_survivalist_path(:user_id => current_user.id) %>
 	<% else %>
 		<%= form.collection_select :survivalist_id, Survivalist.order(:name), :id, :name, include_blank: false %>
 	<% end %>
   </div>
+  
+  <div class="field">
+    <%= form.label "Pick a Location" %>
+	<%= form.collection_select :location_id, Location.order(:name), :id, :name, include_blank: false %>
+  </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "BEGIN" %>
   </div>
 <% end %>

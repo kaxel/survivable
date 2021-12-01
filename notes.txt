@@ -92,7 +92,7 @@ survivable app
 VVxPjad86PvFxmX
 
 
-
+brew services start postgresql
 
 
 

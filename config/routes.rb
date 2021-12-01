@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   
   #custom routes
   get "/add_default_survivalist", to: "survivalists#get_default"
+  
   get "/my_admin", to: "my_admin#index"
   
   get "/load_default_project", to: "projects#load_default"
