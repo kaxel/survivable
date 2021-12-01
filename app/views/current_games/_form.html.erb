@@ -20,7 +20,7 @@
 	  	<% else %>
 	  		<%= form.collection_select :survivalist_id, Survivalist.order(:name), :id, :name, 
 			{include_blank: false, :remote => true},  
-			{:id =>"survivalist_selection", :style => "width:220px", :onchange => "updateSurvivalist();", :remote => true} %>
+			{:id =>"survivalist_selection", :style => "width:180px", :onchange => "updateSurvivalist(this.id);", :remote => true} %>
 						
 	  	<% end %>
 	    </div>
@@ -36,7 +36,7 @@
 	    <div class="field">
 	      <%= form.label "Pick a Location" %>
 	  	<%= form.collection_select :location_id, Location.order(:name), :id, :name, 
-			{include_blank: false},  {:id =>"location_selection", :style => "width:220px", :remote => true} %>
+			{include_blank: false},  {:id =>"location_selection", :style => "width:180px", :remote => true} %>
 	    </div>
 	</div>
     <div class="col-sm-8">
@@ -53,9 +53,10 @@
 <% end %>
 
 <script type='text/javascript'>
-	function updateSurvivalist(id) {
-		var elem = document.getElementById('survivalist_selected');
-	    elem.replaceWith("<%= j render(:partial => 'survivalist') %>");
+	function updateSurvivalist(myid) {
+		const wrapper = document.createElement('div');
+		wrapper.innerHTML = "<%= j render(:partial => 'survivalist', :locals => {:id => myid}) %>"
+		document.getElementById("survivalist_selected").replaceWith(wrapper);
 	}
 </script>
   

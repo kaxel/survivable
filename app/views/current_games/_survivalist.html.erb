@@ -1,9 +1,12 @@
 <div class="row">
   <div class="col-8">
     <div class="row">
-      <div class="col-6">stat1</div>
+      <div class="col-6">stat1 <%= id %></div>
       <div class="col-6">stat1 value</div>
     </div>
   </div>
-  <div class="col-4">image</div>
+  <div class="col-4">
+	  <div id="image"><%= image_tag 'Furbooshio.png', size: "140x140" %>
+	  </div>
+  </div>
 </div>
