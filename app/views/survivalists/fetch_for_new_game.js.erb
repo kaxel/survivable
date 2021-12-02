@@ -1,0 +1,4 @@
+ 		const wrapper = document.createElement('div');
+ 		wrapper.innerHTML = "<%= j render(:partial => 'cards/survivalist', :locals => {:id => @data_from_select}) %>"
+ 		document.getElementById("survivalist_selected").replaceWith(wrapper);
+		alert("boom");

@@ -1,0 +1,104 @@
+  , :onchange => "fetch_survivalist(:survivalist_id => this.id);", :remote => true}
+  
+  
+  $(function (){
+     $(document).on("change","#survivalist_selection", function (){
+        var selectValue = $(this).val();
+		alert("uodate");
+		$('#survivalist_selected').append("<%= escape_javascript render(:partial => 'cards/survivalist') %>");
+     });
+  });
+
+
+ <%= escape_javascript render(:partial => 'cards/survivalist') %>
+ 
+ 
+ $("#items_grid").html("<%= escape_javascript(render partial: 'items_list', locals: { items: @selected } ) %>"); 
+ 
+ 
+ 
+ <script type='text/javascript'>
+   $(function (){
+      $(document).on("change",".selectProduct", function (){
+         var selectValue = $(this).val();
+         alert(<%= render 'product_form/test', f:builder %>);
+      });
+   });
+ </script>
+ 
+ 
+ <script type='text/javascript'>
+ 	function updateSurvivalist(myid) {
+ 		const wrapper = document.createElement('div');
+ 		wrapper.innerHTML = "<%= j render(:partial => 'survivalist', :locals => {:id => myid}) %>"
+ 		document.getElementById("survivalist_selected").replaceWith(wrapper);
+ 	}
+ </script>
+ 
+ <script type='text/javascript'>
+   $(function (){
+      $(document).on("change",".survivalist_selection", function (){
+         var selectValue = $(this).val();
+         alert(<%= render 'product_form/test', f:builder %>);
+      });
+   });
+ </script>
+ 
+ 
+ 
+ <script type='text/javascript'>
+   $(function (){
+      $(document).on("change",".survivalist_selection", function (){
+         var selectValue = $(this).val();
+  		 const wrapper = document.createElement('div');
+  		 wrapper.innerHTML = "<%= j render(:partial => 'survivalist', :locals => {:id => selectValue}) %>"
+  		 document.getElementById("survivalist_selected").replaceWith(wrapper);
+      });
+   });
+ </script>
+   
+   
+   
+   
+<script type='text/javascript'>
+	function updateSurvivalist(myid) {
+		const wrapper = document.createElement('div');
+		wrapper.innerHTML = "<%= j render(:partial => 'survivalist', :locals => {:id => myid}) %>"
+		document.getElementById("survivalist_selected").replaceWith(wrapper);
+	}
+</script>
+	
+	
+<script type='text/javascript'>
+	function updateSurvivalist(myid) {
+		alert(myid);
+		const wrapper = document.createElement('div');
+		wrapper.innerHTML = "<%= j render(:partial => 'survivalist', :locals => {:id => myid}) %>"
+		document.getElementById("survivalist_selected").replaceWith(wrapper);
+	}
+</script>
+	
+	
+	  			<%= form.collection_select :survivalist_id, Survivalist.order(:name), :id, :name, {},
+				data: { action: "change->survivalist#handleNewSelection" } %>
+	
+	
+	
+	
+	
+	$(document).ready(function() {
+	  $("select#select_id").bind("change",function() {
+		  alert("boom");
+
+	  })
+	})
+	
+	
+	
+	
+	
+    static targets = ["survivalist_selected"];
+
+    handleNewSelection() {
+      alert("boom");
+    }

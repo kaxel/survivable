@@ -55,4 +55,8 @@ Rails.application.routes.draw do
   
   get "/load_default_animal", to: "animals#load_default"
   get "/destroy_default_animal", to: "animals#destroy_default"
+  
+  
+  #new game ajax
+  get "fetch_survivalist", to: "survivalists#fetch_for_new_game", as: 'fetch_survivalist'
 end

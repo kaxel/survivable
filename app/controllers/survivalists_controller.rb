@@ -6,6 +6,16 @@ class SurvivalistsController < ApplicationController
     Survivalist.add_default(user_id)
     redirect_to new_current_game_path
   end
+  
+  def fetch_for_new_game
+      @data_from_select = params[:survivalist_selection]
+      @selected = Survivalist.find(@data_from_select)
+      puts "found match"
+      puts "..."
+      respond_to do |format|
+          format.js
+      end
+  end
 
   # GET /survivalists or /survivalists.json
   def index

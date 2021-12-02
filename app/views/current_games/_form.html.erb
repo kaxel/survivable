@@ -18,12 +18,18 @@
 	  	<% if !Survivalist.first %>
 	  		<%= link_to 'use default', add_default_survivalist_path(:user_id => current_user.id) %>
 	  	<% else %>
-	  		<%= form.collection_select :survivalist_id, Survivalist.order(:name), :id, :name, 
-			{include_blank: false, :remote => true},  
-			{:id =>"survivalist_selection", :style => "width:180px", :onchange => "updateSurvivalist(this.id);", :remote => true} %>
-						
+			<%=
+  		  select_tag :survivalist_selection, # name of selectbox
+  		      options_from_collection_for_select(Survivalist.all, "id", "name"), # your options for this select box
+  		      :'data-remote' => 'true', # important for UJS
+  		      :'data-url' => fetch_survivalist_path, # we get the data from here!
+  		      :'data-type' => 'json' # tell jQuery to parse the response as JSON!
+  		      
+			%>
+			
 	  	<% end %>
 	    </div>
+		
 	</div>
     <div class="col-sm-8">
       <div id="survivalist_selected">
@@ -36,7 +42,7 @@
 	    <div class="field">
 	      <%= form.label "Pick a Location" %>
 	  	<%= form.collection_select :location_id, Location.order(:name), :id, :name, 
-			{include_blank: false},  {:id =>"location_selection", :style => "width:180px", :remote => true} %>
+			{include_blank: false} %>
 	    </div>
 	</div>
     <div class="col-sm-8">
@@ -52,12 +58,5 @@
   
 <% end %>
 
-<script type='text/javascript'>
-	function updateSurvivalist(myid) {
-		const wrapper = document.createElement('div');
-		wrapper.innerHTML = "<%= j render(:partial => 'survivalist', :locals => {:id => myid}) %>"
-		document.getElementById("survivalist_selected").replaceWith(wrapper);
-	}
-</script>
   
   
