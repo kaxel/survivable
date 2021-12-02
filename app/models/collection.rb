@@ -2,9 +2,9 @@ class Collection < ApplicationRecord
   has_and_belongs_to_many :projects
   
   @default_collections = [
-    {:name => "Hunting Kit"},
-    {:name => "Fisherman's Pride"},
-    {:name => "Desert"}
+    {:name => "Hunting Kit", :description => "The only two things that Hunter really needs."},
+    {:name => "Fisherman's Pride", :description => "If the fish are biting you'll have plenty to eat."},
+    {:name => "Desert", :description => "Just the things you'll find in a Desert."}
   ]
   
   def self.starting_collections
@@ -15,6 +15,8 @@ class Collection < ApplicationRecord
     @default_collections.each do |d|
       x = Collection.new
       x.name = d[:name]
+      x.description = d[:description]
+      
       #find projects
       case d[:name]
         when "Hunting Kit"
@@ -64,6 +66,10 @@ class Collection < ApplicationRecord
   def self.destroy_default
     Collection.delete_all
     "Collections delete all"
+  end
+  
+  def image_path
+    name.gsub(" ", "-").gsub("'", "")
   end
   
 end
