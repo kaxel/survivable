@@ -49,6 +49,9 @@
 				 	Admin: <%= current_user.admin? %>
 				 <% end %>
 				 
+				 <% if current_user.latest_game %> | <%= link_to "current_game", current_game_path(current_user.latest_game.id) %>
+				 <% end %>
+				 
 			 </div>
 		  </div>
 		</div>
