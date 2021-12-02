@@ -3,7 +3,7 @@ class CurrentGame < ApplicationRecord
   belongs_to :user
   belongs_to :location
   has_many :possessions
-  has_many :events
+  has_many :days
   
   def earliest
     puts "search for game #{id}"
@@ -17,7 +17,7 @@ class CurrentGame < ApplicationRecord
   def self.delete_game(id)
     @game = CurrentGame.find(id)
     @survivalists = Survivalist.where(user_id: @game.user.id)
-    message = "game #{@game.id} deleted. #{@game.events.size} events, #{@game.possessions.size} possessions, #{@survivalists.size} survivalists"
+    message = "game #{@game.id} deleted. #{@game.possessions.size} possessions, #{@survivalists.size} survivalists"
     
     Event.delete_related(@game.id)
     Possession.delete_related(@game.id)

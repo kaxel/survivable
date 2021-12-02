@@ -38,10 +38,15 @@ class CurrentGamesController < ApplicationController
     @current_game.survivalist_id = params[:survivalist_id]
     @current_game.location_id = params[:location_id]
     
+    @collection = Collection.find(params[:collection_id])
+    
     respond_to do |format|
       if @current_game.save
         #add new events
         Event.insert_starting_events(@current_game)
+        
+        #add starting items
+        @collection.projects.each {|p| @current_game.possessions << Possession.input_starter_possession(@current_game, p)}
         
         format.html { redirect_to @current_game, notice: "Current game was successfully created." }
         format.json { render :show, status: :created, location: @current_game }

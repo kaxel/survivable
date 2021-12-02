@@ -1,4 +1,4 @@
 class DayTask < ApplicationRecord
-  belongs_to :day
+  has_one :day
   belongs_to :event
 end
