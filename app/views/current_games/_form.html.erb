@@ -41,8 +41,16 @@
     <div class="col-sm-4">
 	    <div class="field">
 	      <%= form.label "Pick a Location" %>
-	  	<%= form.collection_select :location_id, Location.order(:name), :id, :name, 
-			{include_blank: false} %>
+		  
+			<%=
+  		  select_tag :location_id, # name of selectbox
+  		      options_from_collection_for_select(Location.all, "id", "name"), # options
+  		      :'data-remote' => 'true', # UJS
+  		      :'data-url' => fetch_location_path,
+			  include_blank: true,
+			  :class => "game_dropdown"
+			%>
+
 	    </div>
 	</div>
     <div class="col-sm-8">

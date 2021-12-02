@@ -59,4 +59,5 @@ Rails.application.routes.draw do
   
   #new game ajax
   get "fetch_survivalist", to: "survivalists#fetch_for_new_game", as: 'fetch_survivalist'
+  get "fetch_location", to: "locations#fetch_for_new_game", as: 'fetch_location'
 end

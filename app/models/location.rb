@@ -4,8 +4,8 @@ class Location < ApplicationRecord
   has_and_belongs_to_many :animals
   
   @defaults = [
-    {:name => "Black Lake", :climate => "Rainy Cold Brisk", :animals => "All", :collection => "Standard"},
-    {:name => "Sonoran Desert", :climate => "Dry Hot Extreme", :animals => "Desert", :collection => "Desert"}
+    {:name => "Black Lake", :climate => "Rainy Cold Brisk", :animals => "All", :collection => "Standard", :description => "This 12-mile-long lake is home to some of the best fishing in the world. Mild summer and cold winters are always punctuated with regular precipitation."},
+    {:name => "Sonoran Desert", :climate => "Dry Hot Extreme", :animals => "Desert", :collection => "Desert", :description => "A desert climate is home to only a handful of animals. Finding food may be a problem. Also, the heat can be overwhelming."}
   ]
   
   
@@ -13,7 +13,7 @@ class Location < ApplicationRecord
     @defaults.each do |d|
       collection = Collection.where(name: d[:collection]).first
       climate = Climate.where(name: d[:climate]).first
-      Location.new(:name => d[:name], :collection_id => collection.id, :climate_id => climate.id).save
+      Location.new(:name => d[:name], :collection_id => collection.id, :climate_id => climate.id, :description => d[:description]).save
       @location = Location.where(name: d[:name]).first
       case d[:animals]
         when "All"
@@ -44,6 +44,10 @@ class Location < ApplicationRecord
   def self.destroy_default
     Location.delete_all
     "Locations delete all"
+  end
+  
+  def image_path
+    name.gsub(" ", "-")
   end
   
 end
