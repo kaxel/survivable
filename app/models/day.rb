@@ -1,3 +1,3 @@
 class Day < ApplicationRecord
-  belongs_to :event
+  belongs_to :day_task
 end
