@@ -4,7 +4,7 @@ class Location < ApplicationRecord
   has_and_belongs_to_many :animals
   
   @defaults = [
-    {:name => "Black Lake", :climate => "Rainy Cold Brisk", :animals => "All", :collection => "Standard", :description => "This 12-mile-long lake is home to some of the best fishing in the world. Mild summer and cold winters are always punctuated with regular precipitation."},
+    {:name => "Black Lake", :climate => "Rainy Cold Brisk", :animals => "All", :collection => "Standard", :description => "This 12-mile-long lake is home to some of the best fishing in the world. Mild summers and cold winters are always punctuated with regular precipitation."},
     {:name => "Sonoran Desert", :climate => "Dry Hot Extreme", :animals => "Desert", :collection => "Desert", :description => "A desert climate is home to only a handful of animals. Finding food may be a problem. Also, the heat can be overwhelming."}
   ]
   
@@ -19,7 +19,6 @@ class Location < ApplicationRecord
         when "All"
           Animal.list.each do |a|
             animal = Animal.where(name: a[:name]).first
-            #LocationAnimal.new(location_id: @location.id, animal_id: animal.id).save
             @location.animals << animal
           end
           @location.save
