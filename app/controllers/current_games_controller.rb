@@ -33,7 +33,7 @@ class CurrentGamesController < ApplicationController
 
   # POST /current_games or /current_games.json
   def create
-    @current_game = CurrentGame.new(current_game_params.merge(user_id: current_user.id))
+    @current_game = CurrentGame.new(current_game_params.merge(user_id: current_user.id, survivalist_id: params[:survivalist_id]))
 
     respond_to do |format|
       if @current_game.save

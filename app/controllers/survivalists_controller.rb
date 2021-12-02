@@ -8,7 +8,7 @@ class SurvivalistsController < ApplicationController
   end
   
   def fetch_for_new_game
-      @data_from_select = params[:survivalist_selection]
+      @data_from_select = params[:survivalist_id]
       respond_to do |format|
           format.js
       end
