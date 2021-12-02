@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_02_215249) do
+ActiveRecord::Schema.define(version: 2021_12_02_220224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,13 +86,11 @@ ActiveRecord::Schema.define(version: 2021_12_02_215249) do
 
   create_table "days", force: :cascade do |t|
     t.integer "hour", limit: 2
-    t.bigint "event_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "current_game_id", null: false
     t.integer "num", limit: 2
     t.index ["current_game_id"], name: "index_days_on_current_game_id"
-    t.index ["event_id"], name: "index_days_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -189,7 +187,6 @@ ActiveRecord::Schema.define(version: 2021_12_02_215249) do
   add_foreign_key "day_tasks", "days"
   add_foreign_key "day_tasks", "events"
   add_foreign_key "days", "current_games"
-  add_foreign_key "days", "events"
   add_foreign_key "events", "current_games"
   add_foreign_key "locations", "climates"
   add_foreign_key "locations", "collections"

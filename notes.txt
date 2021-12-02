@@ -89,6 +89,9 @@ rails g migration AddNumToDay num:integer{2}
 
 rails g scaffold DayTask num:integer{2} day:references event:references
 
+
+rails generate migration RemoveEventFromDays event:references
+
 webmaster
 55zmeE5VD*BpAbS
 
