@@ -25,8 +25,8 @@ class DaysController < ApplicationController
   # POST /days or /days.json
   def create
     
-    @day = Day.new(day_params)
-
+    @day = Day.new(day_params.merge(current_game_id: current_user.latest_game.id))
+    
     respond_to do |format|
       if @day.save
         format.html { redirect_to @day, notice: "Day was successfully created." }
