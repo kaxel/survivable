@@ -1,5 +1,5 @@
 class DaysController < ApplicationController
-  before_action :set_day
+  before_action :set_day, :except => [:new, :create, :index]
   before_action :authenticate_user!
 
   # GET /days or /days.json

@@ -12,26 +12,16 @@
       </ul>
     </div>
   <% end %>
-  
+
   <div class="field">
-    <%= form.collection_select :current_game_id, CurrentGame.order(:id),:id,:sig, include_blank: false %>
+	Hour: <%= form.text_field :hour, :value => cur_game.earliest, :readonly => true %>
   </div>
 
   <div class="field">
-    <%= form.label :hour %>
-	<%= form.text_field :hour, :value => cur_game.earliest, :readonly => true %>
-  </div>
-
-  <div class="field">
-	<%= form.collection_select :event_id, Event.order(:name),:id,:name, include_blank: false %>
-  </div>
-  
-  <div class="field">
-    <%= form.label :current_game_id %>
-    <%= cur_game.id %>
+	<%= form.collection_select :event_id, Event.order(:name),:id,:name, include_blank: false, :class => "game_dropdown" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Take action" %>
   </div>
 <% end %>
