@@ -1,7 +1,7 @@
 class Project < ApplicationRecord
   
   has_and_belongs_to_many :collections
-  has_and_belongs_to_many :requirements
+  has_many :project_requirements
   
   @defaults = [
     "Twine",
@@ -38,6 +38,10 @@ class Project < ApplicationRecord
   
   def self.list
     @defaults
+  end
+  
+  def requirements
+    ProjectRequirement.where(project_id: self.id).map {|p| p.requirement}
   end
   
 end
