@@ -1,6 +1,7 @@
 class CurrentGame < ApplicationRecord
   belongs_to :survivalist
   belongs_to :user
+  belongs_to :location
   has_many :possessions
   has_many :events
   

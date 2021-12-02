@@ -78,6 +78,9 @@ rails g migration DropTableAnimalsLocations
 
 rails g migration CreateJoinTableLocationsAnimals locations animals
 
+
+rails g migration AddLocationToCurrentGame location:references
+
 webmaster
 55zmeE5VD*BpAbS
 

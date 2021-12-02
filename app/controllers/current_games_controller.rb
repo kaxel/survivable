@@ -81,6 +81,6 @@ class CurrentGamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def current_game_params
-      params.require(:current_game).permit(:sig, :ip, :survivalist_id, :user_id)
+      params.require(:current_game).permit(:sig, :ip, :survivalist_id, :user_id, :location_id)
     end
 end
