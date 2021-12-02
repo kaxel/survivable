@@ -22,7 +22,9 @@
   		  select_tag :survivalist_id, # name of selectbox
   		      options_from_collection_for_select(Survivalist.all, "id", "name"), # options
   		      :'data-remote' => 'true', # UJS
-  		      :'data-url' => fetch_survivalist_path
+  		      :'data-url' => fetch_survivalist_path,
+			  include_blank: true,
+			  :class => "game_dropdown"
 			%>
 			
 	  	<% end %>

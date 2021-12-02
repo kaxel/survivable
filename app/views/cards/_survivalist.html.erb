@@ -1,4 +1,13 @@
-<% player = Survivalist.find(@data_from_select)%>
+<% player = @data_from_select!="" ? Survivalist.find(@data_from_select) : "none" %>
+<% if player=="none" %>
+<div class="row">
+  <div class="col-8">
+    <div class="row">
+		Please select a survivalist.
+	</div>
+  </div>
+</div>
+<% else %>
 <div class="row">
   <div class="col-8">
     <div class="row">
@@ -30,3 +39,4 @@
 	  </div>
   </div>
 </div>
+<% end %>

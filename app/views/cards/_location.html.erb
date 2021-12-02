@@ -1,0 +1,10 @@
+<% location = Location.find(@data_from_selected_location)%>
+<div class="row">
+  <div class="col-8">
+    This is a descrioption of the selected location.
+  </div>
+  <div class="col-2">
+	  <div id="image"><%= image_tag "locations/#{location.image_path}.png", size: "140x140" %>
+	  </div>
+  </div>
+</div>

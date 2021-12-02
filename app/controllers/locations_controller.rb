@@ -11,6 +11,13 @@ class LocationsController < ApplicationController
     message = Location.destroy_default
     redirect_to my_admin_path, notice: "Successful: #{message}"
   end
+  
+  def fetch_for_new_game
+      @data_from_selected_location = params[:location_id]
+      respond_to do |format|
+          format.js
+      end
+  end
 
   # GET /locations or /locations.json
   def index
