@@ -9,9 +9,6 @@ class SurvivalistsController < ApplicationController
   
   def fetch_for_new_game
       @data_from_select = params[:survivalist_selection]
-      @selected = Survivalist.find(@data_from_select)
-      puts "found match"
-      puts "..."
       respond_to do |format|
           format.js
       end

@@ -41,4 +41,8 @@ class Survivalist < ApplicationRecord
     
   end
   
+  def image_path
+    name.gsub(" ", "-")
+  end
+  
 end

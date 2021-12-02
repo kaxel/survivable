@@ -1,12 +1,32 @@
+<% player = Survivalist.find(@data_from_select)%>
 <div class="row">
   <div class="col-8">
     <div class="row">
-      <div class="col-6">stat1 <%= id %></div>
-      <div class="col-6">stat1 value</div>
+      <div class="col-10"><h3><%= player.name %></h3></div>
+    </div>
+    <div class="row">
+      <div class="col-4">Strength</div>
+      <div class="col-6"><%= player.strength %></div>
+    </div>
+    <div class="row">
+      <div class="col-4">Creativity</div>
+      <div class="col-6"><%= player.creativity %></div>
+    </div>
+    <div class="row">
+      <div class="col-4">Determination</div>
+      <div class="col-6"><%= player.determination %></div>
+    </div>
+    <div class="row">
+      <div class="col-4">Optimism</div>
+      <div class="col-6"><%= player.optimism %></div>
+    </div>
+    <div class="row">
+      <div class="col-4">Skill</div>
+      <div class="col-6"><%= player.skill %></div>
     </div>
   </div>
-  <div class="col-4">
-	  <div id="image"><%= image_tag 'Furbooshio.png', size: "140x140" %>
+  <div class="col-2">
+	  <div id="image"><%= image_tag "survivalists/#{player.image_path}.png", size: "140x140" %>
 	  </div>
   </div>
 </div>

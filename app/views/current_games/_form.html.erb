@@ -20,11 +20,9 @@
 	  	<% else %>
 			<%=
   		  select_tag :survivalist_selection, # name of selectbox
-  		      options_from_collection_for_select(Survivalist.all, "id", "name"), # your options for this select box
-  		      :'data-remote' => 'true', # important for UJS
-  		      :'data-url' => fetch_survivalist_path, # we get the data from here!
-  		      :'data-type' => 'json' # tell jQuery to parse the response as JSON!
-  		      
+  		      options_from_collection_for_select(Survivalist.all, "id", "name"), # options
+  		      :'data-remote' => 'true', # UJS
+  		      :'data-url' => fetch_survivalist_path
 			%>
 			
 	  	<% end %>
