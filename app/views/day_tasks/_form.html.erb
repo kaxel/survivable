@@ -1,0 +1,32 @@
+<%= form_with(model: day_task) do |form| %>
+  <% if day_task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(day_task.errors.count, "error") %> prohibited this day_task from being saved:</h2>
+
+      <ul>
+        <% day_task.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :num %>
+    <%= form.number_field :num %>
+  </div>
+
+  <div class="field">
+    <%= form.label :day_id %>
+    <%= form.text_field :day_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :event_id %>
+    <%= form.text_field :event_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

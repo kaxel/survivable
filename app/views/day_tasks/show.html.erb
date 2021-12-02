@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Num:</strong>
+  <%= @day_task.num %>
+</p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @day_task.day_id %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @day_task.event_id %>
+</p>
+
+<%= link_to 'Edit', edit_day_task_path(@day_task) %> |
+<%= link_to 'Back', day_tasks_path %>
