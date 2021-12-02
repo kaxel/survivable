@@ -46,7 +46,3 @@ test:
 
 production:
   <<: *default
-  database: survivable_production
-  url: <%= ENV['DATABASE_URL'] %>
-  username: survivable
-  password: <%= ENV['SURVIVABLE_DATABASE_PASSWORD'] %>
