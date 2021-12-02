@@ -1,0 +1,42 @@
+<% collection = @data_from_selected_collection!="" ? Collection.find(@data_from_selected_collection) : "none" %>
+<% if collection=="none" %>
+<div class="row">
+  <div class="col-8">
+    <div class="row">
+		Please select a starting collection.
+	</div>
+  </div>
+</div>
+<% else %>
+<div class="row">
+  <div class="col-8">
+    <div class="row">
+      <div class="col-10"><h3><%= collection.name %></h3></div>
+    </div>
+    <div class="row">
+      <div class="col-2 text-start">Climate</div>
+      <div class="col-8"><%= location.climate.name %></div>
+    </div>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8"><hr/></div>
+    </div>
+    <div class="row">
+      <div class="col-2 text-start">Animals</div>
+      <div class="col-8"><%= location.animals.map {|a| a.name}.join(" ") %></div>
+    </div>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8"><hr/></div>
+    </div>
+    <div class="row">
+      <div class="col-2 text-start">Description</div>
+      <div class="col-8"><%= location.description %></div>
+    </div>
+  </div>
+  <div class="col-2">
+	  <div id="image"><%= image_tag "locations/#{location.image_path}.png", size: "140x140" %>
+	  </div>
+  </div>
+</div>
+<% end %>

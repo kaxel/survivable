@@ -6,6 +6,10 @@ class Collection < ApplicationRecord
     {:name => "Fisherman's Pride"},
     {:name => "Desert"}
   ]
+  
+  def self.starting_collections
+    Collection.where(name: ["Hunting Kit", "Fisherman's Pride"])
+  end
 
   def self.load_default
     @default_collections.each do |d|

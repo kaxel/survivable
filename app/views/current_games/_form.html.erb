@@ -60,6 +60,30 @@
 	
 
   </div>
+  <!-- item selection -->
+  <div class="row">
+    <div class="col-sm-4 text-end">
+	    <div class="field">
+	      <%= form.label "Pick an item set" %>
+		  
+			<%=
+  		  select_tag :collection_id, # name of selectbox
+  		      options_from_collection_for_select(Collection.starting_collections, "id", "name"), # options
+  		      :'data-remote' => 'true', # UJS
+  		      :'data-url' => fetch_starting_possessions_path,
+			  include_blank: true,
+			  :class => "game_dropdown"
+			%>
+
+	    </div>
+	</div>
+    <div class="col-sm-8">
+      <div id="collection_selected">
+	  </div>
+    </div>
+	
+
+  </div>
   
   
   <div class="row">

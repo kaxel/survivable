@@ -83,6 +83,8 @@ rails g migration AddLocationToCurrentGame location:references
 
 rails g migration AddDescriptionToLocations description:string
 
+rails g migration AddDescriptionToCollections description:string
+
 webmaster
 55zmeE5VD*BpAbS
 

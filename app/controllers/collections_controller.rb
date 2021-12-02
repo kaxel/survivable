@@ -2,6 +2,13 @@ class CollectionsController < ApplicationController
   before_action :set_collection, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
   
+  def fetch_for_new_game
+      @data_from_selected_collection = params[:collection_id]
+      respond_to do |format|
+          format.js
+      end
+  end
+  
   def load_default
     message = Collection.load_default
     redirect_to my_admin_path, notice: "Successful: #{message}"
