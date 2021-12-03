@@ -60,6 +60,10 @@ class CurrentGame < ApplicationRecord
     self.save
   end
   
+  def has_fire?
+    return self.possessions.where(name: "Fire").first
+  end
+  
   def mood_description
     case true
     when mood > 85
