@@ -37,4 +37,8 @@ class Animal < ApplicationRecord
     @defaults
   end
   
+  def self.animals_for_hunt
+    
+  end
+  
 end

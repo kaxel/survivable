@@ -71,6 +71,21 @@ class Event < ApplicationRecord
         #message = "you spent an hour collecting wood. You found #{x} good logs."
         game.add_resource("Wood", x[0])
       when "Hunt"
+        consolations = ["You found nothing.", "Hunting ain't easy.", "No luck this time.", "Better luck next time."]
+        message = consolations.sample #default
+        found_prey = strength_check(game.survivalist, 0.20, 1)[0]==1
+        if found_prey
+          animal = game.location.animals.where(aclass: ["mammal", "bird", "reptile"]).sample
+          
+          x = skill_check(game.survivalist, 0.50, animal.meat)
+          game.add_resource("Meat", x[0])
+          if x[0]==0
+            message = "You saw a #{animal.name} but it got away."
+          else
+            message = "You saw a #{animal.name} and took it down for #{x[0]} meat."
+          end
+        end
+        message
       when "Set Fish Hook"
       when "Drop Net"
       when "Start Fire"
