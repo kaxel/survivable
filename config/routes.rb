@@ -63,4 +63,8 @@ Rails.application.routes.draw do
   get "fetch_location", to: "locations#fetch_for_new_game", as: 'fetch_location'
   get "fetch_starting_possessions", to: "collections#fetch_for_new_game", as: 'fetch_starting_possessions'
   
+  
+  #testing
+  get "gameplay", to: "current_games#gameplay", as: 'gameplay'
+  
 end

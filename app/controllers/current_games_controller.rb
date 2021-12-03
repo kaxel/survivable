@@ -6,6 +6,10 @@ class CurrentGamesController < ApplicationController
     @current_games = CurrentGame.all
   end
   
+  def gameplay
+    render :template => "cards/gameplay"
+  end
+  
   def delete_game
     @current_game = CurrentGame.where(user_id: current_user.id).first
     if @current_game
