@@ -14,6 +14,10 @@ class CurrentGame < ApplicationRecord
     end
   end
   
+  def latest_day
+    Day.where(["current_game_id = ?", self.id]).order("num desc").first
+  end
+  
   def self.delete_game(id)
     @game = CurrentGame.find(id)
     @survivalists = Survivalist.where(user_id: @game.user.id)

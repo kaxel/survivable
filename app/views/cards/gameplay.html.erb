@@ -50,24 +50,24 @@
             <div class="col-md-3 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title text-md-center text-xl-left">Sales</p>
+                  <p class="card-title text-md-center text-xl-left">Survivalist</p>
                   <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">34040</h3>
+                    <div class="mx-auto"><%= image_tag "survivalists/#{@current_game.survivalist.image_path}.png", size: "160x160" %></div>
                     <i class="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                   </div>  
-                  <p class="mb-0 mt-2 text-danger">0.12% <span class="text-black ml-1"><small>(30 days)</small></span></p>
+                  <p class="mb-0 mt-2"><%= @current_game.survivalist.name %></p>
                 </div>
               </div>
             </div>
             <div class="col-md-3 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title text-md-center text-xl-left">Revenue</p>
+                  <p class="card-title text-md-center text-xl-left">DAY</p>
                   <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">47033</h3>
+                    <h3 class="mx-auto"><%= @current_game.latest_day.num %></h3>
                     <i class="ti-user icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                   </div>  
-                  <p class="mb-0 mt-2 text-danger">0.47% <span class="text-black ml-1"><small>(30 days)</small></span></p>
+                  <p class="mb-0 mt-2"><small>(of 30 days)</small></p>
                 </div>
               </div>
             </div>
@@ -126,28 +126,12 @@
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card border-bottom-0">
                 <div class="card-body pb-0">
-                  <p class="card-title">Purchases</p>
-                  <p class="text-muted font-weight-light">The argument in favor of using filler text goes something like this: If you use real content in the design process, anytime you reach a review</p>
-                  <div class="d-flex flex-wrap mb-5">
-                    <div class="mr-5 mt-3">
-                      <p class="text-muted">Status</p>
-                      <h3>362</h3>
-                    </div>
-                    <div class="mr-5 mt-3">
-                      <p class="text-muted">New users</p>
-                      <h3>187</h3>
-                    </div>
-                    <div class="mr-5 mt-3">
-                      <p class="text-muted">Chats</p>
-                      <h3>524</h3>
-                    </div>
-                    <div class="mt-3">
-                      <p class="text-muted">Feedbacks</p>
-                      <h3>509</h3>
-                    </div> 
-                  </div>
+                  <p class="card-title">Status</p>
+                  <p class="text-muted font-weight-light">Your latest system message is here.</p>
+                  <div class="d-flex flex-wrap mb-5"><%= render(:partial => 'cards/location_dash') %></div>
+				  <div class="mb-5"><%= render(:partial => 'cards/possession_list_dash') %></div>
                 </div>
-                <canvas id="order-chart" class="w-100"></canvas>
+                
               </div>
             </div>
           </div>

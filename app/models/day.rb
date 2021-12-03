@@ -1,3 +1,3 @@
 class Day < ApplicationRecord
-  belongs_to :day_task
+  has_many :day_tasks
 end
