@@ -4,7 +4,7 @@ class Day < ApplicationRecord
   
   def hour
     if day_tasks.last
-      day_tasks.last
+      day_tasks.last.num
     else
       0
     end

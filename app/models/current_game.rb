@@ -3,6 +3,7 @@ class CurrentGame < ApplicationRecord
   belongs_to :user
   belongs_to :location
   has_many :possessions
+  has_many :stashes
   has_many :days
   has_many :events
   

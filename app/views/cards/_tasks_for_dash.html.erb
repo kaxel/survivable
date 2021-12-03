@@ -1,5 +1,5 @@
 <% @current_game.events.each do |e| %>
-<p class="mb-0 mt-1"><%= e.name %></p>
+<p class="mb-0 mt-1"><%= link_to e.name, add_next_path(:event_id => e.id) %></p>
 <% end %>
 <p><hr/></p>
 <p class="mb-0 mt-2"><small>New task will unlock as you gather more possessions.</small></p>

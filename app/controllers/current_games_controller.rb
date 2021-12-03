@@ -22,6 +22,7 @@ class CurrentGamesController < ApplicationController
   end
   
   def add_next
+    @current_game = CurrentGame.where(user_id: current_user.id).first
     e = Event.find(params[:event_id])
     d = @current_game.latest_day
     num = @current_game.latest_day.hour + 1
@@ -30,7 +31,8 @@ class CurrentGamesController < ApplicationController
     nexttask.day_id = d.id
     nexttask.num = num
     if nexttask.save
-      redirect_to gameplay_path, notice: e.process(@current_game)
+      message = e.process(@current_game)
+      redirect_to gameplay_path, notice: message
     end
   end
 

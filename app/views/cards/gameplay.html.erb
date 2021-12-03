@@ -75,8 +75,8 @@
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Tasks Today</p>
-                  TASK LIST
+                  <p class="card-title">Tasks Completed Today</p>
+                  <%= render(:partial => 'cards/tasklist_for_dash') %>
                   <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
                   <canvas id="sales-chart"></canvas>
                 </div>
