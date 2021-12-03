@@ -92,6 +92,8 @@ rails g scaffold DayTask num:integer{2} day:references event:references
 
 rails generate migration RemoveEventFromDays event:references
 
+rails generate migration RemoveHourFromDays hour:integer
+
 webmaster
 55zmeE5VD*BpAbS
 
