@@ -1,5 +1,13 @@
 class Resource < ApplicationRecord
   
+  def self.input_new_resource(game, project, amount=1)
+    new_resource = Resource.new(current_game_id: game.id, project_id: project.id)
+    new_possession.quantity = amount
+    new_possession.name = project.name
+    new_possession.save
+    new_possession
+  end
+  
   
   def self.load_default
     defaults = [

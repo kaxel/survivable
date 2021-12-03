@@ -26,7 +26,7 @@ class Event < ApplicationRecord
      Event.where(["current_game_id = ?", game_id]).delete_all
   end
   
-  def process
+  def process(game)
     
     case name
       when "Explore"
@@ -34,6 +34,7 @@ class Event < ApplicationRecord
       when "Gather Mud"
         x = 1
         message = "You spent an hour gathering mud. You found #{x} clumps of it."
+        
       when "Gather Leaves"
         x = 1
         message = "You spent an hour gathering leaves. You found #{x} piles."

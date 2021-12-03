@@ -20,6 +20,19 @@ class CurrentGamesController < ApplicationController
     end
     redirect_to my_admin_path, notice: message
   end
+  
+  def add_next
+    e = Event.find(params[:event_id])
+    d = @current_game.latest_day
+    num = @current_game.latest_day.hour + 1
+    nexttask = DayTask.new
+    nexttask.event_id = e.id
+    nexttask.day_id = d.id
+    nexttask.num = num
+    if nexttask.save
+      redirect_to gameplay_path, notice: e.process(@current_game)
+    end
+  end
 
   # GET /current_games/1 or /current_games/1.json
   def show
@@ -62,7 +75,7 @@ class CurrentGamesController < ApplicationController
         @newday.save
         @current_game.days<<@newday
         #add starting items
-        @collection.projects.each {|p| @current_game.possessions << Possession.input_starter_possession(@current_game, p)}
+        @collection.projects.each {|p| @current_game.possessions << Possession.input_new_possession(@current_game, p)}
         
         format.html { redirect_to gameplay_path, notice: "Current game was successfully created." }
         format.json { render :show, status: :created, location: @current_game }

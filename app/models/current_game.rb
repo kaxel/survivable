@@ -6,13 +6,16 @@ class CurrentGame < ApplicationRecord
   has_many :days
   has_many :events
   
-  def earliest
-    puts "search for game #{id}"
-    if !Day.find_by(current_game_id: self.id)
-      1
+  def add_thing(what, amount = 1)
+    possession_match = possessions.where(name: what).first
+    #possession exists?
+    if possession_match
+      
     else
-      Day.where(["current_game_id = ?", self.id]).last.hour + 1
+      project = Project.where(name: what).first
+      Possession.input_new_possession(self, project, amount=1)
     end
+    "#{what} added #{amount}"
   end
   
   def latest_day

@@ -64,7 +64,8 @@ Rails.application.routes.draw do
   get "fetch_starting_possessions", to: "collections#fetch_for_new_game", as: 'fetch_starting_possessions'
   
   
-  #testing
+  #gameplay
   get "gameplay", to: "current_games#gameplay", as: 'gameplay'
+  get "add_next", to: "current_games#add_next", as: 'add_next'
   
 end
