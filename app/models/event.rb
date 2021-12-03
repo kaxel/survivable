@@ -9,15 +9,21 @@ class Event < ApplicationRecord
     ]
     events.each do |ev|
       if game.possessions.where(name: ev[:requires].join(","))
-        Event.new(:name => ev[:name], :length => 1, :current_game_id => game.id).save
+        add_new_event_if_not_present(ev[:name], game)
       end
     end
     
     #firestarter
     if game.possessions.where(name: "Firestarter")
-      Event.new(:name => "Start Fire", :length => 1, :current_game_id => game.id).save
+      add_new_event_if_not_present("Start Fire", game)
     else
-      Event.new(:name => "Make Friction Fire", :length => 1, :current_game_id => game.id).save
+      add_new_event_if_not_present("Make Friction Fire", game)
+    end
+  end
+  
+  def self.add_new_event_if_not_present(name, game, amount = 1)
+    if !Event.where(name: name, current_game_id: game.id).first
+      Event.new(:name => name, :length => amount, :current_game_id => game.id).save
     end
   end
     
