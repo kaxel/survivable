@@ -6,7 +6,7 @@ class Event < ApplicationRecord
     collection = Collection.where(name: game.location.collection.name).first
     collection.projects.each do |p|
       if p.requirements_met?(game)
-        add_new_event_if_not_present(p.name, game)
+        #add_new_event_if_not_present(p.name, game)
       end
     end
   end
@@ -72,7 +72,16 @@ class Event < ApplicationRecord
     
     case name
       when "Explore"
-        "You have explored. Nothing of interest was found."
+        
+        x = creativity_check(game.survivalist, 0.50)
+        if x[0]==0
+          "You found nothing."
+        else
+          available = ["Meat", "Mud", "Leaves", "Wood"].sample
+          game.add_resource(available)
+          "You found some #{available}."
+        end
+        
       when "Gather Mud"
         x = skill_check(game.survivalist, 0.50, 3)
         #message = "You spent an hour gathering mud. You found #{x} clumps of it."
@@ -140,6 +149,25 @@ class Event < ApplicationRecord
     #root_change s/b between 0 and 1
     i_return=0
     player_factor = (player.skill * player.strength) #s/b between 1 and 100
+    root_factor = root_chance*100
+    for i in 1..max_return do
+      #as many tries as we are given
+      if rand(0..100)<((root_factor*player_factor)/100)
+        i_return+=1
+      end
+    end
+    
+    if i_return==0
+      [i_return, "Your attempt failed."]
+    else
+      [i_return, "Success!"]
+    end
+  end
+  
+  def creativity_check(player, root_chance, max_return = 1)
+    #root_change s/b between 0 and 1
+    i_return=0
+    player_factor = (player.creativity * 10) #s/b between 1 and 100
     root_factor = root_chance*100
     for i in 1..max_return do
       #as many tries as we are given
