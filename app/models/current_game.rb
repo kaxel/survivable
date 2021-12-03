@@ -6,16 +6,28 @@ class CurrentGame < ApplicationRecord
   has_many :days
   has_many :events
   
-  def add_thing(what, amount = 1)
+  def add_possession(what, amount = 1)
     possession_match = possessions.where(name: what).first
     #possession exists?
     if possession_match
-      
+      possession_match.quantity += amount
     else
       project = Project.where(name: what).first
       Possession.input_new_possession(self, project, amount=1)
     end
-    "#{what} added #{amount}"
+    "Possession #{what} added #{amount}"
+  end
+  
+  def add_resource(what, amount = 1)
+    resource_match = stashes.where(name: what).first
+    #resource exists?
+    if resource_match
+      resource_match.quantity += amount
+    else
+      resource = Resource.where(name: what).first
+      Resource.input_new_resource(self, resource, amount=1)
+    end
+    "Stash #{what} added #{amount}"
   end
   
   def latest_day

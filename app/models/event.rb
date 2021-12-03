@@ -30,17 +30,19 @@ class Event < ApplicationRecord
     
     case name
       when "Explore"
-        message = "You have explored. Nothing of interest was found."
+        #message = "You have explored. Nothing of interest was found."
       when "Gather Mud"
         x = 1
-        message = "You spent an hour gathering mud. You found #{x} clumps of it."
-        
+        #message = "You spent an hour gathering mud. You found #{x} clumps of it."
+        #game.add_resource("Mud")
       when "Gather Leaves"
         x = 1
-        message = "You spent an hour gathering leaves. You found #{x} piles."
+        #message = "You spent an hour gathering leaves. You found #{x} piles."
+        #game.add_resource("Leaves")
       when "Collect Firewood"
         x = 1
-        message = "you spent an hour collecting wood. You found #{x} good logs."
+        #message = "you spent an hour collecting wood. You found #{x} good logs."
+        #game.add_resource("Firewood")
     end
     
   end

@@ -1,11 +1,11 @@
 class Resource < ApplicationRecord
   
-  def self.input_new_resource(game, project, amount=1)
-    new_resource = Resource.new(current_game_id: game.id, project_id: project.id)
-    new_possession.quantity = amount
-    new_possession.name = project.name
-    new_possession.save
-    new_possession
+  def self.input_new_resource(game, resource, amount=1)
+    new_resource = Stash.new(current_game_id: game.id, resource_id: resource.id)
+    new_resource.quantity = amount
+    new_resource.name = resource.name
+    new_resource.save
+    new_resource
   end
   
   
