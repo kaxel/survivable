@@ -14,9 +14,9 @@ class Event < ApplicationRecord
     end
     
     #firestarter
-    if game.possessions.where(name: "Firestarter")
+    if game.possessions.where(name: "Firestarter").first && game.stashes.where(name: "Wood").first
       add_new_event_if_not_present("Start Fire", game)
-    else
+    elsif game.stashes.where(name: "Wood").first
       add_new_event_if_not_present("Make Friction Fire", game)
     end
   end

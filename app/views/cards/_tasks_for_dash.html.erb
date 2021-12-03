@@ -4,7 +4,7 @@
 <p class="mb-0 mt-2"><small>You've had a long day!</small></p>
 <p class="mb-0 mt-2"><small>Your mood and hunger levels will change a little bit according to the weather and the state of your shelter.</small></p>
 <% else %>
-<% @current_game.events.each do |e| %>
+<% @current_game.events.where(visible: true).each do |e| %>
 <p class="mb-0 mt-1"><%= link_to e.name, add_next_path(:event_id => e.id) %></p>
 <% end %>
 <p><hr/></p>
