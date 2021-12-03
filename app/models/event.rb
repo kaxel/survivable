@@ -76,13 +76,12 @@ class Event < ApplicationRecord
         found_prey = strength_check(game.survivalist, 0.20, 1)[0]==1
         if found_prey
           animal = game.location.animals.where(aclass: ["mammal", "bird", "reptile"]).sample
-          
           x = skill_check(game.survivalist, 0.50, animal.meat)
-          game.add_resource("Meat", x[0])
           if x[0]==0
             message = "You saw a #{animal.name} but it got away."
           else
             message = "You saw a #{animal.name} and took it down for #{x[0]} meat."
+            game.add_resource("Meat", x[0])
           end
         end
         message
