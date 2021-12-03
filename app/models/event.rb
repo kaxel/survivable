@@ -95,7 +95,25 @@ class Event < ApplicationRecord
     else
       [i_return, "Success!"]
     end
+  end
+  
+  def strength_check(player, root_chance, max_return = 1)
+    #root_change s/b between 0 and 1
+    i_return=0
+    player_factor = (player.skill * player.strength) #s/b between 1 and 100
+    root_factor = root_chance*100
+    for i in 1..max_return do
+      #as many tries as we are given
+      if rand(0..100)<((root_factor*player_factor)/100)
+        i_return+=1
+      end
+    end
     
+    if i_return==0
+      [i_return, "Your attempt failed."]
+    else
+      [i_return, "Success!"]
+    end
   end
   
 end
