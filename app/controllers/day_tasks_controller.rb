@@ -64,6 +64,6 @@ class DayTasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def day_task_params
-      params.require(:day_task).permit(:num, :day_id, :event_id)
+      params.require(:day_task).permit(:num, :day_id, :event_id, :message)
     end
 end

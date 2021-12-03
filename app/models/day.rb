@@ -10,4 +10,8 @@ class Day < ApplicationRecord
     end
   end
   
+  # def day_tasks
+  #   DayTask.where(day_id: self.id)
+  # end
+  
 end
