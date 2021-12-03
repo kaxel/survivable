@@ -35,6 +35,7 @@ class CurrentGamesController < ApplicationController
       nexttask.update_message(message)
       @current_game.hunger_down
       Event.insert_possession_related_events(@current_game)
+      Event.add_events_for_requirements_met(@current_game)
       redirect_to gameplay_path, notice: message
     end
   end

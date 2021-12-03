@@ -18,7 +18,8 @@ class Project < ApplicationRecord
     "Net",
     "Firestarter",
     "Well",
-    "Fire"
+    "Fire",
+    "Cook Food"
   ]
   
 

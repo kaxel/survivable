@@ -1,6 +1,10 @@
 class Event < ApplicationRecord
   
   
+  def self.add_events_for_requirements_met(game)
+    #look for requirements met
+  end
+  
   def self.insert_possession_related_events(game)
     events = [
       {:name => "Hunt", :requires => ["Knife"]},
@@ -22,8 +26,11 @@ class Event < ApplicationRecord
   end
   
   def self.add_new_event_if_not_present(name, game, amount = 1)
-    if !Event.where(name: name, current_game_id: game.id).first
+    my_event = Event.where(name: name, current_game_id: game.id).first
+    if !my_event
       Event.new(:name => name, :length => amount, :current_game_id => game.id).save
+    else
+      my_event.toggle_visible(true)
     end
   end
     
