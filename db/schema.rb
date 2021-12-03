@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_03_032221) do
+ActiveRecord::Schema.define(version: 2021_12_03_054238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,17 @@ ActiveRecord::Schema.define(version: 2021_12_03_032221) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "stashes", force: :cascade do |t|
+    t.string "name"
+    t.bigint "current_game_id", null: false
+    t.bigint "resource_id", null: false
+    t.integer "quantity", limit: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["current_game_id"], name: "index_stashes_on_current_game_id"
+    t.index ["resource_id"], name: "index_stashes_on_resource_id"
+  end
+
   create_table "survivalists", force: :cascade do |t|
     t.integer "strength", limit: 2
     t.integer "creativity", limit: 2
@@ -196,5 +207,7 @@ ActiveRecord::Schema.define(version: 2021_12_03_032221) do
   add_foreign_key "project_requirements", "projects"
   add_foreign_key "project_requirements", "requirements"
   add_foreign_key "requirements", "resources"
+  add_foreign_key "stashes", "current_games"
+  add_foreign_key "stashes", "resources"
   add_foreign_key "survivalists", "users"
 end

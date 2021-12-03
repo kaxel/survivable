@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Stashes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Current game</th>
+      <th>Resource</th>
+      <th>Quantity</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stashes.each do |stash| %>
+      <tr>
+        <td><%= stash.name %></td>
+        <td><%= stash.current_game_id %></td>
+        <td><%= stash.resource_id %></td>
+        <td><%= stash.quantity %></td>
+        <td><%= link_to 'Show', stash %></td>
+        <td><%= link_to 'Edit', edit_stash_path(stash) %></td>
+        <td><%= link_to 'Destroy', stash, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stash', new_stash_path %>

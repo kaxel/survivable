@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @stash.name %>
+</p>
+
+<p>
+  <strong>Current game:</strong>
+  <%= @stash.current_game_id %>
+</p>
+
+<p>
+  <strong>Resource:</strong>
+  <%= @stash.resource_id %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @stash.quantity %>
+</p>
+
+<%= link_to 'Edit', edit_stash_path(@stash) %> |
+<%= link_to 'Back', stashes_path %>

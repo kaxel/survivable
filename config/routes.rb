@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :stashes
   resources :day_tasks
   resources :animals
   resources :locations
