@@ -12,6 +12,7 @@ class CurrentGame < ApplicationRecord
     #possession exists?
     if possession_match
       possession_match.quantity += amount
+      possession_match.save
     else
       project = Project.where(name: what).first
       Possession.input_new_possession(self, project, amount=1)
@@ -24,6 +25,7 @@ class CurrentGame < ApplicationRecord
     #resource exists?
     if resource_match
       resource_match.quantity += amount
+      resource_match.save
     else
       resource = Resource.where(name: what).first
       Resource.input_new_resource(self, resource, amount=1)

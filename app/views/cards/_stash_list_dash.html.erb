@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-6">
+	  <h4>Stash</h4>
+  </div>
+  <div class="col-6">
+	  <% @current_game.stashes.each do |item| %>
+	  	<div><%= item.name %> | <%= item.quantity %></div>
+	  <% end %>
+  </div>
+</div>
