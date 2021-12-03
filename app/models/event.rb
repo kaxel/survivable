@@ -74,7 +74,7 @@ class Event < ApplicationRecord
         consolations = ["You found nothing.", "Hunting ain't easy.", "No luck this time.", "Better luck next time."]
         message = consolations.sample #default
         #pull from climate intensity to adjust hunt frequency (typically 20-80 (higher is more difficult))
-        hunt_root_chance = (0.20)*((100-game.location.climate.intensity)/100)
+        hunt_root_chance = (0.6)*((100.00-game.location.climate.intensity)/100)
         found_prey = strength_check(game.survivalist, hunt_root_chance)[0]==1
         if found_prey
           animal = game.location.animals.where(aclass: ["mammal", "bird", "reptile"]).sample
