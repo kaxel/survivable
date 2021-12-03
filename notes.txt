@@ -94,6 +94,8 @@ rails generate migration RemoveEventFromDays event:references
 
 rails generate migration RemoveHourFromDays hour:integer
 
+rails g migration AddHungerToCurrentGame hunger:integer{1} mood:integer{1}
+
 webmaster
 55zmeE5VD*BpAbS
 
