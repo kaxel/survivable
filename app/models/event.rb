@@ -59,17 +59,41 @@ class Event < ApplicationRecord
       when "Explore"
         "You have explored. Nothing of interest was found."
       when "Gather Mud"
-        x = 1
+        x = skill_check(game.survivalist, 0.50, 3)
         #message = "You spent an hour gathering mud. You found #{x} clumps of it."
-        game.add_resource("Mud", x)
+        game.add_resource("Mud", x[0])
       when "Gather Leaves"
-        x = 1
+        x = skill_check(game.survivalist, 0.50, 3)
         #message = "You spent an hour gathering leaves. You found #{x} piles."
-        game.add_resource("Leaves", x)
+        game.add_resource("Leaves", x[0])
       when "Collect Wood"
-        x = 1
+        x = skill_check(game.survivalist, 0.50, 3)
         #message = "you spent an hour collecting wood. You found #{x} good logs."
-        game.add_resource("Wood", x)
+        game.add_resource("Wood", x[0])
+      when "Hunt"
+      when "Set Fish Hook"
+      when "Drop Net"
+      when "Start Fire"
+    end
+    
+  end
+  
+  def skill_check(player, root_chance, max_return = 1)
+    #root_change s/b between 0 and 1
+    i_return=0
+    player_factor = (player.skill * player.creativity) #s/b between 1 and 100
+    root_factor = root_chance*100
+    for i in 1..max_return do
+      #as many tries as we are given
+      if rand(0..100)<((root_factor*player_factor)/100)
+        i_return+=1
+      end
+    end
+    
+    if i_return==0
+      [i_return, "Your attempt failed."]
+    else
+      [i_return, "Success!"]
     end
     
   end
