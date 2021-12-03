@@ -16,4 +16,17 @@ module ApplicationHelper
 
   end
   
+  def translate_hour(num)
+    case true
+    when num < 6
+      return ["#{num+5}:00 AM", "Top of the morning to ya."]
+    when num == 6
+      return ["12:00 PM", "The sun is high."]
+    when num < 11
+      return ["#{(num-6)}:00 PM", "Good afternoon."]
+    else
+      return ["#{(num-6)}:00 PM", "You are almost out of sunlight."]
+    end
+  end
+  
 end

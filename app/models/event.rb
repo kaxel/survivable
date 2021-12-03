@@ -1,4 +1,25 @@
 class Event < ApplicationRecord
+  
+  
+  def self.insert_possession_related_events(game)
+    events = [
+      {:name => "Hunt", :requires => ["Knife"]},
+      {:name => "Set Fish Hook", :requires => ["Hook"]},
+      {:name => "Drop Net", :requires => ["Hook"]}
+    ]
+    events.each do |ev|
+      if game.possessions.where(name: ev[:requires].join(","))
+        Event.new(:name => ev[:name], :length => 1, :current_game_id => game.id).save
+      end
+    end
+    
+    #firestarter
+    if game.possessions.where(name: "Firestarter")
+      Event.new(:name => "Start Fire", :length => 1, :current_game_id => game.id).save
+    else
+      Event.new(:name => "Make Friction Fire", :length => 1, :current_game_id => game.id).save
+    end
+  end
     
   def self.insert_starting_events(game)
     events = [

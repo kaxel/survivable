@@ -32,6 +32,7 @@ class CurrentGamesController < ApplicationController
     nexttask.num = num
     if nexttask.save
       message = e.process(@current_game)
+      Event.insert_possession_related_events(@current_game)
       redirect_to gameplay_path, notice: message
     end
   end
@@ -68,6 +69,7 @@ class CurrentGamesController < ApplicationController
       if @current_game.save
         #add new events
         Event.insert_starting_events(@current_game)
+        Event.insert_possession_related_events(@current_game)
         
         #make first day
         puts "set new day"
