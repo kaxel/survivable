@@ -24,7 +24,13 @@ class Survivalist < ApplicationRecord
     :skill => 7}
   ]
     
+  def starting_mood_score
+    optimism*10
+  end
   
+  def starting_hunger_score
+    strength*10
+  end
   
   def self.add_default(user_id)
     @defaults.each do |survivalist|

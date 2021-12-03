@@ -5,39 +5,9 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
-              <i class="ti-shield menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
-              <i class="ti-layout-list-post menu-icon"></i>
-              <span class="menu-title">Form elements</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/charts/chartjs.html">
-              <i class="ti-pie-chart menu-icon"></i>
-              <span class="menu-title">Charts</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
-              <i class="ti-view-list-alt menu-icon"></i>
-              <span class="menu-title">Tables</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/icons/themify.html">
-              <i class="ti-star menu-icon"></i>
-              <span class="menu-title">Icons</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="documentation/documentation.html">
-              <i class="ti-write menu-icon"></i>
-              <span class="menu-title">Documentation</span>
+            <a class="nav-link" href="/">
+              <i class="menu-icon"></i>
+              <span class="menu-title">Home</span>
             </a>
           </li>
         </ul>
@@ -78,22 +48,25 @@
             <div class="col-md-3 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title text-md-center text-xl-left">HOUR</p>
+                  <p class="card-title text-md-center text-xl-left">MOOD</p>
                   <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                    <h3 class="mx-auto"><%= @current_game.latest_day.hour %></h3>
+                    <h3 class="mx-auto"><%= @current_game.mood %></h3>
                   </div>  
+                  <p class="mb-0 mt-2"><small>(<%= @current_game.mood_description %>)</small></p>
+				  <p><hr/></p>
+                  <p class="card-title text-md-center text-xl-left">HUNGER</p>
+                  <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                    <h3 class="mx-auto"><%= @current_game.hunger %></h3>
+                  </div>
+				  <p class="mb-0 mt-2"><small>(<%= @current_game.hunger_description %>)</small></p>
                 </div>
               </div>
             </div>
             <div class="col-md-3 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title text-md-center text-xl-left">Returns</p>
-                  <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">61344</h3>
-                    <i class="ti-layers-alt icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
-                  </div>  
-                  <p class="mb-0 mt-2 text-success">23.00%<span class="text-black ml-1"><small>(30 days)</small></span></p>
+                  <p class="card-title text-md-center text-xl-left">TASKS</p>
+                  <%= render(:partial => 'cards/tasks_for_dash') %>
                 </div>
               </div>
             </div>
@@ -102,8 +75,8 @@
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Sales details</p>
-                  <p class="text-muted font-weight-light">Received overcame oh sensible so at an. Formed do change merely to county it. Am separate contempt domestic to to oh. On relation my so addition branched.</p>
+                  <p class="card-title">Tasks Today</p>
+                  TASK LIST
                   <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
                   <canvas id="sales-chart"></canvas>
                 </div>
@@ -130,8 +103,8 @@
                 <div class="card-body pb-0">
                   <p class="card-title">Status</p>
                   <p class="text-muted font-weight-light">Your latest system message is here.</p>
-                  <div class="d-flex flex-wrap mb-5"><%= render(:partial => 'cards/location_dash') %></div>
 				  <div class="mb-5"><%= render(:partial => 'cards/possession_list_dash') %></div>
+                  <div class="d-flex flex-wrap mb-5"><%= render(:partial => 'cards/location_dash') %></div>
                 </div>
                 
               </div>

@@ -38,10 +38,14 @@ class CurrentGamesController < ApplicationController
 
   # POST /current_games or /current_games.json
   def create
+    @survivalist = Survivalist.find(params[:survivalist_id])
     @current_game = CurrentGame.new
     @current_game.user_id = current_user.id
     @current_game.survivalist_id = params[:survivalist_id]
     @current_game.location_id = params[:location_id]
+    #set starting scores
+    @current_game.mood = @survivalist.starting_mood_score
+    @current_game.hunger = @survivalist.starting_hunger_score
     
     @collection = Collection.find(params[:collection_id])
     
@@ -56,10 +60,7 @@ class CurrentGamesController < ApplicationController
         @newday.current_game_id = @current_game.id
         @newday.num = 1
         @newday.save
-        puts "save the day !!!"
         @current_game.days<<@newday
-        puts "day added to collection"
-        puts @newday.inspect
         #add starting items
         @collection.projects.each {|p| @current_game.possessions << Possession.input_starter_possession(@current_game, p)}
         
