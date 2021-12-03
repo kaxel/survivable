@@ -40,7 +40,7 @@
 				  <p><hr/></p>
                   <p class="card-title text-md-center text-xl-left">HOUR</p>
                   <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-					<% hour_translation = translate_hour(@current_game.latest_day.hour) %>
+					<% hour_translation = translate_hour(@current_game.latest_day.hour) %><%= @current_game.latest_day.hour %>
                     <h3 class="mx-auto"><%= hour_translation[0] %></h3>
 				  </div> 
 					<p class="mb-0 mt-2"><small><%= hour_translation[1] %></small></p>

@@ -68,5 +68,6 @@ Rails.application.routes.draw do
   #gameplay
   get "gameplay", to: "current_games#gameplay", as: 'gameplay'
   get "add_next", to: "current_games#add_next", as: 'add_next'
+  get "add_subsequent_day", to: "current_games#add_subsequent_day", as: 'add_subsequent_day'
   
 end

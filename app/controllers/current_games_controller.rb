@@ -36,6 +36,19 @@ class CurrentGamesController < ApplicationController
       redirect_to gameplay_path, notice: message
     end
   end
+  
+  def add_subsequent_day
+    @current_game = CurrentGame.where(user_id: current_user.id).first
+    last_day_num = @current_game.latest_day.num
+    @newday = Day.new
+    @newday.current_game_id = @current_game.id
+    @newday.num = last_day_num+1
+    @newday.save
+    @current_game.days<<@newday
+    
+    message="Good morning!"
+    redirect_to gameplay_path, notice: message
+  end
 
   # GET /current_games/1 or /current_games/1.json
   def show
