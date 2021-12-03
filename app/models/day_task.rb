@@ -1,5 +1,5 @@
 class DayTask < ApplicationRecord
-  has_one :day
+  belongs_to :day
   belongs_to :event
   
   def update_message(m)

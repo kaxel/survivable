@@ -8,7 +8,7 @@ class Event < ApplicationRecord
       {:name => "Drop Net", :requires => ["Hook"]}
     ]
     events.each do |ev|
-      if game.possessions.where(name: ev[:requires].join(","))
+      if game.possessions.where(name: ev[:requires].join(",")).first
         add_new_event_if_not_present(ev[:name], game)
       end
     end
@@ -73,10 +73,12 @@ class Event < ApplicationRecord
       when "Hunt"
         consolations = ["You found nothing.", "Hunting ain't easy.", "No luck this time.", "Better luck next time."]
         message = consolations.sample #default
-        found_prey = strength_check(game.survivalist, 0.20, 1)[0]==1
+        #pull from climate intensity to adjust hunt frequency (typically 20-80 (higher is more difficult))
+        hunt_root_chance = (0.20)*((100-game.location.climate.intensity)/100)
+        found_prey = strength_check(game.survivalist, hunt_root_chance)[0]==1
         if found_prey
           animal = game.location.animals.where(aclass: ["mammal", "bird", "reptile"]).sample
-          x = skill_check(game.survivalist, 0.50, animal.meat)
+          x = skill_check(game.survivalist, 0.50, animal.meat) #50% root chance to get meat per meat integer
           if x[0]==0
             message = "You saw a #{animal.name} but it got away."
           else
@@ -85,9 +87,17 @@ class Event < ApplicationRecord
           end
         end
         message
+      when "Start Fire"
+        x = skill_check(game.survivalist, 0.50, 1)
+        if x[0]==1
+          Possession.add_fire(game)
+          "That's a fire!"
+        else
+          "Your fire did not start."
+        end
       when "Set Fish Hook"
       when "Drop Net"
-      when "Start Fire"
+      
     end
     
   end
@@ -128,6 +138,11 @@ class Event < ApplicationRecord
     else
       [i_return, "Success!"]
     end
+  end
+  
+  def toggle_visible(is_visible)
+    self.visible = is_visible
+    self.save
   end
   
 end

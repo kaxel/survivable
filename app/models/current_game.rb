@@ -68,14 +68,18 @@ class CurrentGame < ApplicationRecord
     @survivalists = Survivalist.where(user_id: @game.user.id)
     @days = Day.where(current_game_id: @game.id)
     @day_tasks = DayTask.where(day_id: [@days.map {|d| d.id}.join(", ")])
-    message = "game #{@game.id} deleted. #{@game.possessions.size} possessions, #{@survivalists.size} survivalists, #{@days.size} days, #{@day_tasks.first ? @day_tasks.size : 0} day_tasks"
+    @stashes = Stash.where(current_game_id: @game.id)
+    @possessions = Possession.where(current_game_id: @game.id)
+    message = "game #{@game.id} deleted. #{@game.possessions.size} possessions, #{@survivalists.size} survivalists, 
+    #{@days.size} days, #{@day_tasks.first ? @day_tasks.size : 0} day_tasks, #{@stashes.size} stashes"
     
-    Event.delete_related(@game.id)
+    
     Possession.delete_related(@game.id)
-    
-    
-    @days.delete_all
+    Stash.delete_related(@game.id)
     @day_tasks.delete_all
+    @days.delete_all
+    Event.delete_related(@game.id)
+    
     @game.delete
     @survivalists.delete_all
     

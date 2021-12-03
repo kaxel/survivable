@@ -1,6 +1,16 @@
 class Possession < ApplicationRecord
   belongs_to :current_game
   
+  def self.add_fire(game)
+    fire = Project.where(name: "Fire").first
+    new_possession = Possession.new(current_game_id: game.id, project_id: fire.id)
+    new_possession.quantity = 1
+    new_possession.name = fire.name
+    new_possession.save
+    game.events.where("name LIKE '%Fire'").each {|e| e.toggle_visible(false)}
+    new_possession
+  end
+    
   def self.delete_related(game_id)
      Possession.where(["current_game_id = ?", game_id]).delete_all
   end
