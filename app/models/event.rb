@@ -5,7 +5,9 @@ class Event < ApplicationRecord
     #look for requirements met
     collection = Collection.where(name: game.location.collection.name).first
     collection.projects.each do |p|
-      puts p.name
+      if p.requirements_met?(game)
+        add_new_event_if_not_present(p.name, game)
+      end
     end
   end
   

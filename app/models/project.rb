@@ -22,7 +22,12 @@ class Project < ApplicationRecord
     "Cook Food"
   ]
   
-
+  def requirements_met?(game)
+    def_return = false
+    self.project_requirements.each do |pr|
+      puts pr.inspect
+    end
+  end
   
   #add new to Adjustment, Requirement, and ProjectRequirement
   
