@@ -33,6 +33,7 @@ class CurrentGamesController < ApplicationController
     if nexttask.save
       message = e.process(@current_game)
       nexttask.update_message(message)
+      @current_game.hunger_down
       Event.insert_possession_related_events(@current_game)
       redirect_to gameplay_path, notice: message
     end

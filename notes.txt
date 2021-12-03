@@ -103,6 +103,8 @@ rails g scaffold Stash name:string current_game:references resource:references q
 
 rails g migration AddMessageToDayTask message:string
 
+rails g migration AddVisibleToEvent visible:boolean
+
 webmaster
 55zmeE5VD*BpAbS
 

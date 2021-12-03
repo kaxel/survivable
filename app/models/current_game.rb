@@ -50,6 +50,16 @@ class CurrentGame < ApplicationRecord
     end
   end
   
+  def hunger_down(amount = 1)
+    self.hunger-=amount
+    self.save
+  end
+  
+  def hunger_up(amount = 1)
+    self.hunger+=amount
+    self.save
+  end
+  
   def mood_description
     case true
     when mood > 85

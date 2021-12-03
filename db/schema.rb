@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_03_172016) do
+ActiveRecord::Schema.define(version: 2021_12_03_182130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2021_12_03_172016) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "current_game_id", null: false
     t.boolean "hidden", default: false
+    t.boolean "visible", default: true
     t.index ["current_game_id"], name: "index_events_on_current_game_id"
   end
 
