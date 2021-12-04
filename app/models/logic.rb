@@ -45,21 +45,25 @@ class Logic < ApplicationRecord
     mood_penalty = 0
     case true
       when game.temp > 85
-        mood_penalty = 5
+        mood_penalty = 10
         message << "The heat is intense. "
       when game.temp > 65
         message << "You are feeling comfortable. "
       when game.temp > 45
-        mood_penalty = 5
+        mood_penalty = 10
         message << "You are feeling a bit chilly. "
       when game.temp > 25
-        mood_penalty = 10
+        mood_penalty = 15
         message << "Your toes are freezing. "
       else
-        mood_penalty = 15
+        mood_penalty = 20
         message << "You are living in a freezer. "
     end
     
+    #offset mood penalty with character determination
+    if mood_penalty>(game.survivalist.determination/2)
+      mood_penalty-=(game.survivalist.determination/2)
+    end
     #mitigation strategies
     #comfort
     comfort_offset = 0
