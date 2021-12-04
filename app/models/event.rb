@@ -105,10 +105,13 @@ class Event < ApplicationRecord
         matching_stash = game.stashes.where(name: "Trotline Catch").where("quantity > 0").first
         if matching_stash
           num_caught = matching_stash.quantity
+          #checking lines costs hunger
           game.hunger_down(num_caught)
           matching_stash.delete
-          "You found #{num_caught} #{game.location.animals.where(aclass: "fish").sample}."
+          game.add_resource("Meat", num_caught)
+          "You found #{num_caught} #{game.location.animals.where(aclass: "fish").sample.name}."
         else
+          game.hunger_down(2)
           "No fish today."
         end
         

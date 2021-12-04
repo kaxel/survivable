@@ -1,7 +1,7 @@
 class Logic < ApplicationRecord
   
   CAMPFIRE_MOOD_BOOST = 6
-  TROTLINE_ROOT_CHANCE = 0.80
+  TROTLINE_ROOT_CHANCE = 0.90
   
   def self.evaluate_weather(game)
     climate = game.location.climate
