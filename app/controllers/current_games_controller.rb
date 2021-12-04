@@ -48,7 +48,6 @@ class CurrentGamesController < ApplicationController
       Event.insert_possession_related_events(@current_game)
       Event.add_events_for_requirements_met(@current_game)
       Event.add_events_for_fishing(@current_game)
-      Logic.nightly_fish_check(@current_game)
       redirect_to gameplay_path, notice: message
     end
   end
@@ -64,6 +63,7 @@ class CurrentGamesController < ApplicationController
     morning_message = Logic.evaluate_weather(@current_game)
     morning_message << Logic.nightly_fire_check(@current_game)
     morning_message << Logic.uncooked_meat_tax(@current_game)
+    Logic.nightly_fish_check(@current_game)
     @newday.morning_message = morning_message
     @newday.save
     @current_game.days<<@newday

@@ -21,7 +21,14 @@ class Survivalist < ApplicationRecord
     :creativity => 7, 
     :determination => 8, 
     :optimism => 4, 
-    :skill => 7}
+    :skill => 7},
+    {
+    :name => "Kate of the Mountain",
+    :strength => 6,
+    :creativity => 6, 
+    :determination => 4, 
+    :optimism => 5, 
+    :skill => 9}
   ]
     
   def starting_mood_score
