@@ -17,13 +17,21 @@ class Event < ApplicationRecord
   
   def self.insert_possession_related_events(game)
     events = [
-      {:name => "Hunt", :requires => ["Knife"]},
-      {:name => "Set Fish Hook", :requires => ["Hook"]},
-      {:name => "Drop Net", :requires => ["Net"]}
+      {:name => "Hunt", :requires => ["Knife"], :stash_required => []},
+      {:name => "Set Trotline", :requires => ["Hook"], :stash_required => ["Twine"]},
+      {:name => "Drop Net", :requires => ["Net"], :stash_required => []}
     ]
     events.each do |ev|
       if game.possessions.where(name: ev[:requires].join(",")).first
-        add_new_event_if_not_present(ev[:name], game)
+        if ev[:stash_required].first
+          if game.stashes.where(name: ev[:stash_required].join(",")).first
+            #meets stash requirements
+            add_new_event_if_not_present(ev[:name], game)
+          end
+        else
+          #no stash requirements
+          add_new_event_if_not_present(ev[:name], game)
+        end
       end
     end
     
@@ -136,7 +144,7 @@ class Event < ApplicationRecord
         game.hunger_down(2) #hunting costs extra energy
         message
       when "Start Fire"
-        x = skill_check(game.survivalist, 0.50, 1)
+        x = skill_check(game.survivalist, 0.60, 1)
         if x[0]==1
           Possession.add_fire(game)
           Resource.decrement_resource(game, "Wood", 1)

@@ -111,7 +111,6 @@ class CurrentGamesController < ApplicationController
       if @current_game.save
         #add new events
         Event.insert_starting_events(@current_game)
-        Event.insert_possession_related_events(@current_game)
         
         #make first day
         puts "set new day"
@@ -123,6 +122,7 @@ class CurrentGamesController < ApplicationController
         @current_game.days<<@newday
         #add starting items
         @collection.projects.each {|p| @current_game.possessions << Possession.input_new_possession(@current_game, p, 1)}
+        Event.insert_possession_related_events(@current_game)
         
         format.html { redirect_to gameplay_path, notice: "Current game was successfully created." }
         format.json { render :show, status: :created, location: @current_game }

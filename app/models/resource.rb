@@ -9,10 +9,10 @@ class Resource < ApplicationRecord
   end
   
   def self.add_if_existing(game, resource, amount)
-    resource = Stash.where(current_game_id: game.id, resource_id: resource.id).first
-    if resource
-      resource.quantity+=amount
-      resource.save
+    existing_resource = Stash.where(current_game_id: game.id, resource_id: resource.id).first
+    if existing_resource
+      existing_resource.quantity+=amount
+      existing_resource.save
     else
       Resource.input_new_resource(game, resource, amount)
     end
