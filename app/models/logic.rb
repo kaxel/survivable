@@ -21,6 +21,7 @@ class Logic < ApplicationRecord
       else
         game.temp -= increment
       end
+      game.save
     else
       #warming up
       message << "It's warming up. "
@@ -29,8 +30,9 @@ class Logic < ApplicationRecord
       else
         game.temp += increment
       end
+      game.save
     end
-    game.save
+    
     message << comfort_check(game)
     message  
   end
@@ -46,7 +48,7 @@ class Logic < ApplicationRecord
         message << "You are feeling comfortable. "
       when game.temp > 45
         mood_penalty = 5
-        message << "You are feeling a bit chilly—a shelter would be nice."
+        message << "You are feeling a bit chilly—a shelter would be nice. "
       when game.temp > 25
         mood_penalty = 10
         message << "Your toes are freezing—a shelter would be nice. "

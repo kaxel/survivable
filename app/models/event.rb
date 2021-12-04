@@ -139,7 +139,7 @@ class Event < ApplicationRecord
         x = skill_check(game.survivalist, 0.50, 1)
         if x[0]==1
           Possession.add_fire(game)
-          Resource.decrement_resource(game, "Wood")
+          Resource.decrement_resource(game, "Wood", 1)
           "That's a fire!"
         else
           "Your fire did not start."
