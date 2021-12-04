@@ -28,6 +28,16 @@ class Possession < ApplicationRecord
     new_possession
   end
   
+  def self.decrement_possession(game, project, amount)
+    existing_possession = Possession.where(current_game_id: game.id, project_id: project.id)
+    existing_possession.quantity -= amount
+    if existing_possession.quantity <= 0
+      existing_possession.delete
+    else
+      existing_possession.save
+    end
+  end
+  
   def self.add_if_not_existing(game, project, amount)
     matching_project = Possession.where(current_game_id: game.id, project_id: project.id).first
     if matching_project

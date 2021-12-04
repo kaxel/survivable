@@ -43,7 +43,8 @@ class Resource < ApplicationRecord
       "Wire",
       "Metal",
       "Twine",
-      "Fire"
+      "Fire",
+      "Trotline Hook"
     ]
     
     defaults.each do |d|

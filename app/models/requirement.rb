@@ -5,7 +5,7 @@ class Requirement < ApplicationRecord
   @defaults = [
     ["Twine", "Leaves", 2],
     ["Twine", "Grass", 2],
-    ["Hook", "Wire", 1],
+    ["Hook", "Wire", 2],
     ["Knife", "Metal", 2],
     ["Knife", "Wood", 1],
     ["Lean To", "Wood", 6],

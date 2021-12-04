@@ -172,7 +172,13 @@ class Event < ApplicationRecord
           Resource.decrement_resource(game, pr.requirement.resource.name, pr.requirement.amount)
         end
         "You made some twine."
-      
+      when "Set Trotline"
+        Resource.add_if_existing(game, Resource.where(name: "Trotline Hook").first, 1)
+        #decrement hook - possessions
+        Possession.decrement_possession(game, Project.where(name: "Hook").first, 1)
+        #decrement twine - stashes
+        Resource.decrement_resource(game, "Twine", 1)
+        "You put a hook on your trotline."
       when "Set Fish Hook"
       when "Drop Net"
       else #standard project build
