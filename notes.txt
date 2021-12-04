@@ -115,6 +115,8 @@ rails g migration AddTempToCurrentGame temp:integer{1}
 
 rails g migration AddActiveToCurrentGame active:boolean
 
+rails g migration AddVisibleToStash visible:boolean
+
 webmaster
 55zmeE5VD*BpAbS
 

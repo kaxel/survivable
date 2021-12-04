@@ -122,7 +122,8 @@ class Logic < ApplicationRecord
       end
       if ready_to_add > 0
         resource = Resource.where(name: "Trotline Catch").first
-        Resource.add_if_existing(game, resource, ready_to_add)
+        new_resource = Resource.add_if_existing(game, resource, ready_to_add)
+        new_resource.hide
       end
     end
     

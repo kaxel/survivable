@@ -1,3 +1,8 @@
-You lose.
+<% game = CurrentGame.find(:game_id) %>
+
+<p>You lose.</p>
+
+<p>Your hunger score was <%= game.hunger %>.</p>
+<p>Your mood score was <%= game.mood %>.</p>
 
 <%= link_to "Start a new game", start_new_game_path %> 

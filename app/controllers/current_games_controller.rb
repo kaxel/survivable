@@ -11,9 +11,9 @@ class CurrentGamesController < ApplicationController
     if @current_game
       #game_over_check
       if Logic.game_over_check(@current_game)
-        render :template => "cards/gamelost"
+        render :template => "cards/gamelost", :locals => {:game_id => @current_game.id}
       elsif Logic.win_check(@current_game)
-        render :template => "cards/gamewon"
+        render :template => "cards/gamewon", :locals => {:game_id => @current_game.id}
       else
         render :template => "cards/gameplay", :layout => "gameplay"
       end

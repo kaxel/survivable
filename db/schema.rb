@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_04_164109) do
+ActiveRecord::Schema.define(version: 2021_12_04_230956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,6 +170,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_164109) do
     t.integer "quantity", limit: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "visible", default: true
     t.index ["current_game_id"], name: "index_stashes_on_current_game_id"
     t.index ["resource_id"], name: "index_stashes_on_resource_id"
   end

@@ -13,6 +13,7 @@ class Resource < ApplicationRecord
     if existing_resource
       existing_resource.quantity+=amount
       existing_resource.save
+      existing_resource
     else
       Resource.input_new_resource(game, resource, amount)
     end
@@ -27,6 +28,11 @@ class Resource < ApplicationRecord
         resource.delete
       end
     end
+  end
+  
+  def hide
+    self.visible = false
+    self.save
   end
   
   
