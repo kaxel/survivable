@@ -60,7 +60,12 @@ class CurrentGamesController < ApplicationController
 
   # GET /current_games/new
   def new
-    @current_game = CurrentGame.new
+    @current_game = CurrentGame.where(user_id: current_user.id).first
+    if @current_game
+      redirect_to gameplay_path, notice: "You are already playing a game."
+    else
+      @current_game = CurrentGame.new
+    end
   end
 
   # GET /current_games/1/edit
