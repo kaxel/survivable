@@ -19,7 +19,7 @@ class Event < ApplicationRecord
     events = [
       {:name => "Hunt", :requires => ["Knife"]},
       {:name => "Set Fish Hook", :requires => ["Hook"]},
-      {:name => "Drop Net", :requires => ["Hook"]}
+      {:name => "Drop Net", :requires => ["Net"]}
     ]
     events.each do |ev|
       if game.possessions.where(name: ev[:requires].join(",")).first
