@@ -85,7 +85,7 @@ class Logic < ApplicationRecord
     wood_stash = game.stashes.where(name: "Wood").first
     fire_possession = game.possessions.where(name: "Fire").first
     if fire_possession
-      game.mood_up(2)
+      game.mood_up(5)
       if wood_stash && wood_stash.quantity >= 2
         message << "Your fire burned through the night. "
       elsif wood_stash && wood_stash.quantity >= 1
@@ -107,8 +107,13 @@ class Logic < ApplicationRecord
     if stash
       old_amount = stash.quantity
       new_amount = (old_amount * meat_tax).to_i
-      stash.quantity = new_amount
-      stash.save
+      if new_amount==0
+        stash.delete
+      else
+        stash.quantity = new_amount
+        stash.save
+      end
+      
       message << "Some of your uncooked meat went bad last night."
     end
     message
@@ -120,7 +125,7 @@ class Logic < ApplicationRecord
   end
   
   def self.win_check(game)
-    return (game.latest_day.num >= game.maxday)
+    return (game.latest_day.num >= game.maxdays)
   end
   
 end

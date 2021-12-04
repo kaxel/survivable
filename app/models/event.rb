@@ -84,11 +84,11 @@ class Event < ApplicationRecord
     case name
       when "Explore"
         
-        x = creativity_check(game.survivalist, 0.50, 2)
+        x = creativity_check(game.survivalist, 0.35, 2)
         if x[0]==0
           "You found nothing."
         else
-          available = ["Meat", "Mud", "Leaves", "Wood", "Grass", "Stone"].sample
+          available = ["Meat", "Mud", "Leaves", "Wood", "Grass", "Stone", "Metal", "Wire"].sample
           game.add_resource(available, x[0])
           "You found some #{available}."
         end
@@ -99,7 +99,7 @@ class Event < ApplicationRecord
           "There was no good mud to be found."
         else
           game.add_resource("Mud", x[0])
-          "You found #{x[0]} clumps of mud."
+          "You found #{x[0]} clump#{x[0]>1 ? 's' : ''} of mud."
         end
       when "Gather Leaves"
         x = skill_check(game.survivalist, 0.50, 3)
@@ -107,7 +107,7 @@ class Event < ApplicationRecord
           "Not a lot of leaves around here."
         else
           game.add_resource("Leaves", x[0])
-          "You found #{x[0]} piles of leaves."
+          "You found #{x[0]} pile#{x[0]>1 ? 's' : ''} of leaves."
         end
       when "Collect Wood"
         x = skill_check(game.survivalist, 0.50, 3)
@@ -115,7 +115,7 @@ class Event < ApplicationRecord
           "There was no dry wood to be found."
         else
           game.add_resource("Wood", x[0])
-          "You found #{x[0]} good logs."
+          "You found #{x[0]} good log#{x[0]>1 ? 's' : ''}."
         end
       when "Hunt"
         consolations = ["You found nothing.", "Hunting ain't easy.", "No luck this time.", "Better luck next time."]
