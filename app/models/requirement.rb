@@ -8,8 +8,10 @@ class Requirement < ApplicationRecord
     ["Hook", "Wire", 1],
     ["Knife", "Metal", 2],
     ["Knife", "Wood", 1],
-    ["Lean To", "Wood", 4],
+    ["Lean To", "Wood", 6],
     ["Lean To", "Leaves", 4],
+    ["Bed", "Wood", 4],
+    ["Bed", "Grass", 4],
     ["Log Cabin", "Wood", 8],
     ["Log Cabin", "Leaves", 1],
     ["Log Cabin", "Mud", 5],
@@ -23,6 +25,9 @@ class Requirement < ApplicationRecord
     ["Bed", "Leaves", 2],
     ["Fireplace", "Stone", 6],
     ["Cook Food", "Meat", 1],
+    ["Smoker", "Wood", 6],
+    ["Smoker", "Leaves", 2],
+    ["Net", "Twine", 4],
   ]
   
   def self.load_default

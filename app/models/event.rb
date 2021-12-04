@@ -7,6 +7,18 @@ class Event < ApplicationRecord
     collection.projects.each do |p|
       if p.requirements_met?(game)
         #add_new_event_if_not_present(p.name, game)
+        puts "..."
+        puts "..."
+        puts "..."
+        puts "..."
+        puts "..."
+        puts "requirements met ............................... for #{p.name} ---- #{p.requirements.map {|pr| pr.requirement.name }.join(' ')}"
+        puts "..."
+        puts "..."
+        puts "..."
+        puts "..."
+        puts "..."
+        puts "..."
       end
     end
   end
@@ -73,12 +85,12 @@ class Event < ApplicationRecord
     case name
       when "Explore"
         
-        x = creativity_check(game.survivalist, 0.50)
+        x = creativity_check(game.survivalist, 0.50, 2)
         if x[0]==0
           "You found nothing."
         else
-          available = ["Meat", "Mud", "Leaves", "Wood"].sample
-          game.add_resource(available)
+          available = ["Meat", "Mud", "Leaves", "Wood", "Grass", "Stone"].sample
+          game.add_resource(available, x[0])
           "You found some #{available}."
         end
         

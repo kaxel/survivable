@@ -17,16 +17,27 @@ class Project < ApplicationRecord
     "Smoker",
     "Net",
     "Firestarter",
-    "Well",
     "Fire",
     "Cook Food"
   ]
   
   def requirements_met?(game)
-    def_return = false
-    self.project_requirements.each do |pr|
-      puts pr.inspect
+    must_be_all_true = []
+
+    self.requirements.each do |pr|
+      puts "#{pr.resource.name} of #{pr.amount}"
+      #check stash
+      stashed = game.stashes.where(name: pr.resource.name).where("quantity >= :quant", quant: pr.amount).first
+      #check possessions
+      possessed = game.possessions.where(name: pr.resource.name).where("quantity >= :quant", quant: pr.amount).first
+      if (stashed || possessed)
+        must_be_all_true << true
+      else
+        must_be_all_true << false
+      end
     end
+
+    !must_be_all_true.include? false
   end
   
   #add new to Adjustment, Requirement, and ProjectRequirement

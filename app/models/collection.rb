@@ -32,8 +32,6 @@ class Collection < ApplicationRecord
         when "Desert"
           p = Project.where(name: "Knife").first
           x.projects << p
-          p = Project.where(name: "Firestarter").first
-          x.projects << p
           p = Project.where(name: "Twine").first
           x.projects << p
           p = Project.where(name: "Lean To").first
@@ -55,7 +53,7 @@ class Collection < ApplicationRecord
     #load full standard collection
     x = Collection.new
     x.name = "Standard"
-    Project.list.each do |d|
+    Project.list.where('name != :name', name: "Firestarter").each do |d|
       p = Project.where(name: d).first
       x.projects << p
     end
