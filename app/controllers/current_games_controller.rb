@@ -19,7 +19,7 @@ class CurrentGamesController < ApplicationController
   end
   
   def delete_game
-    @current_game = CurrentGame.current(current_user.id)
+    @current_game = CurrentGame.last
     if @current_game
       message = CurrentGame.delete_game(@current_game.id)
     else

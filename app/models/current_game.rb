@@ -107,11 +107,11 @@ class CurrentGame < ApplicationRecord
   
   def self.delete_game(id)
     @game = CurrentGame.find(id)
-    @survivalists = Survivalist.where(user_id: @game.user.id)
+    #@survivalists = Survivalist.where(user_id: @game.user.id)
     @days = Day.where(current_game_id: @game.id)
     @stashes = Stash.where(current_game_id: @game.id)
     @possessions = Possession.where(current_game_id: @game.id)
-    message = "game #{@game.id} deleted. #{@game.possessions.size} possessions, #{@survivalists.size} survivalists, 
+    message = "game #{@game.id} deleted. #{@game.possessions.size} possessions, 
     #{@days.size} days, #{@stashes.size} stashes"
     
     
@@ -126,7 +126,7 @@ class CurrentGame < ApplicationRecord
     Event.delete_related(@game.id)
     
     @game.delete
-    @survivalists.delete_all
+    #@survivalists.delete_all
     
     message
   end
