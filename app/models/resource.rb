@@ -30,12 +30,6 @@ class Resource < ApplicationRecord
     end
   end
   
-  def hide
-    self.visible = false
-    self.save
-  end
-  
-  
   def self.load_default
     defaults = [
       "Wood",

@@ -166,7 +166,7 @@ class Event < ApplicationRecord
         game.hunger_down(2) #hunting costs extra energy
         message
       when "Start Fire"
-        x = skill_check(game.survivalist, 0.60, 1)
+        x = skill_check(game.survivalist, 0.75, 1)
         if x[0]==1
           Possession.add_fire(game)
           Resource.decrement_resource(game, "Wood", 1)

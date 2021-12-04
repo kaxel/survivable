@@ -3,7 +3,7 @@
 	  <h4>Stash</h4>
   </div>
   <div class="col-6">
-	  <% @current_game.stashes.each do |item| %>
+	  <% @current_game.stashes.where(visible: true).each do |item| %>
 	  	<div><%= item.name %> | <%= item.quantity %></div>
 	  <% end %>
   </div>

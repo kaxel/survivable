@@ -113,8 +113,11 @@ class Logic < ApplicationRecord
     caught_already = game.stashes.where(name: "Trotline Catch").where("quantity > 0").first
     
     if matching_stash && !(caught_already)
+      puts "HOOK IS IN THE WATER CHECKING FOR CATCH"
+      puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
       ready_to_add = 0
       for iteration in 1..matching_stash.quantity
+        puts "#{iteration} HOOK checking"
         #environment check
         if environment_check(game.location, TROTLINE_ROOT_CHANCE)
           ready_to_add+=1
@@ -156,9 +159,12 @@ class Logic < ApplicationRecord
     i_return=0
     climate_factor = (100 - location.climate.intensity) #s/b between 1 and 100
     root_factor = root_chance*100
-    if rand(0..100)<((root_factor*climate_factor)/100)
+    root_and_climate_factor = ((root_factor*climate_factor)/100)
+    my_rand = rand(0..100)
+    if my_rand<root_and_climate_factor
       return true
     else
+      puts "#{my_rand} needed to be < #{root_and_climate_factor}"
       return false
     end
   end

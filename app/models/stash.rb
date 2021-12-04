@@ -7,4 +7,9 @@ class Stash < ApplicationRecord
      Stash.where(["current_game_id = ?", game_id]).delete_all
   end
   
+  def hide
+    self.visible = false
+    self.save
+  end
+  
 end
