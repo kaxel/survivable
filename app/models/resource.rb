@@ -8,6 +8,14 @@ class Resource < ApplicationRecord
     new_resource
   end
   
+  def self.decrement_resource(game, resource_name, amount=1)
+    resource = Stash.where(current_game_id: game.id, name: resource_name).first
+    resource.quantity-=amount
+    if resource.quantity==0
+      resource.delete
+    end
+  end
+  
   
   def self.load_default
     defaults = [
@@ -20,7 +28,9 @@ class Resource < ApplicationRecord
       "Leaves",
       "Grass",
       "Wire",
-      "Metal"
+      "Metal",
+      "Twine",
+      "Fire"
     ]
     
     defaults.each do |d|

@@ -2,7 +2,7 @@ class Collection < ApplicationRecord
   has_and_belongs_to_many :projects
   
   @default_collections = [
-    {:name => "Hunting Kit", :description => "The only two things that Hunter really needs."},
+    {:name => "Hunting Kit", :description => "The only two things that a Hunter really needs."},
     {:name => "Fisherman's Pride", :description => "If the fish are biting you'll have plenty to eat."},
     {:name => "Desert", :description => "Just the things you'll find in a Desert."}
   ]
@@ -42,8 +42,6 @@ class Collection < ApplicationRecord
           x.projects << p
           p = Project.where(name: "Net").first
           x.projects << p
-          p = Project.where(name: "Well").first
-          x.projects << p
           p = Project.where(name: "A Frame").first
           x.projects << p
       end
@@ -53,7 +51,7 @@ class Collection < ApplicationRecord
     #load full standard collection
     x = Collection.new
     x.name = "Standard"
-    Project.list.where('name != :name', name: "Firestarter").each do |d|
+    Project.list.select{|n| n != "Firestarter"}.each do |d|
       p = Project.where(name: d).first
       x.projects << p
     end

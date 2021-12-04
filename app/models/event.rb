@@ -5,20 +5,24 @@ class Event < ApplicationRecord
     #look for requirements met
     collection = Collection.where(name: game.location.collection.name).first
     collection.projects.each do |p|
-      if p.requirements_met?(game)
-        #add_new_event_if_not_present(p.name, game)
-        puts "..."
-        puts "..."
-        puts "..."
-        puts "..."
-        puts "..."
-        puts "requirements met ............................... for #{p.name} ---- #{p.requirements.map {|pr| pr.requirement.name }.join(' ')}"
-        puts "..."
-        puts "..."
-        puts "..."
-        puts "..."
-        puts "..."
-        puts "..."
+      if p.name != "Fire" #Fire is special case
+        if p.requirements_met?(game)
+          add_new_event_if_not_present(p.name, game)
+          puts "..."
+          puts "..."
+          puts "..."
+          puts "..."
+          puts "..."
+          puts "requirements met ............................... for #{p.name} ---- #{p.requirements.map {|pr| pr.name }.join(' ')}"
+          puts "..."
+          puts "..."
+          puts "..."
+          puts "..."
+          puts "..."
+          puts "..."
+        else
+          self.hide_event_if_present(p, game)
+        end
       end
     end
   end
@@ -51,6 +55,13 @@ class Event < ApplicationRecord
       Event.new(:name => name, :length => amount, :current_game_id => game.id).save
     else
       my_event.toggle_visible(true)
+    end
+  end
+  
+  def self.hide_event_if_present(project, game)
+    my_event = Event.where(name: project.name, current_game_id: game.id).first
+    if my_event
+      my_event.toggle_visible(false)
     end
   end
     
@@ -127,6 +138,7 @@ class Event < ApplicationRecord
         x = skill_check(game.survivalist, 0.50, 1)
         if x[0]==1
           Possession.add_fire(game)
+          Resource.decrement_resource(game, "Wood")
           "That's a fire!"
         else
           "Your fire did not start."

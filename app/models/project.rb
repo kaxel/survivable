@@ -13,7 +13,6 @@ class Project < ApplicationRecord
     "Fireplace",
     "Pit House",
     "A Frame",
-    "Firewood",
     "Smoker",
     "Net",
     "Firestarter",

@@ -25,6 +25,7 @@ class Requirement < ApplicationRecord
     ["Bed", "Leaves", 2],
     ["Fireplace", "Stone", 6],
     ["Cook Food", "Meat", 1],
+    ["Cook Food", "Fire", 1],
     ["Smoker", "Wood", 6],
     ["Smoker", "Leaves", 2],
     ["Net", "Twine", 4],
