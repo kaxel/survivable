@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
   
+  EAT_FOOD_MOOD_BOOST = 5
+  EAT_FOOD_HUNGER_BOOST = 20
   
   def self.add_events_for_requirements_met(game)
     #look for requirements met
@@ -154,14 +156,14 @@ class Event < ApplicationRecord
           consolations.sample
         end
       when "Cook Food"
-        if game.hunger<=80
-          game.hunger_up(20)
+        if game.hunger<=(100 - EAT_FOOD_HUNGER_BOOST)
+          game.hunger_up(EAT_FOOD_HUNGER_BOOST)
         else
           game.hunger=100
           game.save
         end
         Resource.decrement_resource(game, "Meat", 1)
-        game.mood_up(2)
+        game.mood_up(EAT_FOOD_MOOD_BOOST)
         consolations = ["Delicious.", "That really hit the spot.", "Best meal ever."]
         consolations.sample
       when "Twine"

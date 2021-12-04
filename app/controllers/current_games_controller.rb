@@ -8,13 +8,17 @@ class CurrentGamesController < ApplicationController
   
   def gameplay
     @current_game = CurrentGame.current(current_user.id)
-    #game_over_check
-    if Logic.game_over_check(@current_game)
-      render :template => "cards/gamelost"
-    elsif Logic.win_check(@current_game)
-      render :template => "cards/gamewon"
+    if @current_game
+      #game_over_check
+      if Logic.game_over_check(@current_game)
+        render :template => "cards/gamelost"
+      elsif Logic.win_check(@current_game)
+        render :template => "cards/gamewon"
+      else
+        render :template => "cards/gameplay"
+      end
     else
-      render :template => "cards/gameplay"
+      redirect_to new_current_game_path
     end
   end
   

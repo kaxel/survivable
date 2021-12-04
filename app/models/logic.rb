@@ -1,5 +1,7 @@
 class Logic < ApplicationRecord
   
+  CAMPFIRE_MOOD_BOOST = 6
+  
   def self.evaluate_weather(game)
     climate = game.location.climate
     message = ""
@@ -85,7 +87,7 @@ class Logic < ApplicationRecord
     wood_stash = game.stashes.where(name: "Wood").first
     fire_possession = game.possessions.where(name: "Fire").first
     if fire_possession
-      game.mood_up(5)
+      game.mood_up(CAMPFIRE_MOOD_BOOST)
       if wood_stash && wood_stash.quantity >= 2
         message << "Your fire burned through the night. "
       elsif wood_stash && wood_stash.quantity >= 1
