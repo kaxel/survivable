@@ -61,7 +61,7 @@
 
   </div>
   <!-- item selection -->
-  <div class="row">
+  <div class="row mt-4">
     <div class="col-sm-4 text-end">
 	    <div class="field">
 	      <%= form.label "Pick an item set" %>
@@ -86,21 +86,37 @@
   </div>
   
   <div class="row">
+    <div class="col-sm-4 text-end">
+	    <div class="field">
+	      <%= form.label "How long is your challenge?" %>
+		  
+			<%=
+  		  select_tag :max_day_value, # name of selectbox
+		  	options_for_select([['10 days', 10], ['15 days', 15], ['30 days', 30], ['45 days', 45], ['60 days', 60]]),
+			:class => "game_dropdown"
+			%>
+
+	    </div>
+	</div>
+    <div class="col-sm-8">
+      <div id="action_select">
+	      <div class="col-sm-4">
+	    	  <div class="actions">
+	      	  <%= form.submit "BEGIN" %>
+	    	  </div>
+	      </div>
+	  </div>
+    </div>
+	
+
+  </div>
+  
+  <div class="row">
   	<div class="col-sm-12">
 		<hr/>
     </div>
   </div>
-  
-  
-  <div class="row">
-  	<div class="col-sm-8">
-    </div>
-    <div class="col-sm-4">
-  	  <div class="actions">
-    	  <%= form.submit "BEGIN" %>
-  	  </div>
-    </div>
-  </div>
+
   
 <% end %>
 

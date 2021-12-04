@@ -36,7 +36,7 @@
                   <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
                     <h3 class="mx-auto"><%= @current_game.latest_day.num %></h3>
                   </div>  
-                  <p class="mb-0 mt-2"><small>(of 30 days)</small></p>
+                  <p class="mb-0 mt-2"><small>(of <%= @current_game.maxdays %> days)</small></p>
 				  <p><hr/></p>
                   <p class="card-title text-md-center text-xl-left">HOUR</p>
                   <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">

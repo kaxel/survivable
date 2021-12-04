@@ -83,6 +83,8 @@ class CurrentGamesController < ApplicationController
     #set starting scores
     @current_game.mood = @survivalist.starting_mood_score
     @current_game.hunger = @survivalist.starting_hunger_score
+    @current_game.maxdays = params[:max_day_value]
+    @current_game.morning_message = "You begin your journey next to a reliable water supply."
     
     @collection = Collection.find(params[:collection_id])
     
@@ -143,6 +145,6 @@ class CurrentGamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def current_game_params
-      params.require(:current_game).permit(:sig, :ip, :survivalist_id, :user_id, :location_id)
+      params.require(:current_game).permit(:sig, :ip, :survivalist_id, :user_id, :location_id, :max_day_value)
     end
 end
