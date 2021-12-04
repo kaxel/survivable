@@ -8,7 +8,14 @@ class CurrentGamesController < ApplicationController
   
   def gameplay
     @current_game = CurrentGame.where(user_id: current_user.id).first
-    render :template => "cards/gameplay"
+    #game_over_check
+    if Logic.game_over_check(@current_game)
+      render :template => "cards/gamelost"
+    elsif Logic.win_check(@current_game)
+      render :template => "cards/gamewon"
+    else
+      render :template => "cards/gameplay"
+    end
   end
   
   def delete_game

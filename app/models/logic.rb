@@ -114,4 +114,13 @@ class Logic < ApplicationRecord
     message
   end
   
+  
+  def self.game_over_check(game)
+    return (game.hunger <= 0 || game.mood <= 0)
+  end
+  
+  def self.win_check(game)
+    return (game.latest_day.num >= game.maxday)
+  end
+  
 end
