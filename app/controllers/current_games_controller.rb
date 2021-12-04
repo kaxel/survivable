@@ -84,7 +84,6 @@ class CurrentGamesController < ApplicationController
     @current_game.mood = @survivalist.starting_mood_score
     @current_game.hunger = @survivalist.starting_hunger_score
     @current_game.maxdays = params[:max_day_value]
-    @current_game.morning_message = "You begin your journey next to a reliable water supply."
     
     @collection = Collection.find(params[:collection_id])
     
@@ -99,6 +98,7 @@ class CurrentGamesController < ApplicationController
         @newday = Day.new
         @newday.current_game_id = @current_game.id
         @newday.num = 1
+        @newday.morning_message = "You begin your journey next to a reliable water supply."
         @newday.save
         @current_game.days<<@newday
         #add starting items

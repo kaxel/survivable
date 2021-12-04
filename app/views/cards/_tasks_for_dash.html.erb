@@ -8,7 +8,7 @@
 	<p class="mb-0 mt-1"><%= link_to e.name, add_next_path(:event_id => e.id) %></p>
 	<% end %>
 	<p><hr/></p>
-	<p class="mb-0 mt-2"><%= @current_game.morning_message %></p>
+	<p class="mb-0 mt-2"><%= @current_game.latest_day.morning_message %></p>
 <% else %>
 	<% @current_game.events.where(visible: true).each do |e| %>
 	<p class="mb-0 mt-1"><%= link_to e.name, add_next_path(:event_id => e.id) %></p>
