@@ -7,7 +7,7 @@ class Requirement < ApplicationRecord
     ["Twine", "Grass", 2],
     ["Hook", "Wire", 2],
     ["Knife", "Metal", 2],
-    ["Knife", "Wood", 1],
+    ["Knife", "Wood", 2],
     ["Lean To", "Wood", 6],
     ["Lean To", "Leaves", 4],
     ["Bed", "Wood", 4],

@@ -68,17 +68,8 @@ class Event < ApplicationRecord
       {:name => "Explore", :duration => 1},
       {:name => "Gather Mud", :duration => 1},
       {:name => "Gather Leaves", :duration => 1},
-      {:name => "Collect Wood", :duration => 1}
-      # {:name => "Explore", :duration => 1},
-      # {:name => "Set Camp", :duration => 1},
-      # {:name => "Cut Firewood", :duration => 1},
-      # {:name => "Build Fire", :duration => 1},
-      # {:name => "Tend Fire", :duration => 1},
-      # {:name => "Gather Mud", :duration => 1},
-      # {:name => "Gather Leaves", :duration => 1},
-      # {:name => "Build Smoker", :duration => 1},
-      # {:name => "Make Bed", :duration => 1},
-      # {:name => "Eat Food", :duration => 1}
+      {:name => "Collect Wood", :duration => 1},
+      {:name => "Gather Grass", :duration => 1}
     ]
     events.each do |ev|
       Event.new(:name => ev[:name], :length => ev[:duration], :current_game_id => game.id).save
@@ -110,6 +101,14 @@ class Event < ApplicationRecord
         else
           game.add_resource("Mud", x[0])
           "You found #{x[0]} clump#{x[0]>1 ? 's' : ''} of mud."
+        end
+      when "Gather Grass"
+        x = skill_check(game.survivalist, 0.50, 3)
+        if x[0]== 0
+          "There was no good grass to be found."
+        else
+          game.add_resource("Grass", x[0])
+          "You found #{x[0]} clump#{x[0]>1 ? 's' : ''} of grass."
         end
       when "Gather Leaves"
         x = skill_check(game.survivalist, 0.50, 3)
