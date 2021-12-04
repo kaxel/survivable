@@ -30,7 +30,7 @@ class Logic < ApplicationRecord
         game.temp += increment
       end
     end
-    
+    game.save
     message << comfort_check(game)
     message  
   end
@@ -46,13 +46,13 @@ class Logic < ApplicationRecord
         message << "You are feeling comfortable. "
       when game.temp > 45
         mood_penalty = 5
-        message << "You are feeling a bit chilly. "
+        message << "You are feeling a bit chilly—a shelter would be nice."
       when game.temp > 25
         mood_penalty = 10
-        message << "Your toes are freezing."
+        message << "Your toes are freezing—a shelter would be nice."
       else
         mood_penalty = 15
-        message << "You are living in a freezer. "
+        message << "You are living in a freezer—try building a shelter. "
     end
     
     #mitigation strategies

@@ -26,6 +26,10 @@ class CurrentGame < ApplicationRecord
     if resource_match
       resource_match.quantity += amount
       resource_match.save
+      if resource_match.quantity <= 0
+        #check for ghost resources
+        resource_match.delete
+      end
     else
       resource = Resource.where(name: what).first
       Resource.input_new_resource(self, resource, amount)
@@ -61,7 +65,7 @@ class CurrentGame < ApplicationRecord
   end
   
   def mood_adjust(amount)
-    self.mood+=amount
+    self.mood-=amount
     self.save
   end
   
