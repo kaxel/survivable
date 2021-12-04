@@ -15,7 +15,7 @@ class CurrentGamesController < ApplicationController
       elsif Logic.win_check(@current_game)
         render :template => "cards/gamewon"
       else
-        render :template => "cards/gameplay"
+        render :template => "cards/gameplay", :layout => "gameplay"
       end
     else
       redirect_to new_current_game_path

@@ -8,7 +8,7 @@ class Event < ApplicationRecord
     collection = Collection.where(name: game.location.collection.name).first
     collection.projects.each do |p|
       if p.name != "Fire" #Fire is special case
-        if p.requirements_met?(game)
+        if p.requirements_met?(game) && !(Possession.where(project_id: p.id).first)
           add_new_event_if_not_present(p.name, game)
         else
           self.hide_event_if_present(p, game)
@@ -179,6 +179,8 @@ class Event < ApplicationRecord
         Possession.decrement_possession(game, Project.where(name: "Hook").first, 1)
         #decrement twine - stashes
         Resource.decrement_resource(game, "Twine", 1)
+        #remove event
+        self.toggle_visible(false)
         "You put a hook on your trotline."
       when "Set Fish Hook"
       when "Drop Net"

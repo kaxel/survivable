@@ -29,7 +29,7 @@ class Possession < ApplicationRecord
   end
   
   def self.decrement_possession(game, project, amount)
-    existing_possession = Possession.where(current_game_id: game.id, project_id: project.id)
+    existing_possession = Possession.where(current_game_id: game.id, project_id: project.id).first
     existing_possession.quantity -= amount
     if existing_possession.quantity <= 0
       existing_possession.delete
