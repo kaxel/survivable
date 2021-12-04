@@ -95,7 +95,7 @@ class Event < ApplicationRecord
       when "Explore"
         x = creativity_check(game.survivalist, 0.35, 2)
         if x[0]==0
-          "You found nothing."
+          ["You found nothing.", "You did a lot of walking and not much finding.", "You had a nice nature bath."].sample
         else
           available = ["Meat", "Mud", "Leaves", "Wood", "Grass", "Stone", "Metal", "Wire"].sample
           game.add_resource(available, x[0])
