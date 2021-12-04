@@ -111,7 +111,7 @@ rails generate migration RemoveMorningMessageFromCurrentGame morning_message:str
 
 rails g migration AddMorningMessageToDay morning_message:string
 
-rails g migration AddTempToCurrentGame morning_message:string temp:integer{1}
+rails g migration AddTempToCurrentGame temp:integer{1}
 
 webmaster
 55zmeE5VD*BpAbS

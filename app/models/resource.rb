@@ -1,6 +1,6 @@
 class Resource < ApplicationRecord
   
-  def self.input_new_resource(game, resource, amount=1)
+  def self.input_new_resource(game, resource, amount)
     new_resource = Stash.new(current_game_id: game.id, resource_id: resource.id)
     new_resource.quantity = amount
     new_resource.name = resource.name
@@ -8,11 +8,14 @@ class Resource < ApplicationRecord
     new_resource
   end
   
-  def self.decrement_resource(game, resource_name, amount=1)
+  def self.decrement_resource(game, resource_name, amount)
     resource = Stash.where(current_game_id: game.id, name: resource_name).first
-    resource.quantity-=amount
-    if resource.quantity==0
-      resource.delete
+    if resource
+      resource.quantity-=amount
+      resource.save
+      if resource.quantity<=0
+        resource.delete
+      end
     end
   end
   

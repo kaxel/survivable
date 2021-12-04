@@ -7,7 +7,7 @@ class CurrentGame < ApplicationRecord
   has_many :days
   has_many :events
   
-  def add_possession(what, amount = 1)
+  def add_possession(what, amount)
     possession_match = possessions.where(name: what).first
     #possession exists?
     if possession_match
@@ -15,12 +15,12 @@ class CurrentGame < ApplicationRecord
       possession_match.save
     else
       project = Project.where(name: what).first
-      Possession.input_new_possession(self, project, amount=1)
+      Possession.input_new_possession(self, project, amount)
     end
     "Possession #{what} added #{amount}"
   end
   
-  def add_resource(what, amount = 1)
+  def add_resource(what, amount)
     resource_match = stashes.where(name: what).first
     #resource exists?
     if resource_match
@@ -28,7 +28,7 @@ class CurrentGame < ApplicationRecord
       resource_match.save
     else
       resource = Resource.where(name: what).first
-      Resource.input_new_resource(self, resource, amount=1)
+      Resource.input_new_resource(self, resource, amount)
     end
     "Stash #{what} added #{amount}"
   end
@@ -50,13 +50,18 @@ class CurrentGame < ApplicationRecord
     end
   end
   
-  def hunger_down(amount = 1)
+  def hunger_down(amount)
     self.hunger-=amount
     self.save
   end
   
-  def hunger_up(amount = 1)
+  def hunger_up(amount)
     self.hunger+=amount
+    self.save
+  end
+  
+  def mood_adjust(amount)
+    self.mood+=amount
     self.save
   end
   

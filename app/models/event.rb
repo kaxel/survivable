@@ -145,8 +145,13 @@ class Event < ApplicationRecord
           "Your fire did not start."
         end
       when "Cook Food"
-        game.hunger_up(15)
-        Resource.decrement_resource(game, "Meat")
+        if game.hunger<=85
+          game.hunger_up(15)
+        else
+          game.hunger=100
+          game.save
+        end
+        Resource.decrement_resource(game, "Meat", 1)
         "Delicious."
       when "Set Fish Hook"
       when "Drop Net"

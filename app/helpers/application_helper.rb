@@ -30,8 +30,6 @@ module ApplicationHelper
   end
   
   
-  def evaluate_weather(game)
-    
-  end
+  
   
 end

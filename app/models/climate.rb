@@ -2,7 +2,7 @@ class Climate < ApplicationRecord
   
   @default_climates = [
     {:name => "Rainy Hot Mild", :cold_warm => 40, :cold_floor => 45, :warm_ceiling => 100, :intensity => 50, :trend => 3},
-    {:name => "Rainy Cold Brisk", :cold_warm => 70, :cold_floor => 0, :warm_ceiling => 85, :intensity => 80, :trend => -5},
+    {:name => "Rainy Cold Brisk", :cold_warm => 70, :cold_floor => 0, :warm_ceiling => 85, :intensity => 80, :trend => 5},
     {:name => "Dry Hot Extreme", :cold_warm => 90, :cold_floor => 65, :warm_ceiling => 120, :intensity => 80, :trend => 6},
   ]
 

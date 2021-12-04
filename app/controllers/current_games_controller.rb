@@ -33,7 +33,7 @@ class CurrentGamesController < ApplicationController
     if nexttask.save
       message = e.process(@current_game)
       nexttask.update_message(message)
-      @current_game.hunger_down
+      @current_game.hunger_down(1)
       Event.insert_possession_related_events(@current_game)
       Event.add_events_for_requirements_met(@current_game)
       redirect_to gameplay_path, notice: message
@@ -47,7 +47,9 @@ class CurrentGamesController < ApplicationController
     @newday = Day.new
     @newday.current_game_id = @current_game.id
     @newday.num = last_day_num+1
-    @newday.morning_message = evaluate_weather(@current_game)
+    morning_message = Logic.evaluate_weather(@current_game)
+    morning_message << Logic.nighly_fire_check(@current_game)
+    @newday.morning_message = morning_message
     @newday.save
     @current_game.days<<@newday
     

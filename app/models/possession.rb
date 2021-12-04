@@ -1,5 +1,6 @@
 class Possession < ApplicationRecord
   belongs_to :current_game
+  belongs_to :project
   
   def self.add_fire(game)
     if Possession.where(current_game_id: game.id, name: "Fire").first

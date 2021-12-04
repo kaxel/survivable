@@ -2,6 +2,7 @@ class Project < ApplicationRecord
   
   has_and_belongs_to_many :collections
   has_many :project_requirements
+  has_many :adjustments
   
   @defaults = [
     "Twine",
