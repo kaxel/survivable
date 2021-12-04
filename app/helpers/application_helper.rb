@@ -29,7 +29,14 @@ module ApplicationHelper
     end
   end
   
-  
+  def task_link_name(e)
+    p = Project.where(name: e.name).first
+    if p && p.requirements.first
+      "Build #{e.name}"
+    else
+      e.name
+    end
+  end
   
   
 end

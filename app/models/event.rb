@@ -161,6 +161,8 @@ class Event < ApplicationRecord
           Resource.decrement_resource(game, pr.requirement.resource.name, pr.requirement.amount)
         end
         "You made some twine."
+      when "Lean To"
+        
       when "Set Fish Hook"
       when "Drop Net"
       
