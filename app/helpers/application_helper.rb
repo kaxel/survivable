@@ -29,4 +29,9 @@ module ApplicationHelper
     end
   end
   
+  
+  def evaluate_weather(game)
+    
+  end
+  
 end

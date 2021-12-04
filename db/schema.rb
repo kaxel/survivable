@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_04_030204) do
+ActiveRecord::Schema.define(version: 2021_12_04_032206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_030204) do
     t.integer "hunger", limit: 2
     t.integer "mood", limit: 2
     t.integer "maxdays", limit: 2
+    t.integer "temp", limit: 2
     t.index ["location_id"], name: "index_current_games_on_location_id"
     t.index ["survivalist_id"], name: "index_current_games_on_survivalist_id"
     t.index ["user_id"], name: "index_current_games_on_user_id"

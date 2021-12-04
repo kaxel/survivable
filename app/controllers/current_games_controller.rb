@@ -43,9 +43,11 @@ class CurrentGamesController < ApplicationController
   def add_subsequent_day
     @current_game = CurrentGame.where(user_id: current_user.id).first
     last_day_num = @current_game.latest_day.num
+    
     @newday = Day.new
     @newday.current_game_id = @current_game.id
     @newday.num = last_day_num+1
+    @newday.morning_message = evaluate_weather(@current_game)
     @newday.save
     @current_game.days<<@newday
     
