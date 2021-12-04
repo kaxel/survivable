@@ -17,6 +17,15 @@ class Event < ApplicationRecord
     end
   end
   
+  def self.add_events_for_fishing(game)
+    #look for existing trot lines
+    matching_stash = game.stashes.where(name: "Trotline Hook").where("quantity > 0").first
+    if matching_stash
+      add_new_event_if_not_present("Check Trotline", game)
+    end
+    #look for existing gillnets
+  end
+  
   def self.insert_possession_related_events(game)
     events = [
       {:name => "Hunt", :requires => ["Knife"], :stash_required => []},
@@ -84,7 +93,6 @@ class Event < ApplicationRecord
     
     case name
       when "Explore"
-        
         x = creativity_check(game.survivalist, 0.35, 2)
         if x[0]==0
           "You found nothing."
@@ -92,6 +100,16 @@ class Event < ApplicationRecord
           available = ["Meat", "Mud", "Leaves", "Wood", "Grass", "Stone", "Metal", "Wire"].sample
           game.add_resource(available, x[0])
           "You found some #{available}."
+        end
+      when "Check Trotline"
+        matching_stash = game.stashes.where(name: "Trotline Catch").where("quantity > 0").first
+        if matching_stash
+          num_caught = matching_stash.quantity
+          game.hunger_down(num_caught)
+          matching_stash.delete
+          "You found #{num_caught} #{game.location.animals.where(aclass: "fish").sample}."
+        else
+          "No fish today."
         end
         
       when "Gather Mud"
@@ -152,6 +170,16 @@ class Event < ApplicationRecord
           "That's a fire!"
         else
           consolations = ["Your fire did not start.", "Your kindling is wet.", "You're just not having any luck starting a fire today."]
+          consolations.sample
+        end
+      when "Make Friction Fire"
+        x = skill_check(game.survivalist, 0.30, 1)
+        if x[0]==1
+          Possession.add_fire(game)
+          Resource.decrement_resource(game, "Wood", 1)
+          "That's a fire!"
+        else
+          consolations = ["Your fire did not start.", "Your kindling is wet.", "Friction fires take a lot of bushcraft.", "This is not going well."]
           consolations.sample
         end
       when "Cook Food"

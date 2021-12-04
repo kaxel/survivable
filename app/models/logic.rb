@@ -1,6 +1,7 @@
 class Logic < ApplicationRecord
   
   CAMPFIRE_MOOD_BOOST = 6
+  TROTLINE_ROOT_CHANCE = 0.80
   
   def self.evaluate_weather(game)
     climate = game.location.climate
@@ -87,18 +88,46 @@ class Logic < ApplicationRecord
     wood_stash = game.stashes.where(name: "Wood").first
     fire_possession = game.possessions.where(name: "Fire").first
     if fire_possession
-      game.mood_up(CAMPFIRE_MOOD_BOOST)
+      game.mood_up(6)
       if wood_stash && wood_stash.quantity >= 2
         message << "Your fire burned through the night. "
+        Resource.decrement_resource(game, "Wood", 2)
       elsif wood_stash && wood_stash.quantity >= 1
         message << "Your fire extinguished in the night. "
         fire_possession.delete
+        Resource.decrement_resource(game, "Wood", 1)
+      else
+        message << "Your fire extinguished in the night. "
+        fire_possession.delete
       end
-      Resource.decrement_resource(game, "Wood", 2)
+      
     else
       message << "A fire might cheer you up. "
     end
     message
+  end
+  
+  def self.nightly_fish_check(game)
+    # check for trotline
+    matching_stash = game.stashes.where(name: "Trotline Hook").where("quantity > 0").first
+    caught_already = game.stashes.where(name: "Trotline Catch").where("quantity > 0").first
+    
+    if matching_stash && !(caught_already)
+      ready_to_add = 0
+      for iteration in 1..matching_stash.quantity
+        #environment check
+        #if environment_check(game.location, 0.80)
+          ready_to_add+=1
+          #end
+      end
+      if ready_to_add > 0
+        resource = Resource.where(name: "Trotline Catch").first
+        self.add_if_existing(game, resource, ready_to_add)
+      end
+    end
+    
+    #check for gillnet
+    
   end
   
   def self.uncooked_meat_tax(game)
@@ -121,6 +150,17 @@ class Logic < ApplicationRecord
     message
   end
   
+  def self.environment_check(location, root_chance)
+    #root_change s/b between 0 and 1
+    i_return=0
+    climate_factor = (100 - location.climate.intensity) #s/b between 1 and 100
+    root_factor = root_chance*100
+    if rand(0..100)<((root_factor*climate_factor)/100)
+      return true
+    else
+      return false
+    end
+  end
   
   def self.game_over_check(game)
     return (game.hunger <= 0 || game.mood <= 0)
