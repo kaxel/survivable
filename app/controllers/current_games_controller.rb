@@ -47,8 +47,10 @@ class CurrentGamesController < ApplicationController
     @newday = Day.new
     @newday.current_game_id = @current_game.id
     @newday.num = last_day_num+1
+    @current_game.hunger_down(5)
     morning_message = Logic.evaluate_weather(@current_game)
-    morning_message << Logic.nighly_fire_check(@current_game)
+    morning_message << Logic.nightly_fire_check(@current_game)
+    morning_message << Logic.uncooked_meat_tax(@current_game)
     @newday.morning_message = morning_message
     @newday.save
     @current_game.days<<@newday
@@ -107,7 +109,7 @@ class CurrentGamesController < ApplicationController
         @newday.save
         @current_game.days<<@newday
         #add starting items
-        @collection.projects.each {|p| @current_game.possessions << Possession.input_new_possession(@current_game, p)}
+        @collection.projects.each {|p| @current_game.possessions << Possession.input_new_possession(@current_game, p, 1)}
         
         format.html { redirect_to gameplay_path, notice: "Current game was successfully created." }
         format.json { render :show, status: :created, location: @current_game }

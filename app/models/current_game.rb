@@ -64,12 +64,12 @@ class CurrentGame < ApplicationRecord
     self.save
   end
   
-  def mood_adjust(amount)
-    puts "MOOD ADJUST"
-    puts "MOOD ADJUST"
-    puts "MOOD ADJUST"
-    puts "MOOD ADJUST"
-    puts "MOOD ADJUST"
+  def mood_down(amount)
+    puts "MOOD DOWN"
+    puts "MOOD DOWN"
+    puts "MOOD DOWN"
+    puts "MOOD DOWN"
+    puts "MOOD DOWN"
     puts "self.mood -= #{amount}"
     self.mood-=amount
     self.save
@@ -77,8 +77,15 @@ class CurrentGame < ApplicationRecord
   end
   
   def mood_up(amount)
+    puts "MOOD UP"
+    puts "MOOD UP"
+    puts "MOOD UP"
+    puts "MOOD UP"
+    puts "MOOD UP"
+    puts "self.mood += #{amount}"
     self.mood+=amount
     self.save
+    puts self.inspect
   end
   
   def has_fire?

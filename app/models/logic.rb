@@ -64,16 +64,23 @@ class Logic < ApplicationRecord
       adj = Adjustment.where(project_id: p.project.id).where(bonus: "comfort").first
       if adj
         comfort_offset += adj.amount
-        message << "Your #{p.project.name} helps a bit. "
+        puts "Your #{p.project.name} helps a bit (#{adj.amount}). "
+        message << "Your #{p.project.name} helps a bit (#{adj.amount}). "
       end
     end
+    new_adjust = mood_penalty-comfort_offset
+    if new_adjust < 0
+      game.mood_up(mood_penalty.abs())
+    elsif new_adjust > 0
+      game.mood_down(mood_penalty.abs())
+    else
+      #no adjustment
+    end
     
-    mood_penalty-=comfort_offset
-    game.mood_adjust(mood_penalty)
     message
   end
   
-  def self.nighly_fire_check(game)
+  def self.nightly_fire_check(game)
     message = ""
     wood_stash = game.stashes.where(name: "Wood").first
     fire_possession = game.possessions.where(name: "Fire").first
@@ -88,6 +95,21 @@ class Logic < ApplicationRecord
       Resource.decrement_resource(game, "Wood", 2)
     else
       message << "A fire might cheer you up. "
+    end
+    message
+  end
+  
+  def self.uncooked_meat_tax(game)
+    message = ""
+    meat_tax = 0.60
+    resource = Resource.where(name: "Meat").first
+    stash = game.stashes.where(resource_id: resource.id).first
+    if stash
+      old_amount = stash.quantity
+      new_amount = (old_amount * meat_tax).to_i
+      stash.quantity = new_amount
+      stash.save
+      message << "Some of your uncooked meat went bad last night."
     end
     message
   end

@@ -13,14 +13,11 @@ class Requirement < ApplicationRecord
     ["Bed", "Wood", 4],
     ["Bed", "Grass", 4],
     ["Log Cabin", "Wood", 8],
-    ["Log Cabin", "Leaves", 1],
-    ["Log Cabin", "Mud", 5],
+    ["Log Cabin", "Leaves", 2],
+    ["Log Cabin", "Mud", 6],
     ["Pit House", "Wood", 10],
-    ["Pit House", "Leaves", 1],
-    ["Pit House", "Mud", 6],
-    ["A Frame", "Wood", 8],
-    ["A Frame", "Leaves", 4],
-    ["A Frame", "Mud", 4],
+    ["Pit House", "Leaves", 4],
+    ["Pit House", "Mud", 10],
     ["Bed", "Wood", 4],
     ["Bed", "Leaves", 2],
     ["Fireplace", "Stone", 6],
@@ -32,7 +29,6 @@ class Requirement < ApplicationRecord
   ]
   
   def self.load_default
-
     
     @defaults.each do |d|
       #puts "look for project: #{d[0]}"

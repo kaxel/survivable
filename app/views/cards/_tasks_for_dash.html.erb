@@ -4,13 +4,13 @@
 	<p class="mb-0 mt-2"><small>You've had a long day!</small></p>
 	<p class="mb-0 mt-2"><small>Your mood and hunger levels will change a little bit according to the weather and the state of your shelter.</small></p>
 <% elsif @current_game.latest_day.hour == 0 %>
-	<% @current_game.events.where(visible: true).each do |e| %>
+	<% @current_game.events.where(visible: true).order(:id).each do |e| %>
 	<p class="mb-0 mt-1"><%= link_to task_link_name(e), add_next_path(:event_id => e.id) %></p>
 	<% end %>
 	<p><hr/></p>
 	<p class="mb-0 mt-2"><%= @current_game.latest_day.morning_message %></p>
 <% else %>
-	<% @current_game.events.where(visible: true).each do |e| %>
+	<% @current_game.events.where(visible: true).order(:id).each do |e| %>
 	<p class="mb-0 mt-1"><%= link_to task_link_name(e), add_next_path(:event_id => e.id) %></p>
 	<% end %>
 	<p><hr/></p>

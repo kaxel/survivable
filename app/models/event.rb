@@ -8,18 +8,6 @@ class Event < ApplicationRecord
       if p.name != "Fire" #Fire is special case
         if p.requirements_met?(game)
           add_new_event_if_not_present(p.name, game)
-          puts "..."
-          puts "..."
-          puts "..."
-          puts "..."
-          puts "..."
-          puts "requirements met ............................... for #{p.name} ---- #{p.requirements.map {|pr| pr.name }.join(' ')}"
-          puts "..."
-          puts "..."
-          puts "..."
-          puts "..."
-          puts "..."
-          puts "..."
         else
           self.hide_event_if_present(p, game)
         end
@@ -41,7 +29,7 @@ class Event < ApplicationRecord
     
     #firestarter
     if !game.has_fire?
-      if game.possessions.where(name: "Firestarter").first && game.stashes.where(name: "Wood").first
+      if game.possessions.where(name: "Firestarter").first && game.stashes.where(name: "Wood").where("quantity > 0").first
         add_new_event_if_not_present("Start Fire", game)
       elsif game.stashes.where(name: "Wood").first
         add_new_event_if_not_present("Make Friction Fire", game)
@@ -107,16 +95,28 @@ class Event < ApplicationRecord
         
       when "Gather Mud"
         x = skill_check(game.survivalist, 0.50, 3)
-        #message = "You spent an hour gathering mud. You found #{x} clumps of it."
-        game.add_resource("Mud", x[0])
+        if x[0]== 0
+          "There was no good mud to be found."
+        else
+          game.add_resource("Mud", x[0])
+          "You found #{x[0]} clumps of mud."
+        end
       when "Gather Leaves"
         x = skill_check(game.survivalist, 0.50, 3)
-        #message = "You spent an hour gathering leaves. You found #{x} piles."
-        game.add_resource("Leaves", x[0])
+        if x[0]== 0
+          "Not a lot of leaves around here."
+        else
+          game.add_resource("Leaves", x[0])
+          "You found #{x[0]} piles of leaves."
+        end
       when "Collect Wood"
         x = skill_check(game.survivalist, 0.50, 3)
-        #message = "you spent an hour collecting wood. You found #{x} good logs."
-        game.add_resource("Wood", x[0])
+        if x[0]== 0
+          "There was no dry wood to be found."
+        else
+          game.add_resource("Wood", x[0])
+          "You found #{x[0]} good logs."
+        end
       when "Hunt"
         consolations = ["You found nothing.", "Hunting ain't easy.", "No luck this time.", "Better luck next time."]
         message = consolations.sample #default
@@ -125,7 +125,7 @@ class Event < ApplicationRecord
         found_prey = strength_check(game.survivalist, hunt_root_chance)[0]==1
         if found_prey
           animal = game.location.animals.where(aclass: ["mammal", "bird", "reptile"]).sample
-          x = skill_check(game.survivalist, 0.50, animal.meat) #50% root chance to get meat per meat integer
+          x = skill_check(game.survivalist, 0.65, animal.meat) #50% root chance to get meat per meat integer
           if x[0]==0
             message = "You saw a #{animal.name} but it got away."
           else
@@ -142,18 +142,20 @@ class Event < ApplicationRecord
           Resource.decrement_resource(game, "Wood", 1)
           "That's a fire!"
         else
-          "Your fire did not start."
+          consolations = ["Your fire did not start.", "Your kindling is wet.", "You're just not having any luck starting a fire today."]
+          consolations.sample
         end
       when "Cook Food"
-        if game.hunger<=85
-          game.hunger_up(15)
+        if game.hunger<=80
+          game.hunger_up(20)
         else
           game.hunger=100
           game.save
         end
         Resource.decrement_resource(game, "Meat", 1)
         game.mood_up(2)
-        "Delicious."
+        consolations = ["Delicious.", "That really hit the spot.", "Best meal ever."]
+        consolations.sample
       when "Twine"
         Resource.add_if_existing(game, Resource.where(name: "Twine").first, 1)
         project = Project.where(name: "Twine").first
@@ -162,16 +164,16 @@ class Event < ApplicationRecord
           Resource.decrement_resource(game, pr.requirement.resource.name, pr.requirement.amount)
         end
         "You made some twine."
-      when "Lean To"
-        project = Project.where(name: "Lean To").first
+      
+      when "Set Fish Hook"
+      when "Drop Net"
+      else #standard project build
+        project = Project.where(name: self.name).first
         Possession.add_if_not_existing(game, project, 1)
         ProjectRequirement.where(project_id: project.id).all.each do |pr|
           Resource.decrement_resource(game, pr.requirement.resource.name, pr.requirement.amount)
         end
-        "Your Lean To puts a nice roof overhead."
-      when "Set Fish Hook"
-      when "Drop Net"
-      
+        "Your #{self.name} is a nice addition to camp!"
     end
     
   end

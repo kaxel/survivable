@@ -42,8 +42,6 @@ class Collection < ApplicationRecord
           x.projects << p
           p = Project.where(name: "Net").first
           x.projects << p
-          p = Project.where(name: "A Frame").first
-          x.projects << p
       end
       x.save
     end
