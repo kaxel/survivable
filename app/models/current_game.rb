@@ -131,4 +131,14 @@ class CurrentGame < ApplicationRecord
     message
   end
   
+  def archive_game
+    self.active = false
+    self.save
+  end
+  
+  
+  def self.current(user_id)
+    @current_game = CurrentGame.where(user_id: user_id).where(active: true).first
+  end
+  
 end

@@ -7,7 +7,7 @@ class CurrentGamesController < ApplicationController
   end
   
   def gameplay
-    @current_game = CurrentGame.where(user_id: current_user.id).first
+    @current_game = CurrentGame.current(current_user.id)
     #game_over_check
     if Logic.game_over_check(@current_game)
       render :template => "cards/gamelost"
@@ -19,7 +19,7 @@ class CurrentGamesController < ApplicationController
   end
   
   def delete_game
-    @current_game = CurrentGame.where(user_id: current_user.id).first
+    @current_game = CurrentGame.current(current_user.id)
     if @current_game
       message = CurrentGame.delete_game(@current_game.id)
     else
@@ -29,7 +29,7 @@ class CurrentGamesController < ApplicationController
   end
   
   def add_next
-    @current_game = CurrentGame.where(user_id: current_user.id).first
+    @current_game = CurrentGame.current(current_user.id)
     e = Event.find(params[:event_id])
     d = @current_game.latest_day
     num = @current_game.latest_day.hour + 1
@@ -48,7 +48,7 @@ class CurrentGamesController < ApplicationController
   end
   
   def add_subsequent_day
-    @current_game = CurrentGame.where(user_id: current_user.id).first
+    @current_game = CurrentGame.current(current_user.id)
     last_day_num = @current_game.latest_day.num
     
     @newday = Day.new
@@ -65,6 +65,12 @@ class CurrentGamesController < ApplicationController
     message="Good morning!"
     redirect_to gameplay_path, notice: message
   end
+  
+  def start_new_game
+    @current_game = CurrentGame.current(current_user.id)
+    @current_game.archive_game
+    redirect_to new_current_game_path
+  end
 
   # GET /current_games/1 or /current_games/1.json
   def show
@@ -73,7 +79,7 @@ class CurrentGamesController < ApplicationController
 
   # GET /current_games/new
   def new
-    @current_game = CurrentGame.where(user_id: current_user.id).first
+    @current_game = CurrentGame.current(current_user.id)
     if @current_game
       redirect_to gameplay_path, notice: "You are already playing a game."
     else
