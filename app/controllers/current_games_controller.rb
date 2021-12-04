@@ -86,6 +86,7 @@ class CurrentGamesController < ApplicationController
     @current_game.mood = @survivalist.starting_mood_score
     @current_game.hunger = @survivalist.starting_hunger_score
     @current_game.maxdays = params[:max_day_value]
+    @current_game.temp = Location.find(params[:location_id]).climate.start_temp
     
     @collection = Collection.find(params[:collection_id])
     

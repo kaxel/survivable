@@ -25,4 +25,8 @@ class Climate < ApplicationRecord
     "Climates delete all"
   end
   
+  def start_temp
+    return (self.warm_ceiling-self.cold_floor)*(self.cold_warm/100.00)
+  end
+  
 end
