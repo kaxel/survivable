@@ -162,7 +162,12 @@ class Event < ApplicationRecord
         end
         "You made some twine."
       when "Lean To"
-        
+        project = Project.where(name: "Lean To").first
+        Possession.add_if_not_existing(game, project, 1)
+        ProjectRequirement.where(project_id: project.id).all.each do |pr|
+          Resource.decrement_resource(game, pr.requirement.resource.name, pr.requirement.amount)
+        end
+        "Your Lean To puts a nice roof overhead."
       when "Set Fish Hook"
       when "Drop Net"
       

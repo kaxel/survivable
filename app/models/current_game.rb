@@ -65,8 +65,15 @@ class CurrentGame < ApplicationRecord
   end
   
   def mood_adjust(amount)
+    puts "MOOD ADJUST"
+    puts "MOOD ADJUST"
+    puts "MOOD ADJUST"
+    puts "MOOD ADJUST"
+    puts "MOOD ADJUST"
+    puts "self.mood -= #{amount}"
     self.mood-=amount
     self.save
+    puts self.inspect
   end
   
   def mood_up(amount)

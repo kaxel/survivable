@@ -31,7 +31,7 @@ module ApplicationHelper
   
   def task_link_name(e)
     p = Project.where(name: e.name).first
-    if p && p.requirements.first
+    if p && p.requirements.first && !(["Cook Food"].include? p.name)
       "Build #{e.name}"
     else
       e.name

@@ -48,13 +48,13 @@ class Logic < ApplicationRecord
         message << "You are feeling comfortable. "
       when game.temp > 45
         mood_penalty = 5
-        message << "You are feeling a bit chilly—a shelter would be nice. "
+        message << "You are feeling a bit chilly. "
       when game.temp > 25
         mood_penalty = 10
-        message << "Your toes are freezing—a shelter would be nice. "
+        message << "Your toes are freezing. "
       else
         mood_penalty = 15
-        message << "You are living in a freezer—try building a shelter. "
+        message << "You are living in a freezer. "
     end
     
     #mitigation strategies
@@ -64,7 +64,7 @@ class Logic < ApplicationRecord
       adj = Adjustment.where(project_id: p.project.id).where(bonus: "comfort").first
       if adj
         comfort_offset += adj.amount
-        message << "Your #{p.project.name} cheers you up. "
+        message << "Your #{p.project.name} helps a bit. "
       end
     end
     
