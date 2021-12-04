@@ -69,6 +69,11 @@ class CurrentGame < ApplicationRecord
     self.save
   end
   
+  def mood_up(amount)
+    self.mood+=amount
+    self.save
+  end
+  
   def has_fire?
     return self.possessions.where(name: "Fire").first
   end

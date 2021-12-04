@@ -153,6 +153,14 @@ class Event < ApplicationRecord
         end
         Resource.decrement_resource(game, "Meat", 1)
         "Delicious."
+      when "Twine"
+        Resource.add_if_existing(game, Resource.where(name: "Twine").first, 1)
+        project = Project.where(name: "Twine").first
+        puts " found twine project"
+        ProjectRequirement.where(project_id: project.id).all.each do |pr|
+          Resource.decrement_resource(game, pr.requirement.resource.name, pr.requirement.amount)
+        end
+        "You made some twine."
       when "Set Fish Hook"
       when "Drop Net"
       

@@ -49,7 +49,7 @@ class Logic < ApplicationRecord
         message << "You are feeling a bit chilly—a shelter would be nice."
       when game.temp > 25
         mood_penalty = 10
-        message << "Your toes are freezing—a shelter would be nice."
+        message << "Your toes are freezing—a shelter would be nice. "
       else
         mood_penalty = 15
         message << "You are living in a freezer—try building a shelter. "
@@ -72,11 +72,11 @@ class Logic < ApplicationRecord
   end
   
   def self.nighly_fire_check(game)
-    puts "nighly_fire_check nighly_fire_check nighly_fire_check nighly_fire_check"
     message = ""
     wood_stash = game.stashes.where(name: "Wood").first
     fire_possession = game.possessions.where(name: "Fire").first
     if fire_possession
+      game.mood_up(2)
       if wood_stash && wood_stash.quantity >= 2
         message << "Your fire burned through the night. "
       elsif wood_stash && wood_stash.quantity >= 1
@@ -85,7 +85,7 @@ class Logic < ApplicationRecord
       end
       Resource.decrement_resource(game, "Wood", 2)
     else
-      message << "A fire would be nice. "
+      message << "A fire might cheer you up. "
     end
     message
   end

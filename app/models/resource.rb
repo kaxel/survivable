@@ -8,6 +8,16 @@ class Resource < ApplicationRecord
     new_resource
   end
   
+  def self.add_if_existing(game, resource, amount)
+    resource = Stash.where(current_game_id: game.id, resource_id: resource.id).first
+    if resource
+      resource.quantity+=amount
+      resource.save
+    else
+      Resource.input_new_resource(game, resource, amount)
+    end
+  end
+  
   def self.decrement_resource(game, resource_name, amount)
     resource = Stash.where(current_game_id: game.id, name: resource_name).first
     if resource
