@@ -107,6 +107,9 @@ rails g migration AddVisibleToEvent visible:boolean
 
 rails g migration AddMorningMessageToCurrentGame morning_message:string maxdays:integer{2}
 
+rails generate migration RemoveMorningMessageFromCurrentGame morning_message:string
+
+
 webmaster
 55zmeE5VD*BpAbS
 
