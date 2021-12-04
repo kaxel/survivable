@@ -152,6 +152,7 @@ class Event < ApplicationRecord
           game.save
         end
         Resource.decrement_resource(game, "Meat", 1)
+        game.mood_up(2)
         "Delicious."
       when "Twine"
         Resource.add_if_existing(game, Resource.where(name: "Twine").first, 1)
