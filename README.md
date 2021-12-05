@@ -32,16 +32,28 @@ no extra services at the moment.
 * Run this in DEV
 
   Clone the project. 
+  
   Set your local postgres database details in config/database.yml
+  
   run the create and migrate commands (see above)
+  
   start server with **bundle exec rails s**
+  
   add user account via /users/sign_up
+  
   add your email to app/models/user.rb admin? method
+  
   log in
+  
   visit /my_admin
+  
   Press every link under the load column from top to bottom
+  
   visit http://localhost:3000/current_games/new
+  
   load default survivors if necessary
+  
   make selections and press BEGIN
+  
   Don't die!
 
