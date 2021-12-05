@@ -191,7 +191,7 @@ class Logic < ApplicationRecord
   end
   
   def self.win_check(game)
-    return (game.latest_day.num >= game.maxdays)
+    return (game.latest_day.num > game.maxdays)
   end
   
 end
