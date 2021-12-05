@@ -26,6 +26,7 @@ class Requirement < ApplicationRecord
     ["Smoker", "Wood", 6],
     ["Smoker", "Leaves", 2],
     ["Net", "Twine", 4],
+    ["Eat Jerky", "Jerky", 1],
   ]
   
   def self.load_default

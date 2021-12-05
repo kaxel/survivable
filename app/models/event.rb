@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   
-  EAT_FOOD_MOOD_BOOST = 5
+  EAT_FOOD_MOOD_BOOST = 8
   EAT_FOOD_HUNGER_BOOST = 20
   
   def self.add_events_for_requirements_met(game)
@@ -35,48 +35,27 @@ class Event < ApplicationRecord
       {:name => "Hunt", :requires => ["Knife"], :stash_required => []},
       {:name => "Set Trotline", :requires => ["Hook"], :stash_required => ["Twine"]},
       {:name => "Drop Net", :requires => ["Net"], :stash_required => []},
-      {:name => "Smoke Meat", :requires => ["Smoker"], :stash_required => ["Meat", "Wood"]},
-      {:name => "Eat Jerky", :requires => [], :stash_required => ["Jerky"]},
+      {:name => "Smoke Meat", :requires => ["Smoker", "Fire"], :stash_required => ["Meat", "Wood"]},
     ]
     events.each do |ev|
-      if ev[:requires].empty?
-        stash_present = []
-        ev[:stash_required].each do |req|
-          if game.stashes.where(name: req).first
-            stash_present << true
-          else
-            stash_present << false
-          end
-        end
-        if !stash_present.include? false
-          #meets stash requirements
-          add_new_event_if_not_present(ev[:name], game)
+      all_requires = [] #true means req is met
+      ev[:requires].each do |multi_req|
+        if game.possessions.where(name: multi_req).first
+          all_requires << true
         else
-          hide_event_if_present(Project.where(name: ev[:name]).first, game)
+          all_requires << false
         end
-        
-      elsif game.possessions.where(name: ev[:requires]).first
-        if ev[:stash_required].first
-          stash_present = []
-          ev[:stash_required].each do |req|
-            if game.stashes.where(name: req).first
-              stash_present << true
-            else
-              stash_present << false
-            end
-          end
-          if !stash_present.include? false
-            #meets stash requirements
-            add_new_event_if_not_present(ev[:name], game)
-          else
-            hide_event_if_present(Project.where(name: ev[:name]).first, game)
-          end
+      end
+      ev[:stash_required].each do |req|
+        if game.stashes.where(name: req).first
+          all_requires << true
         else
-          #no stash requirements
-          add_new_event_if_not_present(ev[:name], game)
+          all_requires << false
         end
-      else
-        hide_event_if_present(Project.where(name: ev[:name]).first, game)
+      end
+      if !all_requires.include? false
+        #meets stash requirements
+        add_new_event_if_not_present(ev[:name], game)
       end
     end
     
@@ -207,11 +186,28 @@ class Event < ApplicationRecord
         wood_stash = game.stashes.where(name: "Wood").first
         meat_stash = game.stashes.where(name: "Meat").first
         has_smoker = game.possessions.where(name: "Smoker").first
-        if wood_stash && meat_stash && has_smoker
+        has_fire = game.possessions.where(name: "Fire").first
+        if wood_stash && meat_stash && has_smoker && has_fire
           Resource.decrement_resource(game, "Wood", 1)
           Resource.decrement_resource(game, "Meat", 1)
           game.add_resource("Jerky", 1)
+          self.toggle_visible(false)
+          #turn off other food related events
+          Event.where(name: "Cook Food").first.toggle_visible(false)
           "You made some jerky."
+        end
+      when "Eat Jerky"
+        jerky_stash = game.stashes.where(name: "Jerky").first
+        if jerky_stash
+          if game.hunger<=(100 - (EAT_FOOD_HUNGER_BOOST))
+            game.hunger_up(EAT_FOOD_HUNGER_BOOST)
+          else
+            game.hunger=100
+            game.save
+          end
+          game.mood_up(EAT_FOOD_MOOD_BOOST)
+          Resource.decrement_resource(game, "Jerky", 1)
+          "Yum."
         end
       when "Hunt"
         consolations = ["You found nothing.", "Hunting ain't easy.", "No luck this time.", "Better luck next time."]
@@ -258,6 +254,8 @@ class Event < ApplicationRecord
           game.hunger=100
           game.save
         end
+        #turn off other food related events
+        Event.where(name: "Smoke Meat").first.toggle_visible(false)
         Resource.decrement_resource(game, "Meat", 1)
         game.mood_up(EAT_FOOD_MOOD_BOOST)
         consolations = ["Delicious.", "That really hit the spot.", "Best meal ever."]

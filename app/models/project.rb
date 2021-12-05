@@ -17,7 +17,8 @@ class Project < ApplicationRecord
     "Net",
     "Firestarter",
     "Fire",
-    "Cook Food"
+    "Cook Food",
+    "Eat Jerky"
   ]
   
   def requirements_met?(game)
