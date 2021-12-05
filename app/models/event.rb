@@ -68,7 +68,7 @@ class Event < ApplicationRecord
     if !game.has_fire?
       if game.possessions.where(name: "Firestarter").first && game.stashes.where(name: "Wood").where("quantity > 0").first
         add_new_event_if_not_present("Start Fire", game)
-      elsif game.stashes.where(name: "Wood").first
+      elsif game.stashes.where(name: "Wood").first && game.stashes.where(name: "Grass").first
         add_new_event_if_not_present("Make Friction Fire", game)
       end
     end
@@ -245,6 +245,7 @@ class Event < ApplicationRecord
         if x[0]==1
           Possession.add_fire(game)
           Resource.decrement_resource(game, "Wood", 1)
+          Resource.decrement_resource(game, "Grass", 1)
           "That's a fire!"
         else
           consolations = ["Your fire did not start.", "Your kindling is wet.", "Friction fires take a lot of bushcraft.", "This is not going well."]
