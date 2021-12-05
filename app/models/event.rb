@@ -117,7 +117,7 @@ class Event < ApplicationRecord
           "You found #{num_caught} #{game.location.animals.where(aclass: "fish").sample.name} on your trotline."
         else
           game.hunger_down(2)
-          "No fish today."
+          "No fish on the trotline today."
         end
       when "Check Gillnet"
         matching_stash = game.stashes.where(name: "Gillnet Catch").where("quantity > 0").first
@@ -130,7 +130,7 @@ class Event < ApplicationRecord
           "You found #{num_caught} #{game.location.animals.where(aclass: "fish").sample.name} in your gillnet."
         else
           game.hunger_down(2)
-          "No fish today."
+          "No fish in the gillnet today."
         end
         
       when "Gather Mud"

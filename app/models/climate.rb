@@ -26,7 +26,7 @@ class Climate < ApplicationRecord
   end
   
   def start_temp
-    return (self.warm_ceiling-self.cold_floor)*(self.cold_warm/100.00)
+    return ((self.warm_ceiling-self.cold_floor)*(self.cold_warm/100.00)+(self.cold_floor/2))
   end
   
 end
