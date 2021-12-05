@@ -25,7 +25,6 @@ class Project < ApplicationRecord
     must_be_all_true = []
 
     self.requirements.each do |pr|
-      puts "#{pr.resource.name} of #{pr.amount}"
       #check stash
       stashed = game.stashes.where(name: pr.resource.name).where("quantity >= :quant", quant: pr.amount).first
       #check possessions

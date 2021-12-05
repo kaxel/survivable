@@ -32,9 +32,7 @@ class Requirement < ApplicationRecord
   def self.load_default
     
     @defaults.each do |d|
-      #puts "look for project: #{d[0]}"
       proj = Project.where(name: d[0]).first
-      #puts "look for resource: #{d[1]}"
       res = Resource.where(name: d[1]).first
       Requirement.new(:name => "#{proj.name} - #{res.name}", :resource_id => res.id, :amount => d[2]).save
     end

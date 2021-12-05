@@ -46,7 +46,7 @@ class CurrentGame < ApplicationRecord
     when hunger > 85
       "You have a full belly"
     when hunger > 60
-      "You could use a snack"
+      "Pretty much satisfied."
     when hunger > 25
       "You are getting hungry"
     else
@@ -65,27 +65,13 @@ class CurrentGame < ApplicationRecord
   end
   
   def mood_down(amount)
-    puts "MOOD DOWN"
-    puts "MOOD DOWN"
-    puts "MOOD DOWN"
-    puts "MOOD DOWN"
-    puts "MOOD DOWN"
-    puts "self.mood -= #{amount}"
     self.mood-=amount
     self.save
-    puts self.inspect
   end
   
   def mood_up(amount)
-    puts "MOOD UP"
-    puts "MOOD UP"
-    puts "MOOD UP"
-    puts "MOOD UP"
-    puts "MOOD UP"
-    puts "self.mood += #{amount}"
     self.mood+=amount
     self.save
-    puts self.inspect
   end
   
   def has_fire?

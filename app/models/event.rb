@@ -1,7 +1,14 @@
 class Event < ApplicationRecord
   
-  EAT_FOOD_MOOD_BOOST = 8
+  EAT_FOOD_MOOD_BOOST = 10
   EAT_FOOD_HUNGER_BOOST = 20
+  
+  @possession_related_events = [
+      {:name => "Hunt", :requires => ["Knife"], :stash_required => []},
+      {:name => "Set Trotline", :requires => ["Hook"], :stash_required => ["Twine"]},
+      {:name => "Drop Net", :requires => ["Net"], :stash_required => []},
+      {:name => "Smoke Meat", :requires => ["Smoker", "Fire"], :stash_required => ["Meat", "Wood"]},
+    ]
   
   def self.add_events_for_requirements_met(game)
     #look for requirements met
@@ -31,13 +38,7 @@ class Event < ApplicationRecord
   end
   
   def self.insert_possession_related_events(game)
-    events = [
-      {:name => "Hunt", :requires => ["Knife"], :stash_required => []},
-      {:name => "Set Trotline", :requires => ["Hook"], :stash_required => ["Twine"]},
-      {:name => "Drop Net", :requires => ["Net"], :stash_required => []},
-      {:name => "Smoke Meat", :requires => ["Smoker", "Fire"], :stash_required => ["Meat", "Wood"]},
-    ]
-    events.each do |ev|
+    @possession_related_events.each do |ev|
       all_requires = [] #true means req is met
       ev[:requires].each do |multi_req|
         if game.possessions.where(name: multi_req).first
@@ -56,6 +57,10 @@ class Event < ApplicationRecord
       if !all_requires.include? false
         #meets stash requirements
         add_new_event_if_not_present(ev[:name], game)
+      else
+        #turn it off
+        this_event = Event.where(name: ev[:name]).first
+        if this_event then this_event.toggle_visible(false) end
       end
     end
     
@@ -175,7 +180,7 @@ class Event < ApplicationRecord
           "You found #{x[0]} stone#{x[0]>1 ? 's' : ''} to build with."
         end
       when "Collect Wood"
-        x = skill_check(game.survivalist, 0.50, 3)
+        x = skill_check(game.survivalist, 0.60, 4)
         if x[0]== 0
           "There was no dry wood to be found."
         else
@@ -191,9 +196,7 @@ class Event < ApplicationRecord
           Resource.decrement_resource(game, "Wood", 1)
           Resource.decrement_resource(game, "Meat", 1)
           game.add_resource("Jerky", 1)
-          self.toggle_visible(false)
-          #turn off other food related events
-          Event.where(name: "Cook Food").first.toggle_visible(false)
+          #self.toggle_visible(false)
           "You made some jerky."
         end
       when "Eat Jerky"
@@ -254,8 +257,6 @@ class Event < ApplicationRecord
           game.hunger=100
           game.save
         end
-        #turn off other food related events
-        Event.where(name: "Smoke Meat").first.toggle_visible(false)
         Resource.decrement_resource(game, "Meat", 1)
         game.mood_up(EAT_FOOD_MOOD_BOOST)
         consolations = ["Delicious.", "That really hit the spot.", "Best meal ever."]
@@ -263,7 +264,6 @@ class Event < ApplicationRecord
       when "Twine"
         Resource.add_if_existing(game, Resource.where(name: "Twine").first, 1)
         project = Project.where(name: "Twine").first
-        puts " found twine project"
         ProjectRequirement.where(project_id: project.id).all.each do |pr|
           Resource.decrement_resource(game, pr.requirement.resource.name, pr.requirement.amount)
         end

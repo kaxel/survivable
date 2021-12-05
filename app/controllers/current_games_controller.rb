@@ -48,6 +48,7 @@ class CurrentGamesController < ApplicationController
       Event.insert_possession_related_events(@current_game)
       Event.add_events_for_requirements_met(@current_game)
       Event.add_events_for_fishing(@current_game)
+      
       redirect_to gameplay_path, notice: message
     end
   end

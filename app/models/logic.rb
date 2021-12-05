@@ -71,7 +71,6 @@ class Logic < ApplicationRecord
       adj = Adjustment.where(project_id: p.project.id).where(bonus: "comfort").first
       if adj
         comfort_offset += adj.amount
-        puts "Your #{p.project.name} helps a bit (#{adj.amount}). "
         message << "Your #{p.project.name} helps a bit (#{adj.amount}). "
       end
     end
@@ -117,11 +116,8 @@ class Logic < ApplicationRecord
     caught_already = game.stashes.where(name: "Trotline Catch").where("quantity > 0").first
     
     if matching_stash && !(caught_already)
-      puts "HOOK IS IN THE WATER CHECKING FOR CATCH"
-      puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
       ready_to_add = 0
       for iteration in 1..matching_stash.quantity
-        puts "#{iteration} HOOK checking"
         #environment check
         if environment_check(game.location, TROTLINE_ROOT_CHANCE)
           ready_to_add+=1
@@ -139,11 +135,8 @@ class Logic < ApplicationRecord
     caught_already = game.stashes.where(name: "Gillnet Catch").where("quantity > 0").first
     
     if matching_stash && !(caught_already)
-      puts "CHECKING GILLNET"
-      puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
       ready_to_add = 0
       for iteration in 1..matching_stash.quantity
-        puts "#{iteration} GILLNET checking"
         #environment check
         if environment_check(game.location, TROTLINE_ROOT_CHANCE)
           ready_to_add+=1
