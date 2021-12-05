@@ -1,3 +1,21 @@
-You WIN!
+<% game = CurrentGame.find(game_id) %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <%= image_tag "promo/winner.png" %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+			<p>You WIN!</p>
+			<p>You made it past day <%= game.maxdays %>.</p>
+			<p>Your final hunger score was <%= game.hunger %>.</p>
+			<p>Your final mood score was <%= game.mood %>.</p>
+        </div>
+    </div>
+</div>
+
+
 
 <%= link_to "Start a new game", start_new_game_path %>
