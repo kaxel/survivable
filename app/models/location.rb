@@ -4,7 +4,8 @@ class Location < ApplicationRecord
   has_and_belongs_to_many :animals
   
   @defaults = [
-    {:name => "Black Lake", :climate => "Rainy Cold Brisk", :animals => "All", :collection => "Standard", :description => "This 12-mile-long lake is home to some of the best fishing in the world. Mild summers and cold winters are always punctuated with regular precipitation."},
+    {:name => "Black Lake", :climate => "Rainy Warm Brisk", :animals => "All", :collection => "Standard", :description => "This 12-mile-long lake is home to some of the best fishing in the world. Mild summers and cold winters are always punctuated with regular precipitation."},
+    {:name => "McKenzie Mountain", :climate => "Rainy Chilly Mild", :animals => "All", :collection => "Standard", :description => "Great trails, steep slopes, and a great view. With a mild climate year-round McKenzie Mountain is perfect for your first experience as a survivalist."},
     {:name => "Sonoran Desert", :climate => "Dry Hot Extreme", :animals => "Desert", :collection => "Desert", :description => "A desert climate is home to only a handful of animals. Finding food may be a problem. Also, the heat can be overwhelming."}
   ]
   
