@@ -82,7 +82,8 @@ class Event < ApplicationRecord
       {:name => "Gather Mud", :duration => 1},
       {:name => "Gather Leaves", :duration => 1},
       {:name => "Collect Wood", :duration => 1},
-      {:name => "Gather Grass", :duration => 1}
+      {:name => "Gather Grass", :duration => 1},
+      {:name => "Gather Stone", :duration => 1},
     ]
     events.each do |ev|
       Event.new(:name => ev[:name], :length => ev[:duration], :current_game_id => game.id).save
@@ -155,6 +156,14 @@ class Event < ApplicationRecord
         else
           game.add_resource("Leaves", x[0])
           "You found #{x[0]} pile#{x[0]>1 ? 's' : ''} of leaves."
+        end
+      when "Gather Stone"
+        x = skill_check(game.survivalist, 0.35, 5)
+        if x[0]== 0
+          "Not a lot of stones around here."
+        else
+          game.add_resource("Stone", x[0])
+          "You found #{x[0]} stone#{x[0]>1 ? 's' : ''} to build with."
         end
       when "Collect Wood"
         x = skill_check(game.survivalist, 0.50, 3)
