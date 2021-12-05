@@ -241,7 +241,7 @@ class Event < ApplicationRecord
           consolations.sample
         end
       when "Make Friction Fire"
-        x = skill_check(game.survivalist, 0.20, 1)
+        x = skill_check(game.survivalist, 0.10, 1)
         if x[0]==1
           Possession.add_fire(game)
           Resource.decrement_resource(game, "Wood", 1)
