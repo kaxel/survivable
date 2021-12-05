@@ -24,6 +24,10 @@ class Event < ApplicationRecord
       add_new_event_if_not_present("Check Trotline", game)
     end
     #look for existing gillnets
+    matching_stash = game.stashes.where(name: "Gillnet").where("quantity > 0").first
+    if matching_stash
+      add_new_event_if_not_present("Check Gillnet", game)
+    end
   end
   
   def self.insert_possession_related_events(game)
@@ -109,7 +113,20 @@ class Event < ApplicationRecord
           game.hunger_down(num_caught)
           matching_stash.delete
           game.add_resource("Meat", num_caught)
-          "You found #{num_caught} #{game.location.animals.where(aclass: "fish").sample.name}."
+          "You found #{num_caught} #{game.location.animals.where(aclass: "fish").sample.name} on your trotline."
+        else
+          game.hunger_down(2)
+          "No fish today."
+        end
+      when "Check Gillnet"
+        matching_stash = game.stashes.where(name: "Gillnet Catch").where("quantity > 0").first
+        if matching_stash
+          num_caught = matching_stash.quantity
+          #checking gillnets costs hunger
+          game.hunger_down(num_caught)
+          matching_stash.delete
+          game.add_resource("Meat", num_caught)
+          "You found #{num_caught} #{game.location.animals.where(aclass: "fish").sample.name} in your gillnet."
         else
           game.hunger_down(2)
           "No fish today."
@@ -213,8 +230,13 @@ class Event < ApplicationRecord
         #remove event
         self.toggle_visible(false)
         "You put a hook on your trotline."
-      when "Set Fish Hook"
       when "Drop Net"
+        Resource.add_if_existing(game, Resource.where(name: "Gillnet").first, 1)
+        #decrement hook - possessions
+        Possession.decrement_possession(game, Project.where(name: "Net").first, 1)
+        #remove event
+        self.toggle_visible(false)
+        "You dropped a gillnet."
       else #standard project build
         project = Project.where(name: self.name).first
         Possession.add_if_not_existing(game, project, 1)

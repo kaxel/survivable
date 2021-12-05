@@ -135,6 +135,26 @@ class Logic < ApplicationRecord
     end
     
     #check for gillnet
+    matching_stash = game.stashes.where(name: "Gillnet").where("quantity > 0").first
+    caught_already = game.stashes.where(name: "Gillnet Catch").where("quantity > 0").first
+    
+    if matching_stash && !(caught_already)
+      puts "CHECKING GILLNET"
+      puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+      ready_to_add = 0
+      for iteration in 1..matching_stash.quantity
+        puts "#{iteration} GILLNET checking"
+        #environment check
+        if environment_check(game.location, TROTLINE_ROOT_CHANCE)
+          ready_to_add+=1
+        end
+      end
+      if ready_to_add > 0
+        resource = Resource.where(name: "Gillnet Catch").first
+        new_resource = Resource.add_if_existing(game, resource, ready_to_add)
+        new_resource.hide
+      end
+    end
     
   end
   
