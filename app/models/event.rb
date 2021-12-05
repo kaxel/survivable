@@ -34,19 +34,49 @@ class Event < ApplicationRecord
     events = [
       {:name => "Hunt", :requires => ["Knife"], :stash_required => []},
       {:name => "Set Trotline", :requires => ["Hook"], :stash_required => ["Twine"]},
-      {:name => "Drop Net", :requires => ["Net"], :stash_required => []}
+      {:name => "Drop Net", :requires => ["Net"], :stash_required => []},
+      {:name => "Smoke Meat", :requires => ["Smoker"], :stash_required => ["Meat", "Wood"]},
+      {:name => "Eat Jerky", :requires => [], :stash_required => ["Jerky"]},
     ]
     events.each do |ev|
-      if game.possessions.where(name: ev[:requires].join(",")).first
+      if ev[:requires].empty?
+        stash_present = []
+        ev[:stash_required].each do |req|
+          if game.stashes.where(name: req).first
+            stash_present << true
+          else
+            stash_present << false
+          end
+        end
+        if !stash_present.include? false
+          #meets stash requirements
+          add_new_event_if_not_present(ev[:name], game)
+        else
+          hide_event_if_present(Project.where(name: ev[:name]).first, game)
+        end
+        
+      elsif game.possessions.where(name: ev[:requires]).first
         if ev[:stash_required].first
-          if game.stashes.where(name: ev[:stash_required].join(",")).first
+          stash_present = []
+          ev[:stash_required].each do |req|
+            if game.stashes.where(name: req).first
+              stash_present << true
+            else
+              stash_present << false
+            end
+          end
+          if !stash_present.include? false
             #meets stash requirements
             add_new_event_if_not_present(ev[:name], game)
+          else
+            hide_event_if_present(Project.where(name: ev[:name]).first, game)
           end
         else
           #no stash requirements
           add_new_event_if_not_present(ev[:name], game)
         end
+      else
+        hide_event_if_present(Project.where(name: ev[:name]).first, game)
       end
     end
     
@@ -173,6 +203,16 @@ class Event < ApplicationRecord
           game.add_resource("Wood", x[0])
           "You found #{x[0]} good log#{x[0]>1 ? 's' : ''}."
         end
+      when "Smoke Meat"
+        wood_stash = game.stashes.where(name: "Wood").first
+        meat_stash = game.stashes.where(name: "Meat").first
+        has_smoker = game.possessions.where(name: "Smoker").first
+        if wood_stash && meat_stash && has_smoker
+          Resource.decrement_resource(game, "Wood", 1)
+          Resource.decrement_resource(game, "Meat", 1)
+          game.add_resource("Jerky", 1)
+          "You made some jerky."
+        end
       when "Hunt"
         consolations = ["You found nothing.", "Hunting ain't easy.", "No luck this time.", "Better luck next time."]
         message = consolations.sample #default
@@ -202,7 +242,7 @@ class Event < ApplicationRecord
           consolations.sample
         end
       when "Make Friction Fire"
-        x = skill_check(game.survivalist, 0.30, 1)
+        x = skill_check(game.survivalist, 0.20, 1)
         if x[0]==1
           Possession.add_fire(game)
           Resource.decrement_resource(game, "Wood", 1)

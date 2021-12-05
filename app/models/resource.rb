@@ -47,7 +47,8 @@ class Resource < ApplicationRecord
       "Trotline Hook",
       "Trotline Catch",
       "Gillnet",
-      "Gillnet Catch"
+      "Gillnet Catch",
+      "Jerky"
     ]
     
     defaults.each do |d|
